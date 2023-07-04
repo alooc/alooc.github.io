@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Alooc</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Alooc">
+  <title>抽象类和接口 | Alooc</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="抽象类和接口 | Alooc">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
@@ -611,19 +611,36 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-02_编程语言/01_Java/抽象类和接口" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">抽象类和接口</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="编程语言">编程语言</a> > 
+            
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Java</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-29 10:48:25'>2023-01-29 10:48</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-04 15:31:02'>2020-01-01 09:02</time>
         
     </div>
     <div class="article-meta">
@@ -656,7 +673,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -672,19 +689,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <blockquote>
+<blockquote>
+<p>通过抽象类和接口，实现面向对象、多态、代码解耦</p>
+</blockquote>
+</blockquote>
+<ol>
+<li><p>抽象类</p>
+<p> 抽象：从具体的事物抽出、概括出他们共同的方面、本质属性与关系等，而将个别的、非本质的方面、属性与关系舍弃，这种思维过程，成为抽象。简单来说，就是取共性化抽象。</p>
+<p> 一个类，使用abstract修饰</p>
+<p> 特点：</p>
+<pre><code> - 包含抽象方法的类必须被声明为抽象类，抽象类可以不包含抽象方法
+ - 抽象类不能被实例化
+ - 可以包含具体的属性和方法
+ - 继承抽象类或实现接口的类，若未实现所有方法，则须声明为抽象类
+</code></pre>
+</li>
+<li><p>接口</p>
+<p> 接口不是类，类描述对象的属性和方法，接口则包含类要实现的方法。</p>
+<p> 接口用来指定标准</p>
+<ul>
+<li>在Java中，接口类型可以用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象。</li>
+</ul>
+<p> 接口特性：</p>
+<ul>
+<li>方法被隐式指定为<code>public abstract</code></li>
+<li>变量被隐式指定为<code>public static final</code></li>
+<li>接口中的方法不能在接口中实现</li>
+</ul>
+</li>
+<li><p>总结</p>
+<ol>
+<li><p>抽象类是对一组具有相同属性和方法的逻辑上有关系的事物的一种抽象，而接口则是对一组具有相同属性和方法的逻辑上不相关的事物的一种抽象。</p>
+</li>
+<li><p>工厂模式，实现类的创建与使用的分离</p>
+</li>
+<li><p>实例，Datax-web中Json的构建：</p>
+<p> ​    构建Json:<br> ​            处理读，多数据源<br> ​            处理写，多数据源<br> ​    抽象插件类   插件接口，定义插件的标准<br> ​            读抽象类<br> ​            写抽象类<br> ​    工厂类，实例化需要的插件</p>
+</li>
+</ol>
+</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>

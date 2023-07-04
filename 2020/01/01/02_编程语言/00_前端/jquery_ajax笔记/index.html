@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Alooc</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Alooc">
+  <title>jquery-ajax笔记 | Alooc</title>
+  <meta name="keywords" content=" JavaScript ">
+  <meta name="description" content="jquery-ajax笔记 | Alooc">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
@@ -611,19 +611,36 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-02_编程语言/00_前端/jquery_ajax笔记" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">jquery-ajax笔记</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="编程语言">编程语言</a> > 
+            
+            <a  data-rel="编程语言&lt;---&gt;前端">前端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">JavaScript</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-29 10:48:25'>2023-01-29 10:48</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-04 15:30:14'>2020-01-01 09:02</time>
         
     </div>
     <div class="article-meta">
@@ -656,7 +673,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -672,19 +689,124 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>ajax [javascript xmlhttprequest   xml,html,json] </p>
+<p>一、Ajax</p>
+<p>jquery对ajax多了大量的封装<br>    jquery使用三层封装：<br>        最低层封装方法为:$.ajax()<br>            封装最底层实现了第二层的三种方法：<br>                .load()<br>                $.get()<br>                $.post()<br>        最高层是：$.getScript()    和 $.getJSON()</p>
+<p>局部方法：需要一个包含元素的jquery对象作为前缀    .load() 适合做静态文件的异步获取<br>全局方法：无须指定某个元素    $.get()和$.post() 适合传递参数到服务器页面</p>
+<ol>
+<li><p>load方法：<br> .load(url,[data],[callback])<br> 概括：</p>
+<pre><code> url:必须，请求html文件的url地址，参数类型为String
+ data:可选，发送的key/value数据，参数类型为Object
+ callback:可选，成功或失败的回调函数，参数类型为Function
+</code></pre>
+<p> 详解：</p>
+<pre><code> url:
+     1.异步载入html内容
+         $(&quot;#id&quot;).load(&quot;test.html&quot;)
+       对载入的html进行筛选，在url参数跟一个选择器
+         $(&quot;#id&quot;).load(&quot;test.html .my&quot;) 选择器是test.html中的选择器
+     2.载入服务器文件，一般不仅需要载入数据，还要向服务器提交数据，此时用参数data
+         向服务器提交数据有两种方式：get 和 post
+         ajax数据载入完毕后，就能执行回调函数callback，
+             回调函数可以传递三个可选参数：
+                 responseText（请求返回）
+                 textStatus（请求状态）
+                 XMLHttpRequest（XMLHttpRequest对象）
+</code></pre>
+</li>
+<li><p>$.get():<br> $.get(url,[data],[callback],[type])<br> 概括：</p>
+<pre><code> type，服务器返回的内容格式：包括xml,html,script,json,text
+</code></pre>
+<p> 详解：</p>
+<pre><code> 一般情况下type是智能判断的，不需要主动设置
+</code></pre>
+</li>
+<li><p>$.post():<br> 使用和get方法基本一致<br> 区别：</p>
+<pre><code> 1.get请求通过URL提交的，而post请求则是http消息实体提交的
+ 2.get提交有大小限制（2KB）,而post方式不受限制
+ 3.get方式会被缓存下来，可能有安全问题，而post没有这个问题
+</code></pre>
+</li>
+<li><p>$.getScript()和$.getJSON():<br> $.getScript()用于加载特定的js文件<br> $.getJSON()用于专门加载json文件</p>
+</li>
+<li><p>$.ajax():最底层的全局方法，完全可以单独实现上面的所有方法<br> 只有一个参数，传递一个各个功能键值对的对象</p>
+<p> $.ajax()方法对象参数：</p>
+<pre><code> url:    发送请求的地址
+ type:    请求方式
+ data:    发送到服务器的数据，键值对字符串或对象
+ success:    请求成功后调用的回调函数
+</code></pre>
+</li>
+</ol>
+<p>表单序列化：<br>    使用表单序列化方法.serialize()，会智能的获取表单内的所有元素，这样，在面对大量的表单元素时，<br>        会把表单元素内容序列化为字符串，然后再使用Ajax请求</p>
+<pre><code>$.ajaxSetup()   初始化ajax重复的属性
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    $.ajaxSetup(&#123;
+        type:&quot;POST&quot;,
+        url:&quot;user.php&quot;,
+        data:$(&quot;form&quot;).serialize()
+    &#125;);
+    $.(&quot;form&quot;).click(fucntion()&#123;
+        $.ajax()&#123;
+        success:function(response,status,xhr)&#123;
+            $(&quot;#box&quot;) .html(response);
+            &#125;
+            &#125;
+    );
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+在使用data属性传递的时候，如果是以对象形式传递键值对，可以使用$.param()方法将对象转换为字符串键值对格式
+注意：使用$.param()将对象形式的键值对转为URL地址的字符串键值对，可以更加稳定准确的传递表单内容
+</code></pre>
+<p>二、Ajax进阶：</p>
+<ol>
+<li><p>全局请求事件：</p>
+<p> 1.加载请求：</p>
+<pre><code> .ajaxStart()和 .ajaxStop()
+     请求开始时（未完成其他请求）激活.ajaxStart(),
+     请求结束时（所有的请求都结束了）激活.ajaxStop()
+ 
+ $(document).ajaxStart(function()&#123;
+     $(&quot;.loading&quot;).show();
+ &#125;).ajaxStop(function()&#123;
+     $(&quot;.loading&quot;).hide();
+ &#125;);
+ 
+ //如果请求时间太长，可以在ajax里设置超时
+ timeout:2000,
+ 
+ //如果某个ajax不想触发全局事件，可以设置取消
+ global:false,
+</code></pre>
+<p> 2.错误处理：</p>
+<pre><code> error:function()&#123;&#125;
+</code></pre>
+<p> 3.请求全局事件：</p>
+<pre><code> 全局事件方法：ajaxStart() ajaxStop() ajaxError() ajaxSuccess() ajaxComplete() ajaxSend()
+ 局部方法:error() success() complete()
+</code></pre>
+<p> 4.JSON和JSONP：</p>
+<pre><code> 同一域，只要设置dataType：‘json’ 即可加载JSON文件
+ 非同域，可以使用JSONP（json with padding），但也是有条件的
+</code></pre>
+<p> 5.jqXHR对象：</p>
+<pre><code> $.ajax()返回一个jqXHR对象
+ done() always() fail()代替success() complete() error()
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+ 使用jqXHR的连缀方式比$.ajax()的属性方式有三大好处：
+     1.可连缀操作      jqXHR.done(function()&#123;alert(response);&#125;).done(function()&#123;alert(response););
+     2.可以多次执行同一个回调函数
+     3.为多个操作指定回调函数  $.when(jqxhr1,jqxhr2).done(function(r1,r2)&#123;&#125;);
+</code></pre>
+</li>
+</ol>
+<hr>
+<p>全局事件方法时所有Ajax请求都会触发到，并且只能绑定到document上。而局部方法，只针对某个ajax</p>
+<hr>
+<p>​        </p>
+<p>​        </p>
+<p>​<br>​    </p>
+<p>​    </p>
+<p>​            </p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>

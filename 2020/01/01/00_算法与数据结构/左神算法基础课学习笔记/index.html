@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Alooc</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Alooc">
+  <title>左神算法基础课学习笔记 | Alooc</title>
+  <meta name="keywords" content=" 算法 ">
+  <meta name="description" content="左神算法基础课学习笔记 | Alooc">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
@@ -611,19 +611,34 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-00_算法与数据结构/左神算法基础课学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">左神算法基础课学习笔记</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="算法">算法</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">算法</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-29 10:48:25'>2023-01-29 10:48</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-04 15:29:06'>2020-01-01 09:02</time>
         
     </div>
     <div class="article-meta">
@@ -656,7 +671,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -672,19 +687,125 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>时间复杂度：</p>
+<p>​    <img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220225114342859.png" alt="image-20220225114342859"></p>
+<p>异或运算 不同为1 相同为0</p>
+<p>取一个数最右侧的1 eor &amp; (~eor + 1)</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220308211917740.png" alt="image-20220308211917740"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220308211953725.png" alt="image-20220308211953725"></p>
+<p>mid=L + (R-L)/2 取中点 不会溢出 </p>
+<p>mid=L + ((R-L)  &gt;&gt; 1)</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220312130559319.png" alt="image-20220312130559319"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220312165213887.png" alt="image-20220312165213887"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314092102690.png" alt="image-20220314092102690"></p>
+<p>快排1  &lt;=num &gt;num</p>
+<p>快排2 &lt;num =num &gt;num</p>
+<p>快排3 随机取num &lt;num =num &gt;num</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314150202017.png" alt="image-20220314150202017"></p>
+<p>手写堆</p>
+<p>堆排序</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314153756940.png" alt="image-20220314153756940"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314122621445.png" alt="image-20220314122621445"></p>
+<p>基于比较的排序，只和俩个数比较大小有关</p>
+<p>不基于比较的排序 要根据数据具体状况进行定制</p>
+<p>计数排序</p>
+<p>基数排序    低位到高位依次排序  N进制需准备N个桶。设最高M位，则出入桶的次数为M</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314155032440.png" alt="image-20220314155032440"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314172958431.png" alt="image-20220314172958431"></p>
+<p>快速排序用的最多</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314173254103.png" alt="image-20220314173254103"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220314173354701.png" alt="image-20220314173354701"></p>
+<p>利用各算法优势排序 为综合排序</p>
+<p>HashSet</p>
+<p>HashMap</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315120344022.png" alt="image-20220315120344022"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121215420.png" alt="image-20220315121215420"></p>
+<p>HashSet HashMap</p>
+<p>TreeSet TreeMap</p>
+<p>中等难度算法提不会涉及原理</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121412356.png" alt="image-20220315121412356"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121616567.png" alt="image-20220315121616567"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121627823.png" alt="image-20220315121627823"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121722698.png" alt="image-20220315121722698"></p>
+<p>快慢指针，控制慢指针指向的位置</p>
+<p>慢指针指向：</p>
+<ol>
+<li>奇数 <code>中点</code>；偶数 <code>靠后</code>            </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fast !=<span class="literal">null</span> &amp;&amp; fast.next!=<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>奇数 <code>中点</code>；偶数 <code>靠前</code>           </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fast.next !=<span class="literal">null</span> &amp;&amp; fast.next.next!=<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>奇数 <code>中点靠后</code>；偶数 <code>靠后</code>            </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slow = head.next;<span class="comment">//慢指针先走一步 </span></span><br><span class="line">fast.next !=<span class="literal">null</span> &amp;&amp; fast.next.next!=<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>奇数 <code>中点</code>考前；偶数 <code>靠前</code>            </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fast = head.next <span class="comment">//快指针先走一步 </span></span><br><span class="line">fast.next !=<span class="literal">null</span> &amp;&amp; fast.next.next!=<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<ol start="5">
+<li>奇数 <code>中点考前</code>；偶数 <code>靠前再靠前</code>            </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fast = head.next.next;<span class="comment">//快指针先走两步 </span></span><br><span class="line">fast.next !=<span class="literal">null</span> &amp;&amp; fast.next.next!=<span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315121919161.png" alt="image-20220315121919161"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315122535838.png" alt="image-20220315122535838"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315123118968.png" alt="image-20220315123118968"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315123952701.png" alt="image-20220315123952701"></p>
+<p>找第一个入环节点：</p>
+<pre><code>1. 使用额外数据结构 set
+1. 快慢指针。 快慢指针一定在环上相遇，之后快指针回到head,然后快慢指针都同时走一步，之后快慢指针相遇的位置即为第一个入环节点。
+</code></pre>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315181101569.png" alt="image-20220315181101569"></p>
+<p> 递归序</p>
+<p>非递归实现先序、中序、后序  ： </p>
+<p>先序，后序</p>
+<pre><code>                                                            1. 栈弹出
+                                                            1. 打印 处理
+                                                            1. 先压右，再压左
+                                                            1. 循环
+</code></pre>
+<p>中序：</p>
+<p>​    使用左边界分解整颗数</p>
+<p>   左头右[左头]</p>
+<p>深度优先遍历是先序遍历</p>
+<p>宽度优先遍历使用队列实现</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315185702850.png" alt="image-20220315185702850"></p>
+<p>树型DP 【一个套路解决】</p>
+<p>左右子树提供信息，动态处理。</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315202152383.png" alt="image-20220315202152383"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315203759234.png" alt="image-20220315203759234"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315204459141.png" alt="image-20220315204459141"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220315205030708.png" alt="image-20220315205030708"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220316102119792.png" alt="image-20220316102119792"></p>
+<p>用最喜欢的图的表达方式，实现所有的算法</p>
+<p>实际应用时 只需要完成图结构的转换即可。</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220316111552089.png" alt="image-20220316111552089"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220316112800142.png" alt="image-20220316112800142"></p>
+<p>依赖包的引入顺序 </p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220316113525239.png" alt="image-20220316113525239"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220316113536359.png" alt="image-20220316113536359"></p>
+<p>k算法 p算法 用来生成图的最小生成树</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220317105837717.png" alt="image-20220317105837717"></p>
+<p>====================================================================================================</p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220317183328517.png" alt="image-20220317183328517"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319210655844.png" alt="image-20220319210655844"></p>
+<p> <img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319211325932.png" alt="image-20220319211325932"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319213530316.png" alt="image-20220319213530316"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319213555518.png" alt="image-20220319213555518"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319213659918.png" alt="image-20220319213659918"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220319213727732.png" alt="image-20220319213727732"></p>
+<p><img src="C:\Users\Kerwin\AppData\Roaming\Typora\typora-user-images\image-20220403090439199.png" alt="image-20220403090439199"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
