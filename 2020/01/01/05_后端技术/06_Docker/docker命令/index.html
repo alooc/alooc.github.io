@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>docker基础笔记 | Alooc</title>
+  <meta name="keywords" content=" docker ">
+  <meta name="description" content="docker基础笔记 | Alooc">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左神算法基础提升课学习笔记">
+<meta property="og:url" content="http://example.com/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Alooc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-01T01:02:55.000Z">
+<meta property="article:modified_time" content="2023-07-04T07:29:12.928Z">
+<meta property="article:author" content="Alooc">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Alooc</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/alooc"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(40)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="算法">
+                        
+                        算法
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="数据库">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        数据库
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="数据库<--->Mysql">
+                                        
+                                        Mysql
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="数据库<--->Oracle">
+                                        
+                                        Oracle
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="编程语言">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        编程语言
+                        <small>(15)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->前端">
+                                        
+                                        前端
+                                        
+                                            <small>(6
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->Java">
+                                        
+                                        Java
+                                        
+                                            <small>(8
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->Python">
+                                        
+                                        Python
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="技巧">
+                        
+                        技巧
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="后端框架">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        后端框架
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->Mybatis">
+                                        
+                                        Mybatis
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->MyBatis-Plus">
+                                        
+                                        MyBatis-Plus
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->Spring">
+                                        
+                                        Spring
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringBoot">
+                                        
+                                        SpringBoot
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringCloud">
+                                        
+                                        SpringCloud
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringMVC">
+                                        
+                                        SpringMVC
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="后端技术">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        后端技术
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->activiti">
+                                        
+                                        activiti
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->android">
+                                        
+                                        android
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->Bash">
+                                        
+                                        Bash
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->docker">
+                                        
+                                        docker
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->maven">
+                                        
+                                        maven
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->yaml">
+                                        
+                                        yaml
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="前端框架">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        前端框架
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="前端框架<--->vue">
+                                        
+                                        vue
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="前端技术">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        前端技术
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="前端技术<--->websocket">
+                                        
+                                        websocket
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="40">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>工作流</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>技巧</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>项目总结</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>activiti</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Bash</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CSS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HTML</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JavaScript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>maven</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyBatis-Plus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Oracle</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringBoot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yaml</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="左神算法基础提升课学习笔记">左神算法基础提升课学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="左神算法基础课学习笔记">左神算法基础课学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="基础算法总结">基础算法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Oracle "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/02_Oracle/Oracle%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Oracle"
+           data-author="" >
+            <span class="post-title" title="Oracle基础总结">Oracle基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 技巧 "
+           href="/2020/01/01/03_%E6%8A%80%E5%B7%A7/%E6%8A%80%E5%B7%A7/"
+           data-tag="技巧"
+           data-author="" >
+            <span class="post-title" title="常用开发技巧总结Ing">常用开发技巧总结Ing</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Mysql "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/01_Mysql/%E5%9F%BA%E7%A1%80/"
+           data-tag="数据库,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql基础知识">Mysql基础知识</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Mysql "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/01_Mysql/java%E6%95%B4%E5%90%88mysql/"
+           data-tag="数据库,Mysql"
+           data-author="" >
+            <span class="post-title" title="mysql使用">mysql使用</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Python "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/02_Python/note/"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="Python学习笔记">Python学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/JUC/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="JUC">JUC</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/JSP_Servlet%E7%AC%94%E8%AE%B0/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="JSP/Servlet及相关技术详解">JSP/Servlet及相关技术详解</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8A%E7%96%AF%E7%8B%82Java%E8%AE%B2%E4%B9%89%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《疯狂Java讲义》学习笔记">《疯狂Java讲义》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8Ajava%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《Java开发手册》学习笔记">《Java开发手册》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%9F%BA%E7%A1%80/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="基础">基础</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8A%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%EF%BC%9AJava%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《码出高效：Java开发手册》学习笔记">《码出高效：Java开发手册》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E9%9B%86%E5%90%88/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="集合">集合</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="抽象类和接口">抽象类和接口</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/jquery_ajax%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="jquery-ajax笔记">jquery-ajax笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E3%80%8ACSS%E4%B8%96%E7%95%8C%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="CSS"
+           data-author="" >
+            <span class="post-title" title="《CSS世界》学习笔记">《CSS世界》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/JavaScript%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript笔记">JavaScript笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E7%96%AF%E7%8B%82HTML5+CSS3+JavaScript%E8%AE%B2%E4%B9%89%E7%AC%94%E8%AE%B0/"
+           data-tag="HTML"
+           data-author="" >
+            <span class="post-title" title="疯狂HTML5+CSS3+JavaScript讲义笔记">疯狂HTML5+CSS3+JavaScript讲义笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E7%96%AF%E7%8B%82%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AE%B2%E4%B9%89%E7%AC%94%E8%AE%B0/"
+           data-tag="HTML"
+           data-author="" >
+            <span class="post-title" title="疯狂前端开发讲义笔记">疯狂前端开发讲义笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="《JavaScript高级程序设计》学习笔记">《JavaScript高级程序设计》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 android "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/02_Android/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/"
+           data-tag="android"
+           data-author="" >
+            <span class="post-title" title="第一行代码笔记">第一行代码笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 maven "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/03_Maven/maven%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven笔记">maven笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 docker "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/06_Docker/%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker常用镜像">docker常用镜像</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 activiti "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/01_Activiti/activiti6%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/"
+           data-tag="activiti,工作流"
+           data-author="" >
+            <span class="post-title" title="activiti6笔记">activiti6笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 Bash "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/05_Bash/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"
+           data-tag="Bash"
+           data-author="" >
+            <span class="post-title" title="Bash常用命令">Bash常用命令</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 docker "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/06_Docker/docker%E5%91%BD%E4%BB%A4/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker基础笔记">docker基础笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 Mybatis "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/01_MyBaits/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="MyBatis基础用法总结">MyBatis基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringBoot "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/05_SpringBoot/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot基础总结">SpringBoot基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 yaml "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/04_Yaml/yaml%E8%AF%AD%E6%B3%95/"
+           data-tag="yaml"
+           data-author="" >
+            <span class="post-title" title="yaml语法">yaml语法</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 Spring "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/03_Spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring基础用法总结">Spring基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringMVC "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/04_SpringMVC/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="SpringMVC基础用法总结">SpringMVC基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 MyBatis-Plus "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/02_MyBatis%20Plus/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="MyBatis-Plus"
+           data-author="" >
+            <span class="post-title" title="MyBatis-Plus基础用法总结">MyBatis-Plus基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringBoot "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/05_SpringBoot/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot源码分析">SpringBoot源码分析</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端技术 websocket "
+           href="/2020/01/01/07_%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/01_WebSocket/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="websocket"
+           data-author="" >
+            <span class="post-title" title="websocket笔记">websocket笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringCloud "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/06_SpringCloud/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud基础总结">SpringCloud基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端框架 vue "
+           href="/2020/01/01/06_%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/01_Vue/%E3%80%8AVue2.5%E5%BC%80%E5%8F%91%E5%8E%BB%E5%93%AA%E5%84%BF%E7%BD%91App%20%E4%BB%8E%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="vue,项目总结"
+           data-author="" >
+            <span class="post-title" title="《Vue2.5开发去哪儿网App 从零基础入门到实战项目》学习笔记">《Vue2.5开发去哪儿网App 从零基础入门到实战项目》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringCloud "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/06_SpringCloud/springcloud%E9%A1%B9%E7%9B%AE%E3%80%8A%E5%B0%9A%E5%8C%BB%E9%80%9A%E3%80%8B%E6%80%BB%E7%BB%93/"
+           data-tag="SpringCloud,项目总结"
+           data-author="" >
+            <span class="post-title" title="《尚医通》项目总结">《尚医通》项目总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 Bash "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/05_Bash/Bash%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/"
+           data-tag="Bash"
+           data-author="" >
+            <span class="post-title" title="Bash脚本笔记">Bash脚本笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-05_后端技术/06_Docker/docker命令" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">docker基础笔记</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="后端技术">后端技术</a> > 
+            
+            <a  data-rel="后端技术&lt;---&gt;docker">docker</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">docker</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-05 15:20:51'>2020-01-01 09:02</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="toc-text">容器数据卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="toc-text">使用数据卷</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E6%8C%82%E8%BD%BD"><span class="toc-text">匿名挂载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%85%B7%E5%90%8D%E6%8C%82%E8%BD%BD"><span class="toc-text">具名挂载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%B7%E5%90%8D%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="toc-text">查看卷名的路径</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD"><span class="toc-text">挂载</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8"><span class="toc-text">数据卷容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AAmysql%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE"><span class="toc-text">多个mysql同步数据</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%EF%BC%9F%EF%BC%9F%EF%BC%9F%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-text">删除是否会影响？？？？？？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-text">Dockerfile</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">基础知识</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E7%BD%91%E7%BB%9C"><span class="toc-text">Docker网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Compose"><span class="toc-text">Docker Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%93%E9%AA%8C"><span class="toc-text">体验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker%E5%B0%8F%E7%BB%93"><span class="toc-text">Docker小结</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Swarm"><span class="toc-text">Docker Swarm</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">工作模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="toc-text">搭建集群</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Raft%E5%8D%8F%E8%AE%AE"><span class="toc-text">Raft协议</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93"><span class="toc-text">概念总结</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Stack"><span class="toc-text">Docker Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Secret"><span class="toc-text">Docker Secret</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Config"><span class="toc-text">Docker Config</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E5%88%B0k8s"><span class="toc-text">扩展到k8s</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3"><span class="toc-text">云原生时代</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>windows 安装使用</p>
+</blockquote>
+<ol>
+<li><p>安装exe</p>
+</li>
+<li><p>安装wsl,wsl2</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package">https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package</a></p>
+<ol start="3">
+<li>非系统盘安装linux子系统</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual">https://docs.microsoft.com/zh-cn/windows/wsl/install-manual</a></p>
+<ol start="4">
+<li>镜像加速</li>
+</ol>
+<p>“<a target="_blank" rel="noopener" href="https://rvpdnlir.mirror.aliyuncs.com&quot;/">https://rvpdnlir.mirror.aliyuncs.com&quot;</a>,<br>    “<a target="_blank" rel="noopener" href="https://hub-mirror.c.163.com&quot;/">https://hub-mirror.c.163.com&quot;</a>,<br>    “<a target="_blank" rel="noopener" href="https://mirror.baidubce.com&quot;/">https://mirror.baidubce.com&quot;</a></p>
+<blockquote>
+<p>常用命令</p>
+</blockquote>
+<p>docker run –name hello -itd -P my:v1<br>docker container ls<br>docker container start<br>docker container stop<br>docker container rm test<br>docker stats<br>docker inspect -f<br>docker build -f dw -t dw:v2 .<br>docker exec -it test bash<br>docker images<br>docker image rm </p>
+<p>docker run –name dw1 -P -p 33001:22 -itd dw:v2 &amp;&amp; docker run –name dw2 -P -p 33002:22 -itd dw:v2 &amp;&amp; docker run –name dw3 -P -p 33003:22 -itd dw:v2</p>
+<p>docker container stop dw1 &amp;&amp; docker container rm dw1 &amp;&amp; docker container stop dw2 &amp;&amp; docker container rm dw2 &amp;&amp; docker container stop dw3 &amp;&amp; docker container rm dw3</p>
+<p>docker info<br>docker version<br>docker 命令 –help</p>
+<p>帮助文档</p>
+<p>镜像命令<br>docker images<br>docker image rm </p>
+<p>搜索镜像<br>docker search</p>
+<p>docker pull</p>
+<p>docker rmi -f 容器id</p>
+<p>容器命令<br>新建容器并启动<br>docker run [] image<br>-d 后台方式运行<br>-it 交互<br>-p 指定端口<br>-P 随机指定端口</p>
+<p>docker ps -a<br>ctrl+ p+ q 退出后不关闭容器<br>docker rm -rf $(docker ps -aq)</p>
+<p>启动和停止容器<br>docker start<br>docker stop<br>docker restart<br>docker kill</p>
+<p>常用其他命令<br>doceker run -d</p>
+<p>日志<br>docker logs -ft –tail 19 id</p>
+<p>查看容器中进程信息ps<br>docker top id</p>
+<p>查看镜像元数据<br>docker inspect id</p>
+<p>进入当前正在运行的容器<br>docker exec -it id bash<br>exec和attach的区别</p>
+<p>从容器内拷贝文件到主机<br>docker cp id:/home/test.java /home</p>
+<p>-rm 容器停止后就删除</p>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<h1 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h1><h3 id="使用数据卷"><a href="#使用数据卷" class="headerlink" title="使用数据卷"></a>使用数据卷</h3><ol>
+<li>使用 -v 主机目录:容器内目录</li>
+</ol>
+<p><img src="../../images/image-20201227203400071.png" alt="image-20201227203400071"></p>
+<ol start="2">
+<li>示例</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d 后台运行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p 端口映射</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v 卷挂载</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--name 容器名字</span></span><br><span class="line">docker run -d -p 3310:3306 -v /home/docker/mysql/conf:/etc/mysql/conf.d -v /home/docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>具名和匿名挂载</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume ls</span><br></pre></td></tr></table></figure>
+
+<h6 id="匿名挂载"><a href="#匿名挂载" class="headerlink" title="匿名挂载"></a>匿名挂载</h6><p>-v 只写容器内路径</p>
+<h6 id="具名挂载"><a href="#具名挂载" class="headerlink" title="具名挂载"></a>具名挂载</h6><p>-v 指定卷名:容器内路径</p>
+<h6 id="查看卷名的路径"><a href="#查看卷名的路径" class="headerlink" title="查看卷名的路径"></a>查看卷名的路径</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect 卷名</span><br></pre></td></tr></table></figure>
+
+<p>-v  :ro 路径只能通过宿主机操作，容器内部不能操作</p>
+<p>-v :rw</p>
+<h5 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h5><ul>
+<li>-v 容器内路径      # 匿名挂载</li>
+<li>-v 卷名:容器内路径    # 具名挂载</li>
+<li>-v 宿主机路径:容器内路径 # 指定路径挂载</li>
+</ul>
+<h1 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h1><h6 id="多个mysql同步数据"><a href="#多个mysql同步数据" class="headerlink" title="多个mysql同步数据"></a>多个mysql同步数据</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--volumes-from 容器名 #多个容器”互相“共享数据</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h3 id="删除是否会影响？？？？？？"><a href="#删除是否会影响？？？？？？" class="headerlink" title="删除是否会影响？？？？？？"></a>删除是否会影响？？？？？？</h3></blockquote>
+<h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f filename -t imagename .</span><br></pre></td></tr></table></figure>
+
+<h6 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h6><ol>
+<li>每个保留关键字（指令）都是必须是大写字母</li>
+<li>执行从上到下顺序执行</li>
+<li>#表示注释</li>
+<li>每一个指令都会创建提交一个新的镜像层，并提交！</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FROM          # 基础镜像，一切从这里开始构建</span><br><span class="line">MAINTAINER    # 镜像是谁写的，姓名+邮箱</span><br><span class="line">RUN           # 镜像构建的时候需要运行的命令</span><br><span class="line">ADD           # 添加内容，压缩包等</span><br><span class="line">WORKDIR       # 镜像的工作目录</span><br><span class="line">VOLUME        # 挂载目录</span><br><span class="line">EXPOSE        # 保留端口配置</span><br><span class="line">CMD           # 指定这个容器启动时要运行的命令，只有最后一个会生效，可被替代</span><br><span class="line">ENTRYPOINT    # 指定这个容器启动的时候要运行的命令，可以追加命令</span><br><span class="line">ONBUILD       # 当构建一个被集成Dockerfile 这个时候就会运行ONBUILD的指令，触发指令</span><br><span class="line">COPY          # 类似ADD，将我们文件拷贝到镜像中</span><br><span class="line">ENV           # 构建时设置环境变量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=682874762,801900271&fm=26&gp=0.jpg" alt="img"></p>
+<h1 id="Docker网络"><a href="#Docker网络" class="headerlink" title="Docker网络"></a>Docker网络</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d -P --name tomcat1 --net mynet</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">网络联通</span></span><br><span class="line">docker network connect 网络名 容器名</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>定义、运行多个容器</p>
+<p>YAML 配置文件</p>
+<p>命令有哪些</p>
+<p>作用：批量容器编排</p>
+<p>Compose是docker官方的开源项目，需要安装</p>
+<p>Dockerfile让程序在任何地方运行。web服务。redis、mysql、nginx…多个容器。</p>
+<p>docker-compose.yml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.9&quot;</span>  <span class="comment"># optional since v1.27.0</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5000:5000&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">.:/code</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">logvolume01:/var/log</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">logvolume01:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>compose： 重要概念</p>
+<ul>
+<li>服务services,容器。 </li>
+<li>项目project。一组关联的容器。</li>
+</ul>
+<h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><ol>
+<li>下载</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li> 授权</li>
+</ol>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<h2 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h2><ol>
+<li>应用 app.py</li>
+<li>Dockerfile 应用打包为镜像</li>
+<li>Docker-compose yaml文件 （定义整个服务，需要的环境。web,redis）</li>
+<li>启动compose项目（docker-compose up）</li>
+</ol>
+<h4 id="Docker小结"><a href="#Docker小结" class="headerlink" title="Docker小结"></a>Docker小结</h4><ol>
+<li>Docker镜像</li>
+<li>Dockerfile构建镜像</li>
+<li>docker-compose启动项目（编排、多个微服务/环境）</li>
+<li>Docker网络</li>
+</ol>
+<blockquote>
+<p>自己搭建一些开源项目</p>
+</blockquote>
+<p>掌握： docker基础，原理、网络、服务、集群、错误排查、日志。</p>
+<h1 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h1><h5 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h5><h5 id="搭建集群"><a href="#搭建集群" class="headerlink" title="搭建集群"></a>搭建集群</h5><ol>
+<li><p>生成主节点 init</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker swarm init --advertise-addr ip</span><br></pre></td></tr></table></figure></li>
+<li><p>加入（管理者、worker）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker swarm join --token ......</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="Raft协议"><a href="#Raft协议" class="headerlink" title="Raft协议"></a>Raft协议</h5><p>​    保证大多数节点存活才可以用。 只要 &gt; 1，集群至少大于3台！</p>
+<p>​    </p>
+<p>集群可用：3个主节点，&gt;1台管理节点存活。</p>
+<h4 id="概念总结"><a href="#概念总结" class="headerlink" title="概念总结"></a>概念总结</h4><p><strong>swarm</strong></p>
+<p>集群的管理和编号。docker可以初始化一个swarm集群，其他节点可以加入（manager,worker）</p>
+<p><strong>node</strong></p>
+<p>就是一个docker节点。多个节点就组成了一个网络集群。</p>
+<p><strong>service</strong></p>
+<p>任务，可以在管理节点或者工作节点来运行。核心！供用户访问！</p>
+<p><strong>task</strong></p>
+<p>容器内的命令，细节任务。</p>
+<blockquote>
+<p>overlay  ingress  网络模式？？？？？？？？？？？</p>
+</blockquote>
+<h1 id="Docker-Stack"><a href="#Docker-Stack" class="headerlink" title="Docker Stack"></a>Docker Stack</h1><p>docker-compose 单机部署项目</p>
+<p>docker stack部署，集群部署</p>
+<h1 id="Docker-Secret"><a href="#Docker-Secret" class="headerlink" title="Docker Secret"></a>Docker Secret</h1><p>安全。配置密码、证书。</p>
+<h1 id="Docker-Config"><a href="#Docker-Config" class="headerlink" title="Docker Config"></a>Docker Config</h1><p>配置</p>
+<h1 id="扩展到k8s"><a href="#扩展到k8s" class="headerlink" title="扩展到k8s"></a>扩展到k8s</h1><h5 id="云原生时代"><a href="#云原生时代" class="headerlink" title="云原生时代"></a>云原生时代</h5><blockquote>
+<p> GO语言！必须掌握！</p>
+<blockquote>
+<p>GO是并发语言</p>
+</blockquote>
+</blockquote>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '709b87088cb3e563a2a0',
+            clientSecret: 'b142520468a994df44957d419fbd1ddafd73ed44',
+            repo: 'alooc.github.io',
+            owner: 'alooc',
+            admin: ['alooc'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2023 Alooc
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
