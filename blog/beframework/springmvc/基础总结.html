@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.64" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <meta property="og:url" content="https://alooc.github.io/blog/beframework/springmvc/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html"><meta property="og:site_name" content="Alooc"><meta property="og:title" content="SpringMVC基础用法总结"><meta property="og:description" content="第一章 Java EE应用 ## Java EE架构： 	Domain Object(领域对象层) 	DAO(Data Access Object 数据访问层) 在其他框架中的别名 EAO(Entity) 		Mapper层 	Service (业务逻辑层) 	Controller(控制器层) 	View(表现层) 组成：jsp页面等 (上层组件的实现依赖于下层组件的功能，下层组件支持上层组的实现) servlet 3.x规范：提供功能：异步请求，注解，增强的Servlet API，非阻塞I/O jsp只负责简单的显示逻辑 中间层将底层信息封装成JavaBean集，即DTO（数据传输对象），传输DTO给JSP页面"><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2023-07-10T06:35:27.000Z"><meta property="article:author" content="Alooc"><meta property="article:tag" content="SpringMVC"><meta property="article:published_time" content="2020-01-01T09:02:55.000Z"><meta property="article:modified_time" content="2023-07-10T06:35:27.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SpringMVC基础用法总结","image":[""],"datePublished":"2020-01-01T09:02:55.000Z","dateModified":"2023-07-10T06:35:27.000Z","author":[{"@type":"Person","name":"Alooc","url":"https://alooc.github.io"}]}</script><title>SpringMVC基础用法总结 | Alooc</title><meta name="description" content="第一章 Java EE应用 ## Java EE架构： 	Domain Object(领域对象层) 	DAO(Data Access Object 数据访问层) 在其他框架中的别名 EAO(Entity) 		Mapper层 	Service (业务逻辑层) 	Controller(控制器层) 	View(表现层) 组成：jsp页面等 (上层组件的实现依赖于下层组件的功能，下层组件支持上层组的实现) servlet 3.x规范：提供功能：异步请求，注解，增强的Servlet API，非阻塞I/O jsp只负责简单的显示逻辑 中间层将底层信息封装成JavaBean集，即DTO（数据传输对象），传输DTO给JSP页面">
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d1e1f;
+      }
+
+      html,
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/assets/style-8b38246e.css" as="style"><link rel="stylesheet" href="/assets/style-8b38246e.css">
+    <link rel="modulepreload" href="/assets/app-a2c721dc.js"><link rel="modulepreload" href="/assets/基础总结.html-0349b7ee.js"><link rel="modulepreload" href="/assets/plugin-vue_export-helper-c27b6911.js"><link rel="modulepreload" href="/assets/基础总结.html-322beccc.js"><link rel="prefetch" href="/assets/index.html-e1021f54.js" as="script"><link rel="prefetch" href="/assets/intro.html-c1e4b2dc.js" as="script"><link rel="prefetch" href="/assets/slides.html-b45a6447.js" as="script"><link rel="prefetch" href="/assets/index.html-458c8341.js" as="script"><link rel="prefetch" href="/assets/左神算法基础提升课学习笔记.html-c80b4071.js" as="script"><link rel="prefetch" href="/assets/左神算法基础课学习笔记.html-096663ed.js" as="script"><link rel="prefetch" href="/assets/算法总结.html-9a485fee.js" as="script"><link rel="prefetch" href="/assets/index.html-9e0df4db.js" as="script"><link rel="prefetch" href="/assets/index.html-f636b49d.js" as="script"><link rel="prefetch" href="/assets/index.html-a142dc4a.js" as="script"><link rel="prefetch" href="/assets/index.html-fde69805.js" as="script"><link rel="prefetch" href="/assets/index.html-bdb8e9fa.js" as="script"><link rel="prefetch" href="/assets/index.html-c075669e.js" as="script"><link rel="prefetch" href="/assets/index.html-a3d07645.js" as="script"><link rel="prefetch" href="/assets/技巧.html-2793d7c3.js" as="script"><link rel="prefetch" href="/assets/activiti6基础笔记.html-f51799c6.js" as="script"><link rel="prefetch" href="/assets/第一行代码笔记.html-6b105108.js" as="script"><link rel="prefetch" href="/assets/Bash基础笔记.html-f5fbf11c.js" as="script"><link rel="prefetch" href="/assets/常用命令.html-7b2e7a9d.js" as="script"><link rel="prefetch" href="/assets/docker命令.html-6e1c13fc.js" as="script"><link rel="prefetch" href="/assets/常用镜像命令.html-b7dc6f8f.js" as="script"><link rel="prefetch" href="/assets/maven深入学习笔记.html-e465d6d4.js" as="script"><link rel="prefetch" href="/assets/yaml语法.html-9c137d39.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-894e58f9.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-c95a47cc.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-ded985b2.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-1ba79826.js" as="script"><link rel="prefetch" href="/assets/源码分析.html-77cd1a08.js" as="script"><link rel="prefetch" href="/assets/springcloud项目尚医通总结.html-7533d2f4.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-c6f616d3.js" as="script"><link rel="prefetch" href="/assets/java整合mysql.html-6971f64b.js" as="script"><link rel="prefetch" href="/assets/基础.html-feab24ef.js" as="script"><link rel="prefetch" href="/assets/Oracle基础总结.html-48c08c34.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-c4d3d1e4.js" as="script"><link rel="prefetch" href="/assets/Vue2.5开发去哪儿网App从零基础入门到实战项目学习笔记.html-1bcc0f69.js" as="script"><link rel="prefetch" href="/assets/CSS世界学习笔记.html-d61b3898.js" as="script"><link rel="prefetch" href="/assets/JavaScript笔记.html-a3c5445a.js" as="script"><link rel="prefetch" href="/assets/JavaScript高级程序设计学习笔记.html-a10bd1c6.js" as="script"><link rel="prefetch" href="/assets/jquery_ajax笔记.html-d0d7f2ee.js" as="script"><link rel="prefetch" href="/assets/疯狂HTML5_CSS3_JavaScript讲义笔记.html-87a698fd.js" as="script"><link rel="prefetch" href="/assets/疯狂前端开发讲义笔记.html-6fd93eee.js" as="script"><link rel="prefetch" href="/assets/JSP_Servlet笔记.html-b42852cf.js" as="script"><link rel="prefetch" href="/assets/JUC.html-322c1f07.js" as="script"><link rel="prefetch" href="/assets/基础.html-31adf37f.js" as="script"><link rel="prefetch" href="/assets/学习笔记《java开发手册》.html-0e209bf1.js" as="script"><link rel="prefetch" href="/assets/学习笔记《疯狂Java讲义》.html-35e33874.js" as="script"><link rel="prefetch" href="/assets/学习笔记《码出高效：Java开发手册》.html-85052851.js" as="script"><link rel="prefetch" href="/assets/抽象类和接口.html-d8f10676.js" as="script"><link rel="prefetch" href="/assets/集合.html-35003d70.js" as="script"><link rel="prefetch" href="/assets/note.html-a82101b8.js" as="script"><link rel="prefetch" href="/assets/404.html-bb007e7c.js" as="script"><link rel="prefetch" href="/assets/index.html-5a33631f.js" as="script"><link rel="prefetch" href="/assets/index.html-b34cdcff.js" as="script"><link rel="prefetch" href="/assets/index.html-f17edf1c.js" as="script"><link rel="prefetch" href="/assets/index.html-229a541c.js" as="script"><link rel="prefetch" href="/assets/index.html-f5aaa230.js" as="script"><link rel="prefetch" href="/assets/index.html-f64238ef.js" as="script"><link rel="prefetch" href="/assets/index.html-d9b7035b.js" as="script"><link rel="prefetch" href="/assets/index.html-94a162e9.js" as="script"><link rel="prefetch" href="/assets/index.html-2128bc53.js" as="script"><link rel="prefetch" href="/assets/index.html-1f5c737d.js" as="script"><link rel="prefetch" href="/assets/index.html-279e3e4c.js" as="script"><link rel="prefetch" href="/assets/index.html-855b20ae.js" as="script"><link rel="prefetch" href="/assets/index.html-bb9df194.js" as="script"><link rel="prefetch" href="/assets/index.html-6561255c.js" as="script"><link rel="prefetch" href="/assets/index.html-f01f9cce.js" as="script"><link rel="prefetch" href="/assets/index.html-a7da0750.js" as="script"><link rel="prefetch" href="/assets/index.html-69474e89.js" as="script"><link rel="prefetch" href="/assets/index.html-272edd85.js" as="script"><link rel="prefetch" href="/assets/index.html-7c80cf43.js" as="script"><link rel="prefetch" href="/assets/index.html-fcc37413.js" as="script"><link rel="prefetch" href="/assets/index.html-0e5553da.js" as="script"><link rel="prefetch" href="/assets/index.html-ee08f8a4.js" as="script"><link rel="prefetch" href="/assets/index.html-0b977aec.js" as="script"><link rel="prefetch" href="/assets/index.html-2f13bbcc.js" as="script"><link rel="prefetch" href="/assets/index.html-e9d110f9.js" as="script"><link rel="prefetch" href="/assets/index.html-5a918ded.js" as="script"><link rel="prefetch" href="/assets/index.html-9479282f.js" as="script"><link rel="prefetch" href="/assets/index.html-536277d1.js" as="script"><link rel="prefetch" href="/assets/index.html-45a37b61.js" as="script"><link rel="prefetch" href="/assets/index.html-2085521d.js" as="script"><link rel="prefetch" href="/assets/index.html-edf11e1d.js" as="script"><link rel="prefetch" href="/assets/index.html-7bcda36e.js" as="script"><link rel="prefetch" href="/assets/index.html-4e6cd9b4.js" as="script"><link rel="prefetch" href="/assets/index.html-70154c1a.js" as="script"><link rel="prefetch" href="/assets/index.html-5504710a.js" as="script"><link rel="prefetch" href="/assets/index.html-45a9d477.js" as="script"><link rel="prefetch" href="/assets/index.html-3b54d6af.js" as="script"><link rel="prefetch" href="/assets/index.html-d8b74bf0.js" as="script"><link rel="prefetch" href="/assets/index.html-2b442d8c.js" as="script"><link rel="prefetch" href="/assets/index.html-5bab0b0d.js" as="script"><link rel="prefetch" href="/assets/index.html-94361434.js" as="script"><link rel="prefetch" href="/assets/index.html-7cf55d7a.js" as="script"><link rel="prefetch" href="/assets/index.html-39ed20a3.js" as="script"><link rel="prefetch" href="/assets/index.html-b84d7b0e.js" as="script"><link rel="prefetch" href="/assets/index.html-96b00477.js" as="script"><link rel="prefetch" href="/assets/index.html-931e73cc.js" as="script"><link rel="prefetch" href="/assets/index.html-d5238306.js" as="script"><link rel="prefetch" href="/assets/index.html-022320ef.js" as="script"><link rel="prefetch" href="/assets/index.html-1458f3e8.js" as="script"><link rel="prefetch" href="/assets/index.html-2535caab.js" as="script"><link rel="prefetch" href="/assets/index.html-aa00903c.js" as="script"><link rel="prefetch" href="/assets/index.html-89737dbe.js" as="script"><link rel="prefetch" href="/assets/index.html-8f53cfb6.js" as="script"><link rel="prefetch" href="/assets/index.html-da0ace56.js" as="script"><link rel="prefetch" href="/assets/index.html-d672288c.js" as="script"><link rel="prefetch" href="/assets/index.html-fe42fcc6.js" as="script"><link rel="prefetch" href="/assets/index.html-240726d8.js" as="script"><link rel="prefetch" href="/assets/index.html-0ef4edf7.js" as="script"><link rel="prefetch" href="/assets/index.html-6930b6fa.js" as="script"><link rel="prefetch" href="/assets/index.html-7209af5f.js" as="script"><link rel="prefetch" href="/assets/index.html-f13374c1.js" as="script"><link rel="prefetch" href="/assets/index.html-36d23d70.js" as="script"><link rel="prefetch" href="/assets/index.html-71b464fd.js" as="script"><link rel="prefetch" href="/assets/index.html-339be067.js" as="script"><link rel="prefetch" href="/assets/index.html-4421e73f.js" as="script"><link rel="prefetch" href="/assets/index.html-9b007397.js" as="script"><link rel="prefetch" href="/assets/index.html-940ed4e0.js" as="script"><link rel="prefetch" href="/assets/index.html-4bacd547.js" as="script"><link rel="prefetch" href="/assets/index.html-9b0dc7af.js" as="script"><link rel="prefetch" href="/assets/index.html-9d2370c8.js" as="script"><link rel="prefetch" href="/assets/index.html-57282599.js" as="script"><link rel="prefetch" href="/assets/index.html-1e155d25.js" as="script"><link rel="prefetch" href="/assets/index.html-d16d5b9d.js" as="script"><link rel="prefetch" href="/assets/index.html-c548900e.js" as="script"><link rel="prefetch" href="/assets/index.html-ce700e36.js" as="script"><link rel="prefetch" href="/assets/index.html-6ff40265.js" as="script"><link rel="prefetch" href="/assets/index.html-e0955dfb.js" as="script"><link rel="prefetch" href="/assets/index.html-b1191208.js" as="script"><link rel="prefetch" href="/assets/index.html-efa0c71e.js" as="script"><link rel="prefetch" href="/assets/intro.html-93e5942d.js" as="script"><link rel="prefetch" href="/assets/slides.html-d7f89bdf.js" as="script"><link rel="prefetch" href="/assets/index.html-9627a98a.js" as="script"><link rel="prefetch" href="/assets/左神算法基础提升课学习笔记.html-871037ae.js" as="script"><link rel="prefetch" href="/assets/左神算法基础课学习笔记.html-793a3b98.js" as="script"><link rel="prefetch" href="/assets/算法总结.html-94cca232.js" as="script"><link rel="prefetch" href="/assets/index.html-57fc8aa1.js" as="script"><link rel="prefetch" href="/assets/index.html-fdaf2add.js" as="script"><link rel="prefetch" href="/assets/index.html-22bd2c17.js" as="script"><link rel="prefetch" href="/assets/index.html-a5b084e0.js" as="script"><link rel="prefetch" href="/assets/index.html-5cd5be0b.js" as="script"><link rel="prefetch" href="/assets/index.html-487709de.js" as="script"><link rel="prefetch" href="/assets/index.html-4552be36.js" as="script"><link rel="prefetch" href="/assets/技巧.html-3b6ee27f.js" as="script"><link rel="prefetch" href="/assets/activiti6基础笔记.html-1b61032b.js" as="script"><link rel="prefetch" href="/assets/第一行代码笔记.html-69d4ed12.js" as="script"><link rel="prefetch" href="/assets/Bash基础笔记.html-c26d0fc5.js" as="script"><link rel="prefetch" href="/assets/常用命令.html-6b6cdeac.js" as="script"><link rel="prefetch" href="/assets/docker命令.html-eef0c47d.js" as="script"><link rel="prefetch" href="/assets/常用镜像命令.html-fd428514.js" as="script"><link rel="prefetch" href="/assets/maven深入学习笔记.html-366b8248.js" as="script"><link rel="prefetch" href="/assets/yaml语法.html-cf2ebf52.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-c208962b.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-1f8eff17.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-45a62c2a.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-e053aa02.js" as="script"><link rel="prefetch" href="/assets/源码分析.html-954f148e.js" as="script"><link rel="prefetch" href="/assets/springcloud项目尚医通总结.html-571978d1.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-1d20bb80.js" as="script"><link rel="prefetch" href="/assets/java整合mysql.html-e9ef67b3.js" as="script"><link rel="prefetch" href="/assets/基础.html-0450706b.js" as="script"><link rel="prefetch" href="/assets/Oracle基础总结.html-468dc0d1.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-675d5baa.js" as="script"><link rel="prefetch" href="/assets/Vue2.5开发去哪儿网App从零基础入门到实战项目学习笔记.html-a379a8a1.js" as="script"><link rel="prefetch" href="/assets/CSS世界学习笔记.html-aaaaa2ac.js" as="script"><link rel="prefetch" href="/assets/JavaScript笔记.html-0955824c.js" as="script"><link rel="prefetch" href="/assets/JavaScript高级程序设计学习笔记.html-385c4ac7.js" as="script"><link rel="prefetch" href="/assets/jquery_ajax笔记.html-d95d5200.js" as="script"><link rel="prefetch" href="/assets/疯狂HTML5_CSS3_JavaScript讲义笔记.html-59892f49.js" as="script"><link rel="prefetch" href="/assets/疯狂前端开发讲义笔记.html-8f63a08d.js" as="script"><link rel="prefetch" href="/assets/JSP_Servlet笔记.html-8eba6956.js" as="script"><link rel="prefetch" href="/assets/JUC.html-4a2c359b.js" as="script"><link rel="prefetch" href="/assets/基础.html-01f31dec.js" as="script"><link rel="prefetch" href="/assets/学习笔记《java开发手册》.html-7aa6ea8f.js" as="script"><link rel="prefetch" href="/assets/学习笔记《疯狂Java讲义》.html-26fcb733.js" as="script"><link rel="prefetch" href="/assets/学习笔记《码出高效：Java开发手册》.html-9cc463cf.js" as="script"><link rel="prefetch" href="/assets/抽象类和接口.html-04de375f.js" as="script"><link rel="prefetch" href="/assets/集合.html-479e2f1d.js" as="script"><link rel="prefetch" href="/assets/note.html-14cf8edf.js" as="script"><link rel="prefetch" href="/assets/404.html-51d44eea.js" as="script"><link rel="prefetch" href="/assets/index.html-2a7a6861.js" as="script"><link rel="prefetch" href="/assets/index.html-c45a34dd.js" as="script"><link rel="prefetch" href="/assets/index.html-0f30b99c.js" as="script"><link rel="prefetch" href="/assets/index.html-98657ec5.js" as="script"><link rel="prefetch" href="/assets/index.html-94b38a1e.js" as="script"><link rel="prefetch" href="/assets/index.html-f0d0d1e2.js" as="script"><link rel="prefetch" href="/assets/index.html-cb791088.js" as="script"><link rel="prefetch" href="/assets/index.html-a4967664.js" as="script"><link rel="prefetch" href="/assets/index.html-e8fa6857.js" as="script"><link rel="prefetch" href="/assets/index.html-e71ea698.js" as="script"><link rel="prefetch" href="/assets/index.html-dc85b06d.js" as="script"><link rel="prefetch" href="/assets/index.html-055b2ca9.js" as="script"><link rel="prefetch" href="/assets/index.html-f930bad6.js" as="script"><link rel="prefetch" href="/assets/index.html-c2bcdb36.js" as="script"><link rel="prefetch" href="/assets/index.html-5a189899.js" as="script"><link rel="prefetch" href="/assets/index.html-e8f848f4.js" as="script"><link rel="prefetch" href="/assets/index.html-f2b6d918.js" as="script"><link rel="prefetch" href="/assets/index.html-e0b949b6.js" as="script"><link rel="prefetch" href="/assets/index.html-05ff6d51.js" as="script"><link rel="prefetch" href="/assets/index.html-79ea5ccf.js" as="script"><link rel="prefetch" href="/assets/index.html-dbce5675.js" as="script"><link rel="prefetch" href="/assets/index.html-c218230c.js" as="script"><link rel="prefetch" href="/assets/index.html-e8350416.js" as="script"><link rel="prefetch" href="/assets/index.html-b527e6f5.js" as="script"><link rel="prefetch" href="/assets/index.html-f917d2a5.js" as="script"><link rel="prefetch" href="/assets/index.html-950bf01c.js" as="script"><link rel="prefetch" href="/assets/index.html-8dca2b7a.js" as="script"><link rel="prefetch" href="/assets/index.html-ba9ac5a5.js" as="script"><link rel="prefetch" href="/assets/index.html-9a76957b.js" as="script"><link rel="prefetch" href="/assets/index.html-42bae693.js" as="script"><link rel="prefetch" href="/assets/index.html-2fd57555.js" as="script"><link rel="prefetch" href="/assets/index.html-b779b27d.js" as="script"><link rel="prefetch" href="/assets/index.html-d3574a5b.js" as="script"><link rel="prefetch" href="/assets/index.html-64da747a.js" as="script"><link rel="prefetch" href="/assets/index.html-82b3793d.js" as="script"><link rel="prefetch" href="/assets/index.html-38be2a36.js" as="script"><link rel="prefetch" href="/assets/index.html-9725c24b.js" as="script"><link rel="prefetch" href="/assets/index.html-dd09db79.js" as="script"><link rel="prefetch" href="/assets/index.html-4146b37d.js" as="script"><link rel="prefetch" href="/assets/index.html-d43826b8.js" as="script"><link rel="prefetch" href="/assets/index.html-9de3e07a.js" as="script"><link rel="prefetch" href="/assets/index.html-31ef4d0d.js" as="script"><link rel="prefetch" href="/assets/index.html-23977d43.js" as="script"><link rel="prefetch" href="/assets/index.html-095661e7.js" as="script"><link rel="prefetch" href="/assets/index.html-a15268fa.js" as="script"><link rel="prefetch" href="/assets/index.html-04aff772.js" as="script"><link rel="prefetch" href="/assets/index.html-9b77adac.js" as="script"><link rel="prefetch" href="/assets/index.html-7247c7ac.js" as="script"><link rel="prefetch" href="/assets/index.html-0d99ba0f.js" as="script"><link rel="prefetch" href="/assets/index.html-6b169b4b.js" as="script"><link rel="prefetch" href="/assets/index.html-0c6a6310.js" as="script"><link rel="prefetch" href="/assets/index.html-59e4d5c2.js" as="script"><link rel="prefetch" href="/assets/index.html-8d3094cf.js" as="script"><link rel="prefetch" href="/assets/index.html-38490b58.js" as="script"><link rel="prefetch" href="/assets/index.html-a145267a.js" as="script"><link rel="prefetch" href="/assets/index.html-e80145a8.js" as="script"><link rel="prefetch" href="/assets/index.html-734a47c0.js" as="script"><link rel="prefetch" href="/assets/index.html-a9416d71.js" as="script"><link rel="prefetch" href="/assets/index.html-26ffdf94.js" as="script"><link rel="prefetch" href="/assets/index.html-4df71dc7.js" as="script"><link rel="prefetch" href="/assets/index.html-ea2eb893.js" as="script"><link rel="prefetch" href="/assets/index.html-de2ee033.js" as="script"><link rel="prefetch" href="/assets/index.html-01a68c1d.js" as="script"><link rel="prefetch" href="/assets/index.html-d5f96a7b.js" as="script"><link rel="prefetch" href="/assets/index.html-eb54f92e.js" as="script"><link rel="prefetch" href="/assets/index.html-ab5d924e.js" as="script"><link rel="prefetch" href="/assets/index.html-30c83703.js" as="script"><link rel="prefetch" href="/assets/index.html-4f6ff7f5.js" as="script"><link rel="prefetch" href="/assets/index.html-429fc1d3.js" as="script"><link rel="prefetch" href="/assets/index.html-58b8fa5e.js" as="script"><link rel="prefetch" href="/assets/index.html-74b7bfe3.js" as="script"><link rel="prefetch" href="/assets/index.html-c1c852a4.js" as="script"><link rel="prefetch" href="/assets/index.html-b0f222c8.js" as="script"><link rel="prefetch" href="/assets/index.html-3b80d6d2.js" as="script"><link rel="prefetch" href="/assets/index.html-568d3529.js" as="script"><link rel="prefetch" href="/assets/index.html-22fe42e8.js" as="script"><link rel="prefetch" href="/assets/index.html-3b7eb864.js" as="script"><link rel="prefetch" href="/assets/index.html-d79b5f81.js" as="script"><link rel="prefetch" href="/assets/waline-meta-56fbc549.js" as="script"><link rel="prefetch" href="/assets/component-a2159e74.js" as="script"><link rel="prefetch" href="/assets/auto-fa8841cf.js" as="script"><link rel="prefetch" href="/assets/index-ae8c1e74.js" as="script"><link rel="prefetch" href="/assets/flowchart-d65a1d8e.js" as="script"><link rel="prefetch" href="/assets/mermaid.core-4d7b3aa4.js" as="script"><link rel="prefetch" href="/assets/highlight.esm-75b11b9d.js" as="script"><link rel="prefetch" href="/assets/markdown.esm-0191f9da.js" as="script"><link rel="prefetch" href="/assets/math.esm-70a288c8.js" as="script"><link rel="prefetch" href="/assets/notes.esm-a106bb2c.js" as="script"><link rel="prefetch" href="/assets/reveal.esm-ec5549c1.js" as="script"><link rel="prefetch" href="/assets/search.esm-7e6792e2.js" as="script"><link rel="prefetch" href="/assets/zoom.esm-b83b91d0.js" as="script"><link rel="prefetch" href="/assets/VuePlayground-a5baf4db.js" as="script"><link rel="prefetch" href="/assets/photoswipe.esm-5794cde2.js" as="script"><link rel="prefetch" href="/assets/pageview-a7133da3.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><div class="theme-container no-sidebar has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand" href="/"><img class="vp-nav-logo" src="/logo.svg" alt="Alooc"><!----><span class="vp-site-name hide-in-pad">Alooc</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/"><!---->首页<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/algorithm/"><!---->算法<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/database/"><!---->数据库<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/language/"><!---->编程语言<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/skill/"><!---->技巧<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link active" href="/blog/beframework/"><!---->后端框架<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/be/"><!---->后端技术<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/feframework/"><!---->前端框架<!----></a></div><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/blog/fe/"><!---->前端技术<!----></a></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button type="button" class="dropdown-title" aria-label="博文"><span class="title"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>博文</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><h4 class="dropdown-subtitle"><span>苹果</span></h4><ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/apple/1.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>苹果1<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/apple/2.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>苹果2<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/apple/3.html"><!---->/zh/posts/apple/3<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/apple/4.html"><!---->/zh/posts/apple/4<!----></a></li></ul></li><li class="dropdown-item"><h4 class="dropdown-subtitle"><span>香蕉</span></h4><ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/banana/1.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>香蕉 1<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/banana/2.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>香蕉 2<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/banana/3.html"><!---->/zh/posts/banana/3<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/zh/posts/banana/4.html"><!---->/zh/posts/banana/4<!----></a></li></ul></li><li class="dropdown-item"><a class="vp-link nav-link" href="/zh/posts/cherry.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>樱桃<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/zh/posts/dragonfruit.html"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>火龙果<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/zh/posts/tomato.html"><!---->/zh/posts/tomato<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/zh/posts/strawberry.html"><!---->/zh/posts/strawberry<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><a href="https://theme-hope.vuejs.press/zh/" rel="noopener noreferrer" target="_blank" aria-label="V2 文档" class="nav-link"><span class="font-icon icon fa-fw fa-sm fas fa-book" style=""></span>V2 文档<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><!----><!----><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><!----><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->SpringMVC基础用法总结</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://alooc.github.io" target="_blank" rel="noopener noreferrer">Alooc</a></span><span property="author" content="Alooc"></span></span><!----><span class="page-date-info" aria-label="写作日期📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2020-01-01T09:02:55.000Z"></span><span class="page-pageview-info" aria-label="访问量🔢" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon eye-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="eye icon"><path d="M992 512.096c0-5.76-.992-10.592-1.28-11.136-.192-2.88-1.152-8.064-2.08-10.816-.256-.672-.544-1.376-.832-2.08-.48-1.568-1.024-3.104-1.6-4.32C897.664 290.112 707.104 160 512 160c-195.072 0-385.632 130.016-473.76 322.592-1.056 2.112-1.792 4.096-2.272 5.856a55.512 55.512 0 00-.64 1.6c-1.76 5.088-1.792 8.64-1.632 7.744-.832 3.744-1.568 11.168-1.568 11.168-.224 2.272-.224 4.032.032 6.304 0 0 .736 6.464 1.088 7.808.128 1.824.576 4.512 1.12 6.976h-.032c.448 2.08 1.12 4.096 1.984 6.08.48 1.536.992 2.976 1.472 4.032C126.432 733.856 316.992 864 512 864c195.136 0 385.696-130.048 473.216-321.696 1.376-2.496 2.24-4.832 2.848-6.912.256-.608.48-1.184.672-1.728 1.536-4.48 1.856-8.32 1.728-8.32l-.032.032c.608-3.104 1.568-7.744 1.568-13.28zM512 672c-88.224 0-160-71.776-160-160s71.776-160 160-160 160 71.776 160 160-71.776 160-160 160z"></path></svg><span id="ArtalkPV" class="waline-pageview-count" data-path="/blog/beframework/springmvc/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html">...</span></span><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 13 分钟</span><meta property="timeRequired" content="PT13M"></span><span class="page-category-info" aria-label="分类🌈" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon category-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="category icon"><path d="M148.41 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H148.41c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.311-40.31zM147.556 553.478H429.73c22.263 0 40.311 18.048 40.311 40.31v282.176c0 22.263-18.048 40.312-40.31 40.312H147.555c-22.263 0-40.311-18.049-40.311-40.312V593.79c0-22.263 18.048-40.311 40.31-40.311zM593.927 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H593.927c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.31-40.31zM730.22 920.502H623.926c-40.925 0-74.22-33.388-74.22-74.425V623.992c0-41.038 33.387-74.424 74.425-74.424h222.085c41.038 0 74.424 33.226 74.424 74.067v114.233c0 10.244-8.304 18.548-18.547 18.548s-18.548-8.304-18.548-18.548V623.635c0-20.388-16.746-36.974-37.33-36.974H624.13c-20.585 0-37.331 16.747-37.331 37.33v222.086c0 20.585 16.654 37.331 37.126 37.331H730.22c10.243 0 18.547 8.304 18.547 18.547 0 10.244-8.304 18.547-18.547 18.547z"></path></svg><!--[--><span class="page-category-item category1 clickable" role="navigation">后端框架</span><span class="page-category-item category4 clickable" role="navigation">SpringMVC</span><!--]--><meta property="articleSection" content="后端框架,SpringMVC"></span><span class="page-tag-info" aria-label="标签🏷" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon tag-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="tag icon"><path d="M939.902 458.563L910.17 144.567c-1.507-16.272-14.465-29.13-30.737-30.737L565.438 84.098h-.402c-3.215 0-5.726 1.005-7.634 2.913l-470.39 470.39a10.004 10.004 0 000 14.164l365.423 365.424c1.909 1.908 4.42 2.913 7.132 2.913s5.223-1.005 7.132-2.913l470.39-470.39c2.01-2.11 3.014-5.023 2.813-8.036zm-240.067-72.121c-35.458 0-64.286-28.828-64.286-64.286s28.828-64.285 64.286-64.285 64.286 28.828 64.286 64.285-28.829 64.286-64.286 64.286z"></path></svg><!--[--><span class="page-tag-item tag4 clickable" role="navigation">SpringMVC</span><!--]--><meta property="keywords" content="SpringMVC"></span></div><hr></div><!----><!----><div class="theme-hope-content"><h1 id="第一章-java-ee应用" tabindex="-1"><a class="header-anchor" href="#第一章-java-ee应用" aria-hidden="true">#</a> 第一章 Java EE应用</h1><pre><code>## Java EE架构：
+	Domain Object(领域对象层)
+	DAO(Data Access Object 数据访问层)  在其他框架中的别名 EAO(Entity)    		Mapper层
+	Service (业务逻辑层)
+	Controller(控制器层)
+	View(表现层)  组成：jsp页面等
+(上层组件的实现依赖于下层组件的功能，下层组件支持上层组的实现)
+
+servlet 3.x规范：提供功能：异步请求，注解，增强的Servlet API，非阻塞I/O
+
+jsp只负责简单的显示逻辑
+中间层将底层信息封装成JavaBean集，即DTO（数据传输对象），传输DTO给JSP页面
+</code></pre><h1 id="第二章-spring-mvc" tabindex="-1"><a class="header-anchor" href="#第二章-spring-mvc" aria-hidden="true">#</a> 第二章 Spring MVC</h1><pre><code>使用注解开发，简单
+
+Spring MVC应用的开发步骤：
+	1.在web.xml中定义前端控制器DispatcherServlet来拦截请求
+	
+	2.如果 使用POST提交请求，需要定义包含表单数据的JSP页面。GET请求无需这一步骤
+	
+	3.定义处理用户请求的handler类，@Controller
+	
+	4.配置handle。注解开发即可
+	  
+	5.编写视图资源  ModelAndView
+	
+Spring MVC请求&gt;响应的完整工作流程：
+	
+	1.用户发送请求，前端控制器DispatcherServlet截获
+	
+	2.DispatcherServlet对请求URL进行解析，得到URI。根据URI调用HandlerMapping获得该Handler配置的相关对象，包括
+	Handler对象以及Handler对象对应的拦截器，这些对象会被封装在一个HandlerExceptionChain对象中返回。
+	
+	3.DispatcherServlet根据获得的handler，选择一个合适的HandlerAdapter。
+	
+	4.提取请求中的模型数据，开始执行Handler.
+		在填充Handler的入参过程中，根据配置，spring做额外的工作：消息转换，数据转换，数据格式化，数据验证
+		
+	5.Handler执行完成后，向 DispatcherServlet返回一个ModelAndView对象。
+	
+	6.根据返回的ModelAndView对象选择一个合适的ViewResolver(视图解析器)返回给DispatcherServlet
+	
+	7.DispatcherServlet结合Model和View来渲染视图
+	
+	8.将视图渲染结果返回给客户端
+	
+开发者不必关心以上对象是如何共作的，开发者只需要在Controller当中完成对请求的业务处理。
+</code></pre><h1 id="第三章-spring-mvc的常用注解" tabindex="-1"><a class="header-anchor" href="#第三章-spring-mvc的常用注解" aria-hidden="true">#</a> 第三章 Spring MVC的常用注解</h1><pre><code>@Controller
+@RequestMapping
+@GetMapping
+@PostMapping
+@RequestParam
+@PathVariable
+@MatrixVariable
+@CrossOrigin
+@RequestHeader 
+@CookieValue
+@RequestAttribute
+@SessionAttribute
+@SessionAttributes
+@ModelAttribute
+@RequestBody
+@ResponseBody
+@RestController
+@ResponseStatus
+@ExceptionHandler
+@ControllerAdvice
+@RestControllerAdvice
+</code></pre><p>详解：</p><pre><code>@Controller 控制器类
+
+@RequestMapping 处理请求地址映射  注释的方法为请求处理方法 也可以注释类 @RequestMapping(&quot;/login)
+
+@RequestParam 将指定的请求参数赋值给方法中的形参 @RequestParam(&quot;loginname&quot;)
+
+@PathVariable 获得请求URL中的动态参数 @PathVariable(&quot;/pathVariableTest/{userId}&quot;)
+
+@MatrixVariable 允许开发者进行多条件查询 @MatrixVariable(value=&quot;age&quot;,pathVar=&quot;userId&quot;)
+	默认不开启，需在配置文件中设置 &lt;mvc:annotation-driven enable-matrix-variables=&quot;true&quot; /&gt;
+
+@CrossOrigin 处理跨域请求
+
+@RequestHeader 将请求的头信息数据映射到功能处理方法的参数上 @RequestHeader(&quot;User-Agent&quot;) String userAgent
+
+@CookieValue 将请求的Cookie数据映射到功能处理方法的参数上 @CookieValue(value=&quot;JSESSIONID&quot;,defaultValue=&quot;&quot;) String sessionId
+
+@RequestAttribute 将request作用域中的属性转换到目标方法的参数 @RequestAttribute(value=&quot;username&quot;) String username
+
+@SessionAttribute 将session作用域中的属性转换到目标方法的参数 @SessionAttribute(value=&quot;username&quot;) String username
+
+@SessionAttributes 有选择地指定Model中的哪些属性转存到HttpSession对象中
+
+@ModelAttribute 将请求参数绑定到对象 
+
+@RequestBody 将json数据设置到对象中  @RequestBody Book book
+
+@ResponseBody 将其他格式数据（json xml等）转换为body数据
+
+@RestController  该类会被看成一个controller，该类中的所有使用@RequestMapping的方法都默认使用了@ResponseBody
+
+Spring MVC的异常处理：
+	@ExceptionHandler(value=Exception.class)  value=Exception.class表示处理所有的Exception类型异常  
+		为简化开发，写一个父类，在父类中完成异常处理方法
+</code></pre><h1 id="第四章-spring-mvc标签库" tabindex="-1"><a class="header-anchor" href="#第四章-spring-mvc标签库" aria-hidden="true">#</a> 第四章 Spring MVC标签库</h1><pre><code>spring提供一组功能强大的标签用来在JSP和spring web mvc中处理表单元素。
+标签可以访问控制器处理命令对象和绑定数据。
+
+表单标签库：
+	必须在jsp页面开头处声明taglib指令：
+		&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;
+	
+	form标签：自动绑定，支持其他提交方法
+	
+	input标签：绑定表单数据
+		
+	password标签：绑定表单数据
+	
+	hidden标签：没有可视外观的input
+	
+	textarea标签：
+	
+	checkbox标签：绑定boolean数据，绑定列表数据
+	
+	checkboxes标签
+
+	radiobutton标签
+	
+	radiobuttons标签
+	
+	select标签
+	
+	option标签
+	
+	options标签
+	
+	errors标签
+</code></pre><h1 id="第五章-spring-mvc国际化" tabindex="-1"><a class="header-anchor" href="#第五章-spring-mvc国际化" aria-hidden="true">#</a> 第五章 Spring MVC国际化</h1><pre><code>//了解
+
+步骤：
+	1.给系统加载国际化资源文件
+	2.输出国际化消息：
+		两种方式：
+			在视图页面输出国际化消息，需要使用spring mvc的标签库
+			在controller的处理方法中输出国际化消息， 需要用到RequestContext的getMessage()方法
+</code></pre><h1 id="第六章-spring-mvc的数据转换、格式化、数据校验" tabindex="-1"><a class="header-anchor" href="#第六章-spring-mvc的数据转换、格式化、数据校验" aria-hidden="true">#</a> 第六章 Spring MVC的数据转换、格式化、数据校验</h1><pre><code>//了解
+</code></pre><h1 id="第七章-spring-mvc的文件上传下载和拦截器机制" tabindex="-1"><a class="header-anchor" href="#第七章-spring-mvc的文件上传下载和拦截器机制" aria-hidden="true">#</a> 第七章 Spring MVC的文件上传下载和拦截器机制</h1><pre><code>文件上传：
+	表单设置：
+		-&gt;	method=&quot;POST&quot; 
+		-&gt;	enctype=&quot;multipart/form-data&quot;	浏览器采用二进制流的方式来处理表单数据
+
+	SpringMVC ：
+			通过即插即用的MultipartResolver实现
+		SpringMVC使用Apache Commons FileUpload技术实现了一个MultipartResolver实现类：CommonsMultipartResolver
+			需要依赖Apache Commons FileUpload的组件：
+												-&gt;commons-fileupload-1.3.3.jar
+												-&gt;commons-io-2.6.jar
+			文件接收（类型都是MultipartFile）：
+				-&gt;File spring将文件传给File,File.transferTo()
+				-&gt;作为对象的属性  将文件传给某个对象的某一属性 
+
+文件下载：
+	使用ResponseEntity对象，可以方便地定义返回的BodyBulider,HttpHeader,HttpStatus
+		BodyBulider对象用来构建返回的Body
+		HttpHeader类型代表Http协议中的头信息
+		HttpStatus类型代表Http协议中的状态
+	
+拦截器：
+	
+	主要作用是拦截用户的请求并进行相应的处理。比如通过拦截器进行用户权限验证，或用来判断用户是否已经登录等。
+
+	通过实现HandlerInterceptor接口来拦截请求
+		三个方法：
+			1.boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+		Object handler)	预处理 在请求之前被调用
+			
+			2.void postHandle(HttpServletRequest request, HttpServletResponse response,
+		Object handler, ModelAndView mv)	在请求处理之后，视图渲染之前被调用
+			
+			3.void afterCompletion(HttpServletRequest request,
+		HttpServletResponse response, Object handler, Exception exception)   资源清理
+	
+	&lt;mvc:interceptors&gt;
+		&lt;mvc:interceptor&gt;
+			&lt;mvc:mapping path=&quot;/*&quot;/&gt;
+			&lt;!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors下面的Interceptor将拦截所有的请求 --&gt;  
+			&lt;bean class=&quot;org.fkit.interceptor.AuthorizationInterceptor&quot;/&gt;
+		&lt;/mvc:interceptor&gt;
+	&lt;/mvc:interceptors&gt;	
+</code></pre><h1 id="第八章-mybatis简介" tabindex="-1"><a class="header-anchor" href="#第八章-mybatis简介" aria-hidden="true">#</a> 第八章 MyBatis简介</h1><pre><code>	SQL Mapping 框架
+	
+ORM介绍：
+	ORM框架是面向对象程序设计语言与关系数据库发展不同步的中间解决方案
+
+	ORM工具的唯一作用就是：
+		把对持久化对象的保存、修改、删除等操作，转换为对数据库的操作。
+	
+	ORM框架负责将相关操作转换成对应的SQL操作。
+
+ORM基本映射关系：
+	1.数据表映射类。持久化类被映射到一个数据表。
+	2.数据表的行映射对象（即实例）。
+	3.数据表的列（字段）映射对象的属性。
+
+Mybatis主要思想：将程序中的大量SQL语句剥离出来，配置在配置文件中，以实现SQL的灵活配置。
+
+通用信息为根配置信息，根配置信息需要使用配置文件指定。
+
+&lt;configuration&gt;
+&lt;settings&gt;
+&lt;environments&gt;
+&lt;environment&gt;
+&lt;transactionManager&gt;
+&lt;dataSource&gt;
+&lt;property&gt;
+
+ 数据源是一种用来提高数据库连接性能的常规手段，
+ 数据源会负责维持一个数据库连接池，当程序创建数据源实例时，系统会一次性创建多个数据库连接，并存池。
+ 程序需要使用时，在池中取出一个空闲的数据库连接。
+ 不需要时，将数据库连接归还给连接池即可。
+ 
+配置log4j.properties查看日志
+
+使用mybatis步骤：
+	1.开发持久化类PO和编写持久化操作的Mapper.xml，在其中定义要执行的SQL语句。
+	2.获取SqlSessionFactory
+	3.获取SqlSession
+	4.用面向对象的方式操作数据库
+	5.关闭事务，关闭SqlSession
+
+SqlSessionFactory是整个数据库映射关系编译后的内存镜像，通常一个应用对应一个SqlSessionFactory对象，SqlSessionFactory通过加载mybatis-config.xml配置文件生成。
+SqlSession由SqlSessionFactory工厂产生。
+对PO的操作必须在SqlSession的管理下才能同步到数据库。
+</code></pre><h1 id="第九章-mybatis体系结构" tabindex="-1"><a class="header-anchor" href="#第九章-mybatis体系结构" aria-hidden="true">#</a> 第九章 Mybatis体系结构</h1><pre><code>SqlSessionFactory：通过SqlSessionFactoryBuilder对象获得
+	SqlSession openSession() 创建SqlSession对象
+
+SqlSession
+
+Mybatis的配置文件：
+	
+	配置文件的结构：
+		顶层的configuration 配置
+		properties 属性
+		settings 设置
+		typeAliases 类型命名
+		typeHandlers 类型处理器
+		objectFactory 对象工厂
+		plugins 插件
+		environments 环境
+		environment 环境变量
+		transactionManager 事务管理器
+		dataSource 数据源
+		databaseIdProvider 数据库厂商标识
+		mapper 映射器
+
+	properties 属性：
+		可外部配置且动态替换
+		既可在典型的Java属性文件中配置，也可通过properties元素的子元素传递
+	settings 设置：
+		调正mybatis运行时的行为
+	typeAliases 类型命名：
+		别名，减少冗余
+	typeHandlers 类型处理器：
+		处理参数和结果集中的数据类型
+	objectFactory 对象工厂：
+		创建结果对象的新实例
+	environments 环境：
+		配置数据源
+	mapper 映射器：
+		告诉mybatis去哪里找映射文件，进而找到这些SQL语句
+</code></pre><p>​ <br> Mapper XML映射文件：</p><pre><code>	常用的元素：
+		select 映射查询语句
+		insert 映射插入语句
+		update 映射更新语句
+		delete 映射删除语句
+		sql	   可被其他语句引用的可重用语句块
+		cache  给定命名空间的缓存配置
+		cache-ref 其他命名空间缓存配置的引用
+		resultMap 最复杂也是最强大的元素，用来描述如何从数据库结果集中加载对象
+</code></pre><h1 id="第十章-深入使用mybatis" tabindex="-1"><a class="header-anchor" href="#第十章-深入使用mybatis" aria-hidden="true">#</a> 第十章 深入使用MyBatis</h1><pre><code>关联映射：
+	一对一
+	一对多
+	多对多
+
+通过mapper接口的代理对象访问MyBatis，该对象关联了SqlSession对象，可通过该
+	对象直接调用方法操作数据库。
+	mapper接口对象的类名必须与xml文件中的mapper的namespace一致，
+		方法名和参数必须与xml文件中的&lt;select&gt;元素中的id属性和parameterType属性一致
+
+动态SQL：
+	常用的动态SQL元素：
+		if
+		choose(when,otherwise)
+		where
+		set
+		foreach
+		bind
+
+调用存储过程：
+	
+事务管理：
+	
+	事务的概念：ACID
+	
+	transaction接口
+	
+	对于数据库的事务而言，应该具有以下动作：
+		创建 create
+		提交 commit
+		回滚 rollback
+		关闭 close
+	
+	事务管理分为两种形式：
+		使用JDBC的事务管理机制。即利用java.sql.Connection对象完成对事务的提交、回滚和关闭等操作。
+		使用MABAGED的事务管理机制。对于这种机制，MyBatis自身不会去实现事务管理，而是让容器如WebLogic,JBoss等来实现对事务的管理。
+		
+	事务的配置创建和使用：
+		1.配置：跟配置文件中配置&lt;transactionManager type=&quot;JDBC&quot;&gt;
+		2.创建：JdbcTransactionFactory
+		3.使用：对象实例
+	
+缓存机制：
+	
+	简介：
+		查询缓存分为一级缓存和二级缓存，
+			一级缓存是SqlSession级别的缓存，二级缓存是mapper级别的缓存，二级缓存是多个SqlSession共享的。
+	
+	一级缓存：
+		SqlSession对象中用HashMap存储缓存数据
+		使用：
+			再次查询时会从缓存中获取数据
+			SqlSession执行DML操作（insert,update ,delete），并提交数据库，mybatis会清空sqlsession的一级缓存
+			SqlSession结束后，一级缓存也就不存在了。
+			MyBatis默认开启以及缓存，不需要进行任何配置。
+		mybatis的缓存机制时基于id进行缓存的，也就是说，mybatis使用hashmap缓存数据时，
+			对象的id作为key
+			对象作为value
+	
+	二级缓存：
+		多个SqlSession使用用一个mapper的SQL语句去操作数据库，得到的数据会存在二级缓存区域，使用HashMap存储
+		
+		多个SqlSession共享，作用域是mapper的同一个namespace
+		
+		在setting全局参数中配置开启二级缓存。
+			&lt;settings&gt;
+				&lt;!-- 开启二级缓存 --&gt;
+				&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+			&lt;/settings&gt;
+		mapper.xml中使用二级缓存：
+			&lt;!-- 开启二级缓存 
+				回收策略为先进先出
+				自动刷新时间60s
+				最多缓存512个引用对象
+				只读
+			--&gt;
+			&lt;cache 
+				eviction=&quot;LRU&quot;  
+				flushInterval=&quot;60000&quot; 
+				size=&quot;512&quot; 
+				readOnly=&quot;true&quot;/&gt; 
+</code></pre><h1 id="第十一章-mybatis的注解配置" tabindex="-1"><a class="header-anchor" href="#第十一章-mybatis的注解配置" aria-hidden="true">#</a> 第十一章 MyBatis的注解配置</h1><pre><code>常用注解：
+	@Select				映射查询的SQL语句
+	@SelectProvider		Select语句的动态SQL映射
+	@Insert 			映射插入的SQL语句
+	@InsertProvider		Insert语句的动态SQL映射
+	@Update				映射更新的SQL语句
+	@UpdateProvider		Update语句的动态SQL映射
+	@Delete				映射删除的SQL语句
+	@DeleteProvider		Delete语句的动态SQL映射
+	@Result				在列和属性之间的单独结果映射，id  one  mane
+	@Results			多个结果映射(@Result)列表
+	@Options			提供配置选项的附加值，通常在映射语句上作为附加功能配置出现
+	@One				复杂类型的单独属性值映射。必须指定select属性，表示已映射的SQL语句的完全限定名
+	@Many				复杂类型的集合属性映射。必须指定select属性，表示已映射的SQL语句的完全限定名
+	@Param				当映射器方法需要多个参数时，这个注解可以被应用于映射器方法参数来给每个参数取一个名字。否则会按顺序默认命名。
+
+示例：
+	@Select(&quot;SELECT * FROM TB_USER &quot;)
+	
+	@Select(&quot;SELECT * FROM TB_USER WHERE id = #{id}&quot;)
+	@Results({
+		@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+		@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+		@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+		@Result(column=&quot;age&quot;,property=&quot;age&quot;)
+	})
+	
+	@Insert(&quot;INSERT INTO TB_USER(name,sex,age) VALUES(#{name},#{sex},#{age})&quot;)
+	@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)
+	
+	@Delete(&quot;DELETE FROM TB_USER WHERE id = #{id}&quot;)
+	int removeUser(@Param(&quot;id&quot;) Integer id);
+	
+	@Update(&quot;UPDATE TB_USER SET name = #{name},sex = #{sex},age = #{age} WHERE id = #{id}&quot;)
+</code></pre><p>​ <br> ​ <br> 关联：<br> =========================================================<br> select属性表示需要关联执行的SQL语句<br> fetchType表示查询类型是立即加载（EAGER）还是懒加载（LAZY） <br> 【区别：没用时加载，用到时再加载】<br> =========================================================</p><pre><code>	一对一关联：
+		td_person td_card
+		
+		CardMapper
+			@Select(&quot;SELECT * FROM TB_CARD WHERE ID = #{id} &quot;)
+			Card selectCardById(Integer id);
+		PersonMapper
+			@Select(&quot;SELECT * FROM TB_PERSON WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+				@Result(column=&quot;age&quot;,property=&quot;age&quot;),
+				@Result(column=&quot;card_id&quot;,property=&quot;card&quot;,
+				one=@One(
+					select=&quot;org.fkit.mapper.CardMapper.selectCardById&quot;,
+					fetchType=FetchType.EAGER))
+			})
+			Person selectPersonById(Integer id);
+
+	一对多关联：
+		td_clazz td_student
+		
+		StudentMapper
+			// 根据班级id查询班级所有学生
+			@Select(&quot;SELECT * FROM TB_STUDENT WHERE CLAZZ_ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+				@Result(column=&quot;age&quot;,property=&quot;age&quot;)
+			})
+			List&lt;Student&gt; selectByClazzId(Integer clazz_id);
+			
+		ClazzMapper
+			/ 根据id查询班级信息
+			@Select(&quot;SELECT * FROM TB_CLAZZ  WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;code&quot;,property=&quot;code&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;id&quot;,property=&quot;students&quot;,
+				many=@Many(
+						select=&quot;org.fkit.mapper.StudentMapper.selectByClazzId&quot;,
+						fetchType=FetchType.LAZY))
+			})
+			Clazz selectById(Integer id);	
+			
+	多对多关联：
+		td_user td_order td_article
+		
+		UserMapper
+			@Select(&quot;SELECT * FROM TB_USER WHERE ID = #{id} &quot;)
+			User selectById(Integer id);
+		ArticleMapper
+			@Select(&quot;SELECT * FROM tb_article WHERE id IN &quot;
+			+&quot;(SELECT article_id FROM tb_item WHERE order_id = #{id} ) &quot;)
+			List&lt;Article&gt; selectByOrderId(Integer order_id);
+		OrderMapper
+			@Select(&quot;SELECT * FROM TB_ORDER WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;code&quot;,property=&quot;code&quot;),
+				@Result(column=&quot;total&quot;,property=&quot;total&quot;),
+				@Result(column=&quot;user_id&quot;,property=&quot;user&quot;,
+					one=@One(select=&quot;org.fkit.mapper.UserMapper.selectById&quot;,
+					fetchType=FetchType.EAGER)),
+				@Result(column=&quot;id&quot;,property=&quot;articles&quot;,
+					many=@Many(select=&quot;org.fkit.mapper.ArticleMapper.selectByOrderId&quot;,
+					fetchType=FetchType.LAZY))
+			})
+			Order selectById(Integer id);
+
+	动态SQL：
+		
+		@SelectProvider(type=EmployeeDynaSqlProvider.class,method=&quot;selectWhitParam&quot;)
+		List&lt;Employee&gt; selectWhitParam(Map&lt;String, Object&gt; param);
+		
+		创建一个产生动态SQL的类：
+			EmployeeDynaSqlProvider.java
+				public String selectWhitParam(Map&lt;String, Object&gt; param){
+						return new SQL(){
+							{
+								SELECT(&quot;*&quot;);
+								FROM(&quot;tb_employee&quot;);
+								if(param.get(&quot;id&quot;) != null){
+									WHERE(&quot; id = #{id} &quot;);
+								}
+								if(param.get(&quot;loginname&quot;) != null){
+									WHERE(&quot; loginname = #{loginname} &quot;);
+								}
+								if(param.get(&quot;password&quot;) != null){
+									WHERE(&quot;password = #{password}&quot;);
+								}
+								if(param.get(&quot;name&quot;)!= null){
+									WHERE(&quot;name = #{name}&quot;);
+								}
+								if(param.get(&quot;sex&quot;)!= null){
+									WHERE(&quot;sex = #{sex}&quot;);
+								}
+								if(param.get(&quot;age&quot;)!= null){
+									WHERE(&quot;age = #{age}&quot;);
+								}
+								if(param.get(&quot;phone&quot;)!= null){
+									WHERE(&quot;phone = #{phone}&quot;);
+								}
+								if(param.get(&quot;sal&quot;)!= null){
+									WHERE(&quot;sal = #{sal}&quot;);
+								}
+								if(param.get(&quot;state&quot;)!= null){
+									WHERE(&quot;state = #{state}&quot;);
+								}
+								
+							}
+						}.toString();
+						}	
+
+	调用存储过程：
+		@Select(&quot;{call select_user()}&quot;)
+		@Options(statementType=StatementType.CALLABLE)
+	
+	二级缓存：
+		@CacheNamespace(eviction=LruCache.class,flushInterval=60000,size=512,readWrite=true)
+</code></pre><p>​</p><hr><hr><hr><p>学生 班级<br> 一对一<br> 一对多<br> 多对多</p><p>​ <br> ​ <br> ​</p></div><!----><footer class="page-meta"><!----><div class="meta-item git-info"><div class="update-time"><span class="label">上次编辑于: </span><!----></div><div class="contributors"><span class="label">贡献者: </span><!--[--><!--[--><span class="contributor" title="email: dongzhaohe@inspur.com">dongzhaohe</span><!--]--><!--]--></div></div></footer><!----><div id="comment" class="waline-wrapper" darkmode="false" style="display:block;"><div data-waline provider="Waline"><!--v-if--><div class="wl-comment"><!--v-if--><div class="wl-panel"><div class="wl-header item3"><!--[--><div class="wl-header-item"><label for="wl-nick">昵称</label><input id="wl-nick" class="wl-input wl-nick" name="nick" type="text" value></div><div class="wl-header-item"><label for="wl-mail">邮箱</label><input id="wl-mail" class="wl-input wl-mail" name="mail" type="email" value></div><div class="wl-header-item"><label for="wl-link">网址</label><input id="wl-link" class="wl-input wl-link" name="link" type="text" value></div><!--]--></div><textarea id="wl-edit" class="wl-editor" placeholder="请留言。(填写邮箱可在被回复时收到邮件提醒)"></textarea><div class="wl-preview" style="display:none;"><hr><h4>预览:</h4><div class="wl-content"></div></div><div class="wl-footer"><div class="wl-actions"><a href="https://guides.github.com/features/mastering-markdown/" title="Markdown Guide" aria-label="Markdown is supported" class="wl-action" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" ariaHidden="true"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z" fill="currentColor"></path></svg></a><button type="button" class="wl-action" title="表情" style="display:none;"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M563.2 463.3 677 540c1.7 1.2 3.7 1.8 5.8 1.8.7 0 1.4-.1 2-.2 2.7-.5 5.1-2.1 6.6-4.4l25.3-37.8c1.5-2.3 2.1-5.1 1.6-7.8s-2.1-5.1-4.4-6.6l-73.6-49.1 73.6-49.1c2.3-1.5 3.9-3.9 4.4-6.6.5-2.7 0-5.5-1.6-7.8l-25.3-37.8a10.1 10.1 0 0 0-6.6-4.4c-.7-.1-1.3-.2-2-.2-2.1 0-4.1.6-5.8 1.8l-113.8 76.6c-9.2 6.2-14.7 16.4-14.7 27.5.1 11 5.5 21.3 14.7 27.4zM387 348.8h-45.5c-5.7 0-10.4 4.7-10.4 10.4v153.3c0 5.7 4.7 10.4 10.4 10.4H387c5.7 0 10.4-4.7 10.4-10.4V359.2c0-5.7-4.7-10.4-10.4-10.4zm333.8 241.3-41-20a10.3 10.3 0 0 0-8.1-.5c-2.6.9-4.8 2.9-5.9 5.4-30.1 64.9-93.1 109.1-164.4 115.2-5.7.5-9.9 5.5-9.5 11.2l3.9 45.5c.5 5.3 5 9.5 10.3 9.5h.9c94.8-8 178.5-66.5 218.6-152.7 2.4-5 .3-11.2-4.8-13.6zm186-186.1c-11.9-42-30.5-81.4-55.2-117.1-24.1-34.9-53.5-65.6-87.5-91.2-33.9-25.6-71.5-45.5-111.6-59.2-41.2-14-84.1-21.1-127.8-21.1h-1.2c-75.4 0-148.8 21.4-212.5 61.7-63.7 40.3-114.3 97.6-146.5 165.8-32.2 68.1-44.3 143.6-35.1 218.4 9.3 74.8 39.4 145 87.3 203.3.1.2.3.3.4.5l36.2 38.4c1.1 1.2 2.5 2.1 3.9 2.6 73.3 66.7 168.2 103.5 267.5 103.5 73.3 0 145.2-20.3 207.7-58.7 37.3-22.9 70.3-51.5 98.1-85 27.1-32.7 48.7-69.5 64.2-109.1 15.5-39.7 24.4-81.3 26.6-123.8 2.4-43.6-2.5-87-14.5-129zm-60.5 181.1c-8.3 37-22.8 72-43 104-19.7 31.1-44.3 58.6-73.1 81.7-28.8 23.1-61 41-95.7 53.4-35.6 12.7-72.9 19.1-110.9 19.1-82.6 0-161.7-30.6-222.8-86.2l-34.1-35.8c-23.9-29.3-42.4-62.2-55.1-97.7-12.4-34.7-18.8-71-19.2-107.9-.4-36.9 5.4-73.3 17.1-108.2 12-35.8 30-69.2 53.4-99.1 31.7-40.4 71.1-72 117.2-94.1 44.5-21.3 94-32.6 143.4-32.6 49.3 0 97 10.8 141.8 32 34.3 16.3 65.3 38.1 92 64.8 26.1 26 47.5 56 63.6 89.2 16.2 33.2 26.6 68.5 31 105.1 4.6 37.5 2.7 75.3-5.6 112.3z" fill="currentColor"></path></svg></button><button type="button" class="wl-action" title="表情包"><svg width="24" height="24" fill="currentcolor" viewBox="0 0 24 24"><path style="transform: translateY(0.5px)" d="M18.968 10.5H15.968V11.484H17.984V12.984H15.968V15H14.468V9H18.968V10.5V10.5ZM8.984 9C9.26533 9 9.49967 9.09367 9.687 9.281C9.87433 9.46833 9.968 9.70267 9.968 9.984V10.5H6.499V13.5H8.468V12H9.968V14.016C9.968 14.2973 9.87433 14.5317 9.687 14.719C9.49967 14.9063 9.26533 15 8.984 15H5.984C5.70267 15 5.46833 14.9063 5.281 14.719C5.09367 14.5317 5 14.2973 5 14.016V9.985C5 9.70367 5.09367 9.46933 5.281 9.282C5.46833 9.09467 5.70267 9.001 5.984 9.001H8.984V9ZM11.468 9H12.968V15H11.468V9V9Z"></path><path d="M18.5 3H5.75C3.6875 3 2 4.6875 2 6.75V18C2 20.0625 3.6875 21.75 5.75 21.75H18.5C20.5625 21.75 22.25 20.0625 22.25 18V6.75C22.25 4.6875 20.5625 3 18.5 3ZM20.75 18C20.75 19.2375 19.7375 20.25 18.5 20.25H5.75C4.5125 20.25 3.5 19.2375 3.5 18V6.75C3.5 5.5125 4.5125 4.5 5.75 4.5H18.5C19.7375 4.5 20.75 5.5125 20.75 6.75V18Z"></path></svg></button><input id="wl-image-upload" class="upload" type="file" accept=".png,.jpg,.jpeg,.webp,.bmp,.gif"><label for="wl-image-upload" class="wl-action" title="上传图片"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M784 112H240c-88 0-160 72-160 160v480c0 88 72 160 160 160h544c88 0 160-72 160-160V272c0-88-72-160-160-160zm96 640c0 52.8-43.2 96-96 96H240c-52.8 0-96-43.2-96-96V272c0-52.8 43.2-96 96-96h544c52.8 0 96 43.2 96 96v480z" fill="currentColor"></path><path d="M352 480c52.8 0 96-43.2 96-96s-43.2-96-96-96-96 43.2-96 96 43.2 96 96 96zm0-128c17.6 0 32 14.4 32 32s-14.4 32-32 32-32-14.4-32-32 14.4-32 32-32zm462.4 379.2-3.2-3.2-177.6-177.6c-25.6-25.6-65.6-25.6-91.2 0l-80 80-36.8-36.8c-25.6-25.6-65.6-25.6-91.2 0L200 728c-4.8 6.4-8 14.4-8 24 0 17.6 14.4 32 32 32 9.6 0 16-3.2 22.4-9.6L380.8 640l134.4 134.4c6.4 6.4 14.4 9.6 24 9.6 17.6 0 32-14.4 32-32 0-9.6-4.8-17.6-9.6-24l-52.8-52.8 80-80L769.6 776c6.4 4.8 12.8 8 20.8 8 17.6 0 32-14.4 32-32 0-8-3.2-16-8-20.8z" fill="currentColor"></path></svg></label><button type="button" class="wl-action" title="预览"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M710.816 654.301c70.323-96.639 61.084-230.578-23.705-314.843-46.098-46.098-107.183-71.109-172.28-71.109-65.008 0-126.092 25.444-172.28 71.109-45.227 46.098-70.756 107.183-70.756 172.106 0 64.923 25.444 126.007 71.194 172.106 46.099 46.098 107.184 71.109 172.28 71.109 51.414 0 100.648-16.212 142.824-47.404l126.53 126.006c7.058 7.06 16.297 10.979 26.406 10.979 10.105 0 19.343-3.919 26.402-10.979 14.467-14.467 14.467-38.172 0-52.723L710.816 654.301zm-315.107-23.265c-65.88-65.88-65.88-172.54 0-238.42 32.069-32.07 74.245-49.149 119.471-49.149 45.227 0 87.407 17.603 119.472 49.149 65.88 65.879 65.88 172.539 0 238.42-63.612 63.178-175.242 63.178-238.943 0zm0 0" fill="currentColor"></path><path d="M703.319 121.603H321.03c-109.8 0-199.469 89.146-199.469 199.38v382.034c0 109.796 89.236 199.38 199.469 199.38h207.397c20.653 0 37.384-16.645 37.384-37.299 0-20.649-16.731-37.296-37.384-37.296H321.03c-68.582 0-124.352-55.77-124.352-124.267V321.421c0-68.496 55.77-124.267 124.352-124.267h382.289c68.582 0 124.352 55.771 124.352 124.267V524.72c0 20.654 16.736 37.299 37.385 37.299 20.654 0 37.384-16.645 37.384-37.299V320.549c-.085-109.8-89.321-198.946-199.121-198.946zm0 0" fill="currentColor"></path></svg></button></div><div class="wl-info"><div class="wl-captcha-container"></div><div class="wl-text-number">0 <!--v-if-->  字</div><button type="button" class="wl-btn">登录</button><button type="submit" class="primary wl-btn" title="Cmd|Ctrl + Enter"><!--[-->提交<!--]--></button></div><div class="wl-gif-popup"><input type="text" placeholder="搜索表情包"><!--v-if--><div class="wl-loading"><svg width="30" height="30" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="currentColor" strokeWidth="4" r="40" stroke-dasharray="85 30"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg></div></div><div class="wl-emoji-popup"><!--[--><!--]--><!--v-if--></div></div></div><!--v-if--></div><div class="wl-meta-head"><div class="wl-count"><!--v-if--> 评论</div><ul class="wl-sort"><!--[--><li class="active">按正序</li><li class="">按倒序</li><li class="">按热度</li><!--]--></ul></div><div class="wl-cards"><!--[--><!--]--></div><!--[--><div class="wl-loading"><svg width="30" height="30" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="currentColor" strokeWidth="4" r="40" stroke-dasharray="85 30"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg></div><!--]--><div class="wl-power"> Powered by <a href="https://github.com/walinejs/waline" target="_blank" rel="noopener noreferrer"> Waline </a> v2.15.5</div></div></div><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><div class="vp-footer">默认页脚</div><div class="vp-copyright">Copyright © 2023 Alooc</div></footer></div><!--]--><!----><!--]--></div>
+    <script type="module" src="/assets/app-a2c721dc.js" defer></script>
+  </body>
+</html>
