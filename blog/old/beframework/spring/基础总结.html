@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.64" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <meta property="og:url" content="https://alooc.github.io/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html"><meta property="og:site_name" content="Alooc"><meta property="og:title" content="Spring基础用法总结"><meta property="og:description" content="Spring的基本用法： ​	spring是一个很普通但很实用的一个框架，它提取了大量实际开发中需要重复解决的步骤，将这些步骤抽象成一个框架。 1.spring简介： spring5 - Spring Core Container(即Spring容器)代表了Spring框架的核心机制。 ​ 2.spring入门： 21个jar包 实用spring管理bean： spring核心容器理论：spring核心容器就是一个超级大工厂，所有的对象都会被当成spring核心容器管理的对象。 Spring对Bean没有任何要求，只要是java类，将会当作bean处理 对于Spring框架而言，一切Java对象都是Bean。 				&lt;beans&gt; 					&lt;bean id="" class=""&gt; 						&lt;property name="" ref=""/&gt; 					&lt;/bean&gt; 					&lt;bean id="" class=""&gt; 						&lt;property name="" value=""/&gt; 					&lt;/bean&gt; 					... 				&lt;/beans&gt; spring通过反射机制从xml文件中获取bean对象： ​	spring底层大概的执行代码： 创建bean： String idStr=bean中的id; String classStr=bean中的class; Class clazz=Class.forName(classStr); Object obj=clazz.newInstance(); spring的容器container.put(idStr,obj); 设置参数（调用setter方法）： String nameStr=属性的name; String refStr=属性的引用ref，某一个bean的id 或某个value参数值; String setterName="set"+nameStr.subString(0,1).toUpperCase()+nameStr.subString(1);生成方法名 setName Object paramBean=container.get(refStr) Method setter=clazz.getMethod(setterName,paramBean.getClass()); setter.invoke(obj,paramBean); 在程序中访问bean: ​		ApplicationContext是最常用的接口，	有两个实现类： ClassPathXmlApplicationContext	从类加载路径下搜索配置文件，并根据配置文件创建spring容器 FileSystemXmlApplicationContext	从文件系统的相对路径或绝对路径中搜索配置文件，并根据配置文件创建spring容器 ApplicationContext ctx=new ClassPathXmlApplicationContext("beans.xml"); Person p=ctx.getBean("person",Person.class); 获取对象的两个方法： Object getBean(String id) 需要强制类型转换: Person p=(Person)ctx.getBean("person"); T getBean(String id,Class&lt;T&gt; requiredType) 无需进行强制类型转换： Person p=ctx.getBean("person",Person.class);"><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2024-04-22T01:58:54.000Z"><meta property="article:author" content="Alooc"><meta property="article:tag" content="Spring"><meta property="article:published_time" content="2020-01-01T09:02:55.000Z"><meta property="article:modified_time" content="2024-04-22T01:58:54.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Spring基础用法总结","image":[""],"datePublished":"2020-01-01T09:02:55.000Z","dateModified":"2024-04-22T01:58:54.000Z","author":[{"@type":"Person","name":"Alooc","url":"https://alooc.github.io"}]}</script><link rel="icon" href="/logo.png"><title>Spring基础用法总结 | Alooc</title><meta name="description" content="Spring的基本用法： ​	spring是一个很普通但很实用的一个框架，它提取了大量实际开发中需要重复解决的步骤，将这些步骤抽象成一个框架。 1.spring简介： spring5 - Spring Core Container(即Spring容器)代表了Spring框架的核心机制。 ​ 2.spring入门： 21个jar包 实用spring管理bean： spring核心容器理论：spring核心容器就是一个超级大工厂，所有的对象都会被当成spring核心容器管理的对象。 Spring对Bean没有任何要求，只要是java类，将会当作bean处理 对于Spring框架而言，一切Java对象都是Bean。 				&lt;beans&gt; 					&lt;bean id="" class=""&gt; 						&lt;property name="" ref=""/&gt; 					&lt;/bean&gt; 					&lt;bean id="" class=""&gt; 						&lt;property name="" value=""/&gt; 					&lt;/bean&gt; 					... 				&lt;/beans&gt; spring通过反射机制从xml文件中获取bean对象： ​	spring底层大概的执行代码： 创建bean： String idStr=bean中的id; String classStr=bean中的class; Class clazz=Class.forName(classStr); Object obj=clazz.newInstance(); spring的容器container.put(idStr,obj); 设置参数（调用setter方法）： String nameStr=属性的name; String refStr=属性的引用ref，某一个bean的id 或某个value参数值; String setterName="set"+nameStr.subString(0,1).toUpperCase()+nameStr.subString(1);生成方法名 setName Object paramBean=container.get(refStr) Method setter=clazz.getMethod(setterName,paramBean.getClass()); setter.invoke(obj,paramBean); 在程序中访问bean: ​		ApplicationContext是最常用的接口，	有两个实现类： ClassPathXmlApplicationContext	从类加载路径下搜索配置文件，并根据配置文件创建spring容器 FileSystemXmlApplicationContext	从文件系统的相对路径或绝对路径中搜索配置文件，并根据配置文件创建spring容器 ApplicationContext ctx=new ClassPathXmlApplicationContext("beans.xml"); Person p=ctx.getBean("person",Person.class); 获取对象的两个方法： Object getBean(String id) 需要强制类型转换: Person p=(Person)ctx.getBean("person"); T getBean(String id,Class&lt;T&gt; requiredType) 无需进行强制类型转换： Person p=ctx.getBean("person",Person.class);">
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d1e1f;
+      }
+
+      html,
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/assets/style-28759751.css" as="style"><link rel="stylesheet" href="/assets/style-28759751.css">
+    <link rel="modulepreload" href="/assets/app-310cff28.js"><link rel="modulepreload" href="/assets/基础总结.html-145fd59d.js"><link rel="modulepreload" href="/assets/plugin-vue_export-helper-c27b6911.js"><link rel="modulepreload" href="/assets/基础总结.html-252cf649.js"><link rel="prefetch" href="/assets/index.html-57b96e51.js" as="script"><link rel="prefetch" href="/assets/intro.html-c1e4b2dc.js" as="script"><link rel="prefetch" href="/assets/slides.html-b45a6447.js" as="script"><link rel="prefetch" href="/assets/index.html-1c23f71f.js" as="script"><link rel="prefetch" href="/assets/左神算法基础提升课学习笔记.html-e58f5410.js" as="script"><link rel="prefetch" href="/assets/左神算法基础课学习笔记.html-73707cc6.js" as="script"><link rel="prefetch" href="/assets/算法总结.html-9c3687c9.js" as="script"><link rel="prefetch" href="/assets/index.html-4c7d80cc.js" as="script"><link rel="prefetch" href="/assets/index.html-4e7a5faf.js" as="script"><link rel="prefetch" href="/assets/index.html-873a0ccd.js" as="script"><link rel="prefetch" href="/assets/index.html-1901f99f.js" as="script"><link rel="prefetch" href="/assets/index.html-ae60ef26.js" as="script"><link rel="prefetch" href="/assets/技巧.html-af01b335.js" as="script"><link rel="prefetch" href="/assets/设计模式.html-57ac60f4.js" as="script"><link rel="prefetch" href="/assets/elasticsearch.html-8e92f820.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-6be1cb4e.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-453a9d66.js" as="script"><link rel="prefetch" href="/assets/rabbitmq.html-13632cd8.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-b2fbad3d.js" as="script"><link rel="prefetch" href="/assets/源码分析.html-1d796570.js" as="script"><link rel="prefetch" href="/assets/springcloud项目尚医通总结.html-258c8b70.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-8de0fae5.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-950bfa95.js" as="script"><link rel="prefetch" href="/assets/swagger.html-7ee8da67.js" as="script"><link rel="prefetch" href="/assets/activiti6基础笔记.html-04449f6c.js" as="script"><link rel="prefetch" href="/assets/第一行代码笔记.html-bbcc344c.js" as="script"><link rel="prefetch" href="/assets/Bash基础笔记.html-16e8acb7.js" as="script"><link rel="prefetch" href="/assets/常用命令.html-29d7e70c.js" as="script"><link rel="prefetch" href="/assets/docker命令.html-17726356.js" as="script"><link rel="prefetch" href="/assets/常用镜像命令.html-0c909fcf.js" as="script"><link rel="prefetch" href="/assets/maven深入学习笔记.html-6876201b.js" as="script"><link rel="prefetch" href="/assets/yaml语法.html-d609806e.js" as="script"><link rel="prefetch" href="/assets/java整合mysql.html-f94cf6e5.js" as="script"><link rel="prefetch" href="/assets/基础.html-7241a518.js" as="script"><link rel="prefetch" href="/assets/Oracle基础总结.html-7f999bed.js" as="script"><link rel="prefetch" href="/assets/redis.html-f4594981.js" as="script"><link rel="prefetch" href="/assets/index.html-2144beb5.js" as="script"><link rel="prefetch" href="/assets/index.html-585f3740.js" as="script"><link rel="prefetch" href="/assets/StarterSwagger3.html-5b27aeb3.js" as="script"><link rel="prefetch" href="/assets/CSS世界学习笔记.html-7709a49d.js" as="script"><link rel="prefetch" href="/assets/JavaScript笔记.html-f9a9e530.js" as="script"><link rel="prefetch" href="/assets/JavaScript高级程序设计学习笔记.html-00b60942.js" as="script"><link rel="prefetch" href="/assets/jquery_ajax笔记.html-311e9295.js" as="script"><link rel="prefetch" href="/assets/疯狂HTML5_CSS3_JavaScript讲义笔记.html-004eddf6.js" as="script"><link rel="prefetch" href="/assets/疯狂前端开发讲义笔记.html-abee6948.js" as="script"><link rel="prefetch" href="/assets/JSP_Servlet笔记.html-5eb786c7.js" as="script"><link rel="prefetch" href="/assets/JUC.html-fb48006c.js" as="script"><link rel="prefetch" href="/assets/基础.html-6f24ba47.js" as="script"><link rel="prefetch" href="/assets/学习笔记《java开发手册》.html-3e9e1cab.js" as="script"><link rel="prefetch" href="/assets/学习笔记《疯狂Java讲义》.html-ea0f4dad.js" as="script"><link rel="prefetch" href="/assets/学习笔记《码出高效：Java开发手册》.html-e914d4da.js" as="script"><link rel="prefetch" href="/assets/抽象类和接口.html-d09ed623.js" as="script"><link rel="prefetch" href="/assets/集合.html-1e68bfd2.js" as="script"><link rel="prefetch" href="/assets/note.html-c1004187.js" as="script"><link rel="prefetch" href="/assets/mongodb.html-bf4a3a2e.js" as="script"><link rel="prefetch" href="/assets/Vue2.5开发去哪儿网App从零基础入门到实战项目学习笔记.html-fa801e82.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-5a4edb97.js" as="script"><link rel="prefetch" href="/assets/404.html-bb007e7c.js" as="script"><link rel="prefetch" href="/assets/index.html-eea3f7d2.js" as="script"><link rel="prefetch" href="/assets/index.html-5a33631f.js" as="script"><link rel="prefetch" href="/assets/index.html-09275aea.js" as="script"><link rel="prefetch" href="/assets/index.html-01f34afc.js" as="script"><link rel="prefetch" href="/assets/index.html-7e2ddb84.js" as="script"><link rel="prefetch" href="/assets/index.html-852ebda6.js" as="script"><link rel="prefetch" href="/assets/index.html-4399dab8.js" as="script"><link rel="prefetch" href="/assets/index.html-385f02d5.js" as="script"><link rel="prefetch" href="/assets/index.html-49d4cacd.js" as="script"><link rel="prefetch" href="/assets/index.html-99f15ddf.js" as="script"><link rel="prefetch" href="/assets/index.html-a1c426fb.js" as="script"><link rel="prefetch" href="/assets/index.html-292e95bc.js" as="script"><link rel="prefetch" href="/assets/index.html-51b0c86c.js" as="script"><link rel="prefetch" href="/assets/index.html-88029ef9.js" as="script"><link rel="prefetch" href="/assets/index.html-e120fba2.js" as="script"><link rel="prefetch" href="/assets/index.html-4bd5aca0.js" as="script"><link rel="prefetch" href="/assets/index.html-47f3672e.js" as="script"><link rel="prefetch" href="/assets/index.html-06cec637.js" as="script"><link rel="prefetch" href="/assets/index.html-cfc9140b.js" as="script"><link rel="prefetch" href="/assets/index.html-c822a11e.js" as="script"><link rel="prefetch" href="/assets/index.html-efa0532d.js" as="script"><link rel="prefetch" href="/assets/index.html-fb34a7c9.js" as="script"><link rel="prefetch" href="/assets/index.html-ee7caebe.js" as="script"><link rel="prefetch" href="/assets/index.html-bd84c462.js" as="script"><link rel="prefetch" href="/assets/index.html-53b53031.js" as="script"><link rel="prefetch" href="/assets/index.html-599e5690.js" as="script"><link rel="prefetch" href="/assets/index.html-8e4bafcb.js" as="script"><link rel="prefetch" href="/assets/index.html-288bbf72.js" as="script"><link rel="prefetch" href="/assets/index.html-0e5553da.js" as="script"><link rel="prefetch" href="/assets/index.html-ee08f8a4.js" as="script"><link rel="prefetch" href="/assets/index.html-0b977aec.js" as="script"><link rel="prefetch" href="/assets/index.html-2f13bbcc.js" as="script"><link rel="prefetch" href="/assets/index.html-e9d110f9.js" as="script"><link rel="prefetch" href="/assets/index.html-5a918ded.js" as="script"><link rel="prefetch" href="/assets/index.html-9479282f.js" as="script"><link rel="prefetch" href="/assets/index.html-536277d1.js" as="script"><link rel="prefetch" href="/assets/index.html-45a37b61.js" as="script"><link rel="prefetch" href="/assets/index.html-b84d7b0e.js" as="script"><link rel="prefetch" href="/assets/index.html-eb917384.js" as="script"><link rel="prefetch" href="/assets/index.html-edffe0f2.js" as="script"><link rel="prefetch" href="/assets/index.html-55592f38.js" as="script"><link rel="prefetch" href="/assets/index.html-931e73cc.js" as="script"><link rel="prefetch" href="/assets/index.html-96b00477.js" as="script"><link rel="prefetch" href="/assets/index.html-022320ef.js" as="script"><link rel="prefetch" href="/assets/index.html-d5238306.js" as="script"><link rel="prefetch" href="/assets/index.html-7cc61937.js" as="script"><link rel="prefetch" href="/assets/index.html-d8597e00.js" as="script"><link rel="prefetch" href="/assets/index.html-2535caab.js" as="script"><link rel="prefetch" href="/assets/index.html-1458f3e8.js" as="script"><link rel="prefetch" href="/assets/index.html-89737dbe.js" as="script"><link rel="prefetch" href="/assets/index.html-aa00903c.js" as="script"><link rel="prefetch" href="/assets/index.html-da0ace56.js" as="script"><link rel="prefetch" href="/assets/index.html-8f53cfb6.js" as="script"><link rel="prefetch" href="/assets/index.html-fe42fcc6.js" as="script"><link rel="prefetch" href="/assets/index.html-d672288c.js" as="script"><link rel="prefetch" href="/assets/index.html-88bea764.js" as="script"><link rel="prefetch" href="/assets/index.html-240726d8.js" as="script"><link rel="prefetch" href="/assets/index.html-2085521d.js" as="script"><link rel="prefetch" href="/assets/index.html-8aa45997.js" as="script"><link rel="prefetch" href="/assets/index.html-7bcda36e.js" as="script"><link rel="prefetch" href="/assets/index.html-edf11e1d.js" as="script"><link rel="prefetch" href="/assets/index.html-70154c1a.js" as="script"><link rel="prefetch" href="/assets/index.html-4e6cd9b4.js" as="script"><link rel="prefetch" href="/assets/index.html-45a9d477.js" as="script"><link rel="prefetch" href="/assets/index.html-5504710a.js" as="script"><link rel="prefetch" href="/assets/index.html-d8b74bf0.js" as="script"><link rel="prefetch" href="/assets/index.html-3b54d6af.js" as="script"><link rel="prefetch" href="/assets/index.html-5bab0b0d.js" as="script"><link rel="prefetch" href="/assets/index.html-2b442d8c.js" as="script"><link rel="prefetch" href="/assets/index.html-7cf55d7a.js" as="script"><link rel="prefetch" href="/assets/index.html-94361434.js" as="script"><link rel="prefetch" href="/assets/index.html-0ef4edf7.js" as="script"><link rel="prefetch" href="/assets/index.html-39ed20a3.js" as="script"><link rel="prefetch" href="/assets/index.html-7209af5f.js" as="script"><link rel="prefetch" href="/assets/index.html-6930b6fa.js" as="script"><link rel="prefetch" href="/assets/index.html-36d23d70.js" as="script"><link rel="prefetch" href="/assets/index.html-f13374c1.js" as="script"><link rel="prefetch" href="/assets/index.html-350c6b78.js" as="script"><link rel="prefetch" href="/assets/index.html-71b464fd.js" as="script"><link rel="prefetch" href="/assets/index.html-1e155d25.js" as="script"><link rel="prefetch" href="/assets/index.html-d1d45f0b.js" as="script"><link rel="prefetch" href="/assets/index.html-c548900e.js" as="script"><link rel="prefetch" href="/assets/index.html-9b0dc7af.js" as="script"><link rel="prefetch" href="/assets/index.html-6ff40265.js" as="script"><link rel="prefetch" href="/assets/index.html-57282599.js" as="script"><link rel="prefetch" href="/assets/index.html-b1191208.js" as="script"><link rel="prefetch" href="/assets/index.html-d16d5b9d.js" as="script"><link rel="prefetch" href="/assets/index.html-2997b317.js" as="script"><link rel="prefetch" href="/assets/index.html-ce700e36.js" as="script"><link rel="prefetch" href="/assets/index.html-a860df88.js" as="script"><link rel="prefetch" href="/assets/index.html-e0955dfb.js" as="script"><link rel="prefetch" href="/assets/index.html-4bacd547.js" as="script"><link rel="prefetch" href="/assets/index.html-8ef20e38.js" as="script"><link rel="prefetch" href="/assets/index.html-9d2370c8.js" as="script"><link rel="prefetch" href="/assets/index.html-940ed4e0.js" as="script"><link rel="prefetch" href="/assets/index.html-339be067.js" as="script"><link rel="prefetch" href="/assets/index.html-4421e73f.js" as="script"><link rel="prefetch" href="/assets/index.html-9b007397.js" as="script"><link rel="prefetch" href="/assets/index.html-0fe847ac.js" as="script"><link rel="prefetch" href="/assets/intro.html-0f5ded97.js" as="script"><link rel="prefetch" href="/assets/slides.html-36ba77e4.js" as="script"><link rel="prefetch" href="/assets/index.html-44527ca5.js" as="script"><link rel="prefetch" href="/assets/左神算法基础提升课学习笔记.html-65206d9f.js" as="script"><link rel="prefetch" href="/assets/左神算法基础课学习笔记.html-86537c8d.js" as="script"><link rel="prefetch" href="/assets/算法总结.html-15e9e6e8.js" as="script"><link rel="prefetch" href="/assets/index.html-131279a5.js" as="script"><link rel="prefetch" href="/assets/index.html-ae87bc4f.js" as="script"><link rel="prefetch" href="/assets/index.html-fc93dd86.js" as="script"><link rel="prefetch" href="/assets/index.html-7deb289c.js" as="script"><link rel="prefetch" href="/assets/index.html-04d80898.js" as="script"><link rel="prefetch" href="/assets/技巧.html-81ea0a43.js" as="script"><link rel="prefetch" href="/assets/设计模式.html-9a7cdeed.js" as="script"><link rel="prefetch" href="/assets/elasticsearch.html-e3591a3b.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-f6db041c.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-7918f61e.js" as="script"><link rel="prefetch" href="/assets/rabbitmq.html-9f55aa38.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-c56cf7c3.js" as="script"><link rel="prefetch" href="/assets/源码分析.html-89806455.js" as="script"><link rel="prefetch" href="/assets/springcloud项目尚医通总结.html-95e6bb3c.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-4e4cc439.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-8004c701.js" as="script"><link rel="prefetch" href="/assets/swagger.html-2a70d8a7.js" as="script"><link rel="prefetch" href="/assets/activiti6基础笔记.html-7cfe4f4e.js" as="script"><link rel="prefetch" href="/assets/第一行代码笔记.html-8b799591.js" as="script"><link rel="prefetch" href="/assets/Bash基础笔记.html-c90567f7.js" as="script"><link rel="prefetch" href="/assets/常用命令.html-d4c982d6.js" as="script"><link rel="prefetch" href="/assets/docker命令.html-0342df68.js" as="script"><link rel="prefetch" href="/assets/常用镜像命令.html-05b03ad9.js" as="script"><link rel="prefetch" href="/assets/maven深入学习笔记.html-da5945d5.js" as="script"><link rel="prefetch" href="/assets/yaml语法.html-fdd03fb1.js" as="script"><link rel="prefetch" href="/assets/java整合mysql.html-65ff25d7.js" as="script"><link rel="prefetch" href="/assets/基础.html-dda1d846.js" as="script"><link rel="prefetch" href="/assets/Oracle基础总结.html-e785530c.js" as="script"><link rel="prefetch" href="/assets/redis.html-07a144aa.js" as="script"><link rel="prefetch" href="/assets/index.html-eb1f398c.js" as="script"><link rel="prefetch" href="/assets/index.html-fe6e04fd.js" as="script"><link rel="prefetch" href="/assets/StarterSwagger3.html-70a37781.js" as="script"><link rel="prefetch" href="/assets/CSS世界学习笔记.html-afe9e28a.js" as="script"><link rel="prefetch" href="/assets/JavaScript笔记.html-6eff81ca.js" as="script"><link rel="prefetch" href="/assets/JavaScript高级程序设计学习笔记.html-503d118a.js" as="script"><link rel="prefetch" href="/assets/jquery_ajax笔记.html-49b00441.js" as="script"><link rel="prefetch" href="/assets/疯狂HTML5_CSS3_JavaScript讲义笔记.html-27b69a82.js" as="script"><link rel="prefetch" href="/assets/疯狂前端开发讲义笔记.html-628af0f7.js" as="script"><link rel="prefetch" href="/assets/JSP_Servlet笔记.html-67f91c16.js" as="script"><link rel="prefetch" href="/assets/JUC.html-ad341274.js" as="script"><link rel="prefetch" href="/assets/基础.html-f3d14055.js" as="script"><link rel="prefetch" href="/assets/学习笔记《java开发手册》.html-e75d54c2.js" as="script"><link rel="prefetch" href="/assets/学习笔记《疯狂Java讲义》.html-f34c5870.js" as="script"><link rel="prefetch" href="/assets/学习笔记《码出高效：Java开发手册》.html-024c72f6.js" as="script"><link rel="prefetch" href="/assets/抽象类和接口.html-83791e82.js" as="script"><link rel="prefetch" href="/assets/集合.html-05041965.js" as="script"><link rel="prefetch" href="/assets/note.html-ee53d71e.js" as="script"><link rel="prefetch" href="/assets/mongodb.html-c76cbe24.js" as="script"><link rel="prefetch" href="/assets/Vue2.5开发去哪儿网App从零基础入门到实战项目学习笔记.html-a60eeb9a.js" as="script"><link rel="prefetch" href="/assets/基础总结.html-680f2855.js" as="script"><link rel="prefetch" href="/assets/404.html-2dd72b5f.js" as="script"><link rel="prefetch" href="/assets/index.html-d4cd06df.js" as="script"><link rel="prefetch" href="/assets/index.html-c77f34d9.js" as="script"><link rel="prefetch" href="/assets/index.html-7a144347.js" as="script"><link rel="prefetch" href="/assets/index.html-10cf0069.js" as="script"><link rel="prefetch" href="/assets/index.html-d0f5910b.js" as="script"><link rel="prefetch" href="/assets/index.html-091e25d9.js" as="script"><link rel="prefetch" href="/assets/index.html-1cdcfdea.js" as="script"><link rel="prefetch" href="/assets/index.html-c2743cd1.js" as="script"><link rel="prefetch" href="/assets/index.html-4f1bb5e8.js" as="script"><link rel="prefetch" href="/assets/index.html-147bda8a.js" as="script"><link rel="prefetch" href="/assets/index.html-71543f7a.js" as="script"><link rel="prefetch" href="/assets/index.html-61570c38.js" as="script"><link rel="prefetch" href="/assets/index.html-94c057b4.js" as="script"><link rel="prefetch" href="/assets/index.html-427126c5.js" as="script"><link rel="prefetch" href="/assets/index.html-9a4837bd.js" as="script"><link rel="prefetch" href="/assets/index.html-ceed3205.js" as="script"><link rel="prefetch" href="/assets/index.html-fa15c98c.js" as="script"><link rel="prefetch" href="/assets/index.html-7c46eaa5.js" as="script"><link rel="prefetch" href="/assets/index.html-9778e396.js" as="script"><link rel="prefetch" href="/assets/index.html-694e312f.js" as="script"><link rel="prefetch" href="/assets/index.html-2f6f9a4f.js" as="script"><link rel="prefetch" href="/assets/index.html-06dfa316.js" as="script"><link rel="prefetch" href="/assets/index.html-a3c8611d.js" as="script"><link rel="prefetch" href="/assets/index.html-88cc64a9.js" as="script"><link rel="prefetch" href="/assets/index.html-979b9524.js" as="script"><link rel="prefetch" href="/assets/index.html-b4c17687.js" as="script"><link rel="prefetch" href="/assets/index.html-0bc7d767.js" as="script"><link rel="prefetch" href="/assets/index.html-52e381bb.js" as="script"><link rel="prefetch" href="/assets/index.html-ff77684c.js" as="script"><link rel="prefetch" href="/assets/index.html-f8c42068.js" as="script"><link rel="prefetch" href="/assets/index.html-3c7d932f.js" as="script"><link rel="prefetch" href="/assets/index.html-bf84330f.js" as="script"><link rel="prefetch" href="/assets/index.html-570b5c6d.js" as="script"><link rel="prefetch" href="/assets/index.html-bd458296.js" as="script"><link rel="prefetch" href="/assets/index.html-32b0fba2.js" as="script"><link rel="prefetch" href="/assets/index.html-af76a9b9.js" as="script"><link rel="prefetch" href="/assets/index.html-c68b93af.js" as="script"><link rel="prefetch" href="/assets/index.html-42fcc8a6.js" as="script"><link rel="prefetch" href="/assets/index.html-4ff7868d.js" as="script"><link rel="prefetch" href="/assets/index.html-76c5f5a8.js" as="script"><link rel="prefetch" href="/assets/index.html-c4e94825.js" as="script"><link rel="prefetch" href="/assets/index.html-e1bef331.js" as="script"><link rel="prefetch" href="/assets/index.html-48f66ac9.js" as="script"><link rel="prefetch" href="/assets/index.html-eaf1bd58.js" as="script"><link rel="prefetch" href="/assets/index.html-3302ffc6.js" as="script"><link rel="prefetch" href="/assets/index.html-6be04bde.js" as="script"><link rel="prefetch" href="/assets/index.html-c82ceeeb.js" as="script"><link rel="prefetch" href="/assets/index.html-35b57625.js" as="script"><link rel="prefetch" href="/assets/index.html-b70381de.js" as="script"><link rel="prefetch" href="/assets/index.html-b8a4dbd8.js" as="script"><link rel="prefetch" href="/assets/index.html-15dc1f88.js" as="script"><link rel="prefetch" href="/assets/index.html-9e61a202.js" as="script"><link rel="prefetch" href="/assets/index.html-4f79e29f.js" as="script"><link rel="prefetch" href="/assets/index.html-d6ed55f4.js" as="script"><link rel="prefetch" href="/assets/index.html-42b90490.js" as="script"><link rel="prefetch" href="/assets/index.html-e660ac48.js" as="script"><link rel="prefetch" href="/assets/index.html-1d0082a6.js" as="script"><link rel="prefetch" href="/assets/index.html-e2b6760e.js" as="script"><link rel="prefetch" href="/assets/index.html-19b7f370.js" as="script"><link rel="prefetch" href="/assets/index.html-9e2f7bac.js" as="script"><link rel="prefetch" href="/assets/index.html-db1ac02f.js" as="script"><link rel="prefetch" href="/assets/index.html-a1a62595.js" as="script"><link rel="prefetch" href="/assets/index.html-a3a9d75b.js" as="script"><link rel="prefetch" href="/assets/index.html-74aff653.js" as="script"><link rel="prefetch" href="/assets/index.html-b8717bf4.js" as="script"><link rel="prefetch" href="/assets/index.html-fbd8297d.js" as="script"><link rel="prefetch" href="/assets/index.html-0e55325b.js" as="script"><link rel="prefetch" href="/assets/index.html-fcc68d34.js" as="script"><link rel="prefetch" href="/assets/index.html-2f2dcd07.js" as="script"><link rel="prefetch" href="/assets/index.html-fa1482bc.js" as="script"><link rel="prefetch" href="/assets/index.html-41f9dd93.js" as="script"><link rel="prefetch" href="/assets/index.html-6143d372.js" as="script"><link rel="prefetch" href="/assets/index.html-502e7083.js" as="script"><link rel="prefetch" href="/assets/index.html-07df95c4.js" as="script"><link rel="prefetch" href="/assets/index.html-7e59f29c.js" as="script"><link rel="prefetch" href="/assets/index.html-26982e09.js" as="script"><link rel="prefetch" href="/assets/index.html-257f1a2d.js" as="script"><link rel="prefetch" href="/assets/index.html-e3f1c6b8.js" as="script"><link rel="prefetch" href="/assets/index.html-bd7ca3ef.js" as="script"><link rel="prefetch" href="/assets/index.html-a9af2386.js" as="script"><link rel="prefetch" href="/assets/index.html-227eae99.js" as="script"><link rel="prefetch" href="/assets/index.html-dea87c72.js" as="script"><link rel="prefetch" href="/assets/index.html-f50a51f3.js" as="script"><link rel="prefetch" href="/assets/index.html-c96cbc74.js" as="script"><link rel="prefetch" href="/assets/index.html-b70f33e9.js" as="script"><link rel="prefetch" href="/assets/index.html-4c9ba29d.js" as="script"><link rel="prefetch" href="/assets/index.html-e65613e1.js" as="script"><link rel="prefetch" href="/assets/index.html-61caa0b6.js" as="script"><link rel="prefetch" href="/assets/index.html-1732c50a.js" as="script"><link rel="prefetch" href="/assets/index.html-7b16aa9c.js" as="script"><link rel="prefetch" href="/assets/index.html-357a8cac.js" as="script"><link rel="prefetch" href="/assets/index.html-c3159d78.js" as="script"><link rel="prefetch" href="/assets/index.html-b31ad651.js" as="script"><link rel="prefetch" href="/assets/index.html-a2f4ec1a.js" as="script"><link rel="prefetch" href="/assets/index.html-60c676d5.js" as="script"><link rel="prefetch" href="/assets/index.html-e11642f6.js" as="script"><link rel="prefetch" href="/assets/index.html-26f510cf.js" as="script"><link rel="prefetch" href="/assets/index.html-312d4d4a.js" as="script"><link rel="prefetch" href="/assets/waline-meta-56fbc549.js" as="script"><link rel="prefetch" href="/assets/component-29bbf532.js" as="script"><link rel="prefetch" href="/assets/auto-fa8841cf.js" as="script"><link rel="prefetch" href="/assets/index-ae8c1e74.js" as="script"><link rel="prefetch" href="/assets/flowchart-d65a1d8e.js" as="script"><link rel="prefetch" href="/assets/mermaid.core-ba2cdcaa.js" as="script"><link rel="prefetch" href="/assets/highlight.esm-75b11b9d.js" as="script"><link rel="prefetch" href="/assets/markdown.esm-0191f9da.js" as="script"><link rel="prefetch" href="/assets/math.esm-70a288c8.js" as="script"><link rel="prefetch" href="/assets/notes.esm-a106bb2c.js" as="script"><link rel="prefetch" href="/assets/reveal.esm-ec5549c1.js" as="script"><link rel="prefetch" href="/assets/search.esm-7e6792e2.js" as="script"><link rel="prefetch" href="/assets/zoom.esm-b83b91d0.js" as="script"><link rel="prefetch" href="/assets/VuePlayground-e3d809c8.js" as="script"><link rel="prefetch" href="/assets/photoswipe.esm-5794cde2.js" as="script"><link rel="prefetch" href="/assets/pageview-81c6b87e.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><div class="theme-container has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand" href="/"><img class="vp-nav-logo" src="/logo.png" alt="Alooc"><!----><span class="vp-site-name hide-in-pad">Alooc</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a class="vp-link nav-link" href="/"><!---->首页<!----></a></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button type="button" class="dropdown-title" aria-label="Old"><span class="title"><!---->Old</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a class="vp-link nav-link" href="/blog/old/algorithm/"><!---->算法<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/blog/old/database/"><!---->数据库<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/blog/old/language/"><!---->语言<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link" href="/blog/old/beskill/"><!---->技术<!----></a></li><li class="dropdown-item"><a class="vp-link nav-link active" href="/blog/old/beframework/"><!---->框架<!----></a></li><li class="dropdown-item"><h4 class="dropdown-subtitle"><span>前端</span></h4><ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a class="vp-link nav-link" href="/blog/old/fe/skill/"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>技术<!----></a></li><li class="dropdown-subitem"><a class="vp-link nav-link" href="/blog/old/fe/framework/"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>框架<!----></a></li></ul></li><li class="dropdown-item"><a class="vp-link nav-link" href="/blog/skill/"><!---->其他<!----></a></li></ul></button></div></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><!----><div class="nav-item vp-repo"><a class="vp-repo-link" href="https://github.com/alooc" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><!----><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_1-spring简介"><!---->1.spring简介：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_2-spring入门"><!---->2.spring入门：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_3-spring的核心机制-依赖注入"><!---->3.Spring的核心机制：依赖注入：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_4-使用spring容器"><!---->4.使用spring容器：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_6-spring提供的java配置管理"><!---->6.Spring提供的Java配置管理：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_7-创建bean的三种方式"><!---->7.创建bean的三种方式：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_8-深入理解容器中的bean"><!---->8.深入理解容器中的Bean:<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_9-容器中bean的生命周期"><!---->9.容器中Bean的生命周期：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_10-高级依赖关系配置"><!---->10.高级依赖关系配置：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_11-基于xml-schema的简化配置方式"><!---->11.基于XML Schema的简化配置方式：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_12-spring提供的表达式语言-spel"><!---->12.Spring提供的表达式语言(SpEL):<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_1-两种后处理器"><!---->1.两种后处理器：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_2-spring的-零配置-支持"><!---->2.Spring的“零配置”支持：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_3-资源访问"><!---->3.资源访问：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_4-spring的aop"><!---->4.Spring的AOP：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_5-spring的缓存机制"><!---->5.Spring的缓存机制：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a class="vp-link nav-link vp-sidebar-link vp-sidebar-heading" href="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html#_6-spring的事务"><!---->6.Spring的事务：<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->Spring基础用法总结</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://alooc.github.io" target="_blank" rel="noopener noreferrer">Alooc</a></span><span property="author" content="Alooc"></span></span><!----><span class="page-date-info" aria-label="写作日期📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2020-01-01T09:02:55.000Z"></span><span class="page-pageview-info" aria-label="访问量🔢" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon eye-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="eye icon"><path d="M992 512.096c0-5.76-.992-10.592-1.28-11.136-.192-2.88-1.152-8.064-2.08-10.816-.256-.672-.544-1.376-.832-2.08-.48-1.568-1.024-3.104-1.6-4.32C897.664 290.112 707.104 160 512 160c-195.072 0-385.632 130.016-473.76 322.592-1.056 2.112-1.792 4.096-2.272 5.856a55.512 55.512 0 00-.64 1.6c-1.76 5.088-1.792 8.64-1.632 7.744-.832 3.744-1.568 11.168-1.568 11.168-.224 2.272-.224 4.032.032 6.304 0 0 .736 6.464 1.088 7.808.128 1.824.576 4.512 1.12 6.976h-.032c.448 2.08 1.12 4.096 1.984 6.08.48 1.536.992 2.976 1.472 4.032C126.432 733.856 316.992 864 512 864c195.136 0 385.696-130.048 473.216-321.696 1.376-2.496 2.24-4.832 2.848-6.912.256-.608.48-1.184.672-1.728 1.536-4.48 1.856-8.32 1.728-8.32l-.032.032c.608-3.104 1.568-7.744 1.568-13.28zM512 672c-88.224 0-160-71.776-160-160s71.776-160 160-160 160 71.776 160 160-71.776 160-160 160z"></path></svg><span id="ArtalkPV" class="waline-pageview-count" data-path="/blog/old/beframework/spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.html">...</span></span><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 19 分钟</span><meta property="timeRequired" content="PT19M"></span><span class="page-category-info" aria-label="分类🌈" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon category-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="category icon"><path d="M148.41 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H148.41c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.311-40.31zM147.556 553.478H429.73c22.263 0 40.311 18.048 40.311 40.31v282.176c0 22.263-18.048 40.312-40.31 40.312H147.555c-22.263 0-40.311-18.049-40.311-40.312V593.79c0-22.263 18.048-40.311 40.31-40.311zM593.927 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H593.927c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.31-40.31zM730.22 920.502H623.926c-40.925 0-74.22-33.388-74.22-74.425V623.992c0-41.038 33.387-74.424 74.425-74.424h222.085c41.038 0 74.424 33.226 74.424 74.067v114.233c0 10.244-8.304 18.548-18.547 18.548s-18.548-8.304-18.548-18.548V623.635c0-20.388-16.746-36.974-37.33-36.974H624.13c-20.585 0-37.331 16.747-37.331 37.33v222.086c0 20.585 16.654 37.331 37.126 37.331H730.22c10.243 0 18.547 8.304 18.547 18.547 0 10.244-8.304 18.547-18.547 18.547z"></path></svg><!--[--><span class="page-category-item category1 clickable" role="navigation">后端框架</span><span class="page-category-item category1 clickable" role="navigation">Spring</span><!--]--><meta property="articleSection" content="后端框架,Spring"></span><span class="page-tag-info" aria-label="标签🏷" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon tag-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="tag icon"><path d="M939.902 458.563L910.17 144.567c-1.507-16.272-14.465-29.13-30.737-30.737L565.438 84.098h-.402c-3.215 0-5.726 1.005-7.634 2.913l-470.39 470.39a10.004 10.004 0 000 14.164l365.423 365.424c1.909 1.908 4.42 2.913 7.132 2.913s5.223-1.005 7.132-2.913l470.39-470.39c2.01-2.11 3.014-5.023 2.813-8.036zm-240.067-72.121c-35.458 0-64.286-28.828-64.286-64.286s28.828-64.285 64.286-64.285 64.286 28.828 64.286 64.285-28.829 64.286-64.286 64.286z"></path></svg><!--[--><span class="page-tag-item tag1 clickable" role="navigation">Spring</span><!--]--><meta property="keywords" content="Spring"></span></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<button type="button" class="print-button" title="打印"><svg xmlns="http://www.w3.org/2000/svg" class="icon print-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="print icon"><path d="M819.2 364.8h-44.8V128c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v236.8h-44.8C145.067 364.8 96 413.867 96 473.6v192c0 59.733 49.067 108.8 108.8 108.8h44.8V896c0 17.067 14.933 32 32 32h460.8c17.067 0 32-14.933 32-32V774.4h44.8c59.733 0 108.8-49.067 108.8-108.8v-192c0-59.733-49.067-108.8-108.8-108.8zM313.6 160h396.8v204.8H313.6V160zm396.8 704H313.6V620.8h396.8V864zM864 665.6c0 25.6-19.2 44.8-44.8 44.8h-44.8V588.8c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v121.6h-44.8c-25.6 0-44.8-19.2-44.8-44.8v-192c0-25.6 19.2-44.8 44.8-44.8h614.4c25.6 0 44.8 19.2 44.8 44.8v192z"></path></svg></button></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_1-spring简介">1.spring简介：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_2-spring入门">2.spring入门：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_3-spring的核心机制-依赖注入">3.Spring的核心机制：依赖注入：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_4-使用spring容器">4.使用spring容器：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_6-spring提供的java配置管理">6.Spring提供的Java配置管理：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_7-创建bean的三种方式">7.创建bean的三种方式：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_8-深入理解容器中的bean">8.深入理解容器中的Bean:</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_9-容器中bean的生命周期">9.容器中Bean的生命周期：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_10-高级依赖关系配置">10.高级依赖关系配置：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_11-基于xml-schema的简化配置方式">11.基于XML Schema的简化配置方式：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_12-spring提供的表达式语言-spel">12.Spring提供的表达式语言(SpEL):</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_1-两种后处理器">1.两种后处理器：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_2-spring的-零配置-支持">2.Spring的“零配置”支持：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_3-资源访问">3.资源访问：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_4-spring的aop">4.Spring的AOP：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_5-spring的缓存机制">5.Spring的缓存机制：</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2" href="/#_6-spring的事务">6.Spring的事务：</a></li><!----><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!----><div class="theme-hope-content"><h1 id="spring的基本用法" tabindex="-1"><a class="header-anchor" href="#spring的基本用法" aria-hidden="true">#</a> Spring的基本用法：</h1><p>​ <code>spring是一个很普通但很实用的一个框架，它提取了大量实际开发中需要重复解决的步骤，将这些步骤抽象成一个框架。</code></p><h2 id="_1-spring简介" tabindex="-1"><a class="header-anchor" href="#_1-spring简介" aria-hidden="true">#</a> 1.spring简介：</h2><ul><li>spring5<br> - Spring Core Container(即Spring容器)代表了Spring框架的核心机制。<br> ​</li></ul><h2 id="_2-spring入门" tabindex="-1"><a class="header-anchor" href="#_2-spring入门" aria-hidden="true">#</a> 2.spring入门：</h2><p><code>21个jar包</code></p><ul><li><p>实用spring管理bean：</p><ul><li><p>spring核心容器理论：spring核心容器就是一个超级大工厂，所有的对象都会被当成spring核心容器管理的对象。</p></li><li><p>Spring对Bean没有任何要求，只要是java类，将会当作bean处理</p></li><li><p>对于Spring框架而言，一切Java对象都是Bean。</p><div class="language-xml line-numbers-mode" data-ext="xml"><pre class="language-xml"><code>				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span><span class="token punctuation">&gt;</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+						<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">&gt;</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+						<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">&gt;</span></span>
+					...
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li><p>spring通过反射机制从xml文件中获取bean对象：</p><ul><li><p>​ spring底层大概的执行代码：</p><ul><li><p>创建bean：</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token class-name">String</span> idStr<span class="token operator">=</span>bean中的id<span class="token punctuation">;</span>
+<span class="token class-name">String</span> classStr<span class="token operator">=</span>bean中的<span class="token keyword">class</span><span class="token punctuation">;</span>
+<span class="token class-name">Class</span> clazz<span class="token operator">=</span><span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>classStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Object</span> obj<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+spring的容器container<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>idStr<span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li><p>设置参数（调用setter方法）：</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token class-name">String</span> nameStr<span class="token operator">=</span>属性的name<span class="token punctuation">;</span>
+<span class="token class-name">String</span> refStr<span class="token operator">=</span>属性的引用ref，某一个bean的id 或某个value参数值<span class="token punctuation">;</span>
+<span class="token class-name">String</span> setterName<span class="token operator">=</span><span class="token string">&quot;set&quot;</span><span class="token operator">+</span>nameStr<span class="token punctuation">.</span><span class="token function">subString</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span>nameStr<span class="token punctuation">.</span><span class="token function">subString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>生成方法名 setName
+<span class="token class-name">Object</span> paramBean<span class="token operator">=</span>container<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>refStr<span class="token punctuation">)</span>
+<span class="token class-name">Method</span> setter<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span>setterName<span class="token punctuation">,</span>paramBean<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+setter<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>paramBean<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li></ul></li><li><p>在程序中访问bean:</p><ul><li><p>​ <code>ApplicationContext</code>是最常用的接口， 有两个实现类：</p><ul><li><p><code>ClassPathXmlApplicationContext</code> 从类加载路径下搜索配置文件，并根据配置文件创建spring容器</p></li><li><p><code>FileSystemXmlApplicationContext</code> 从文件系统的相对路径或绝对路径中搜索配置文件，并根据配置文件创建spring容器</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token class-name">ApplicationContext</span> ctx<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">&quot;beans.xml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Person</span> p<span class="token operator">=</span>ctx<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;person&quot;</span><span class="token punctuation">,</span><span class="token class-name">Person</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div></li></ul></li><li><p>获取对象的两个方法：</p><ul><li><p><code>Object getBean(String id)</code> 需要强制类型转换:</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token class-name">Person</span> p<span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">)</span>ctx<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;person&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li><li><p><code>T getBean(String id,Class&lt;T&gt; requiredType)</code> 无需进行强制类型转换：</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token class-name">Person</span> p<span class="token operator">=</span>ctx<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;person&quot;</span><span class="token punctuation">,</span><span class="token class-name">Person</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li></ul></li></ul></li></ul></li></ul></li></ul><h2 id="_3-spring的核心机制-依赖注入" tabindex="-1"><a class="header-anchor" href="#_3-spring的核心机制-依赖注入" aria-hidden="true">#</a> 3.Spring的核心机制：依赖注入：</h2><ul><li><p>Spring框架的核心功能有两个：</p><ol><li><p>Spring容器作为超级大工厂，负责创建、管理所有的Java对象，这些Java对象被称为Bean</p></li><li><p>Spring容器管理容器中Bean之间的依赖关系，使用一种被称为“依赖注入”的方式来管理Bean之间的依赖关系</p></li></ol></li><li><p>理解依赖注入：</p><ul><li>调用者无须主动获取被调用者，只要被动接受Spring容器为其赋值即可（<code>&lt;property /&gt;</code>通过该子元素赋值）</li><li>调用者获取依赖对象的方式由原来的主动获取，变成了被动接受，所以又被称为控制反转。</li></ul></li><li><p>依赖注入的两种注入方式：</p><ul><li>设值注入：IoC容器使用成员变量的setter方法来注入被依赖对象</li><li>构造注入：IoC容器使用构造器来注入被依赖对象</li><li>Spring IoC容器的三个基本要点： <ol><li>应用程序的各组件面向接口编程</li><li>应用程序的各组件不再由程序主动创建，而是由Spring容器来负责产生并实例化</li><li>Spring采用配置文件或注解来管理bean的实现类、依赖关系。Spring容器根据配置文件或注解，利用反射来创建梳理，并为之注入依赖关系。</li></ol></li><li>两种方式对比： <ul><li>建议采用以设值注入为主，构造注入为辅的注入策略。 <ul><li>对于依赖关系无需变化的注入，尽量采用构造注入；</li><li>而对于其他依赖关系的注入，则考虑采用设值注入。</li></ul></li></ul></li></ul></li></ul><h2 id="_4-使用spring容器" tabindex="-1"><a class="header-anchor" href="#_4-使用spring容器" aria-hidden="true">#</a> 4.使用spring容器：</h2><ul><li>核心接口（获取spring容器）：<code>BeanFactory </code>和<code>ApplicationContext</code></li></ul><p><code>ApplicationContext</code>是<code>BeanFactory</code>的子接口</p><ul><li><p><code>ApplicationContext</code>:</p><p>当系统创建<code>ApplicationContext</code>容器时，默认会预初始化所有的singleton Bean 可在<code>&lt;bean&gt;</code>中设置 <code>lazy-init=&quot;true&quot;</code>改变默认预初始化</p></li><li><p><code>ApplicationContext</code>国际化</p></li><li><p><code>ApplicationContext</code>的事件机制:</p><ul><li>通过<code>ApplicationEvent</code>类和<code>ApplicationListener</code>接口实现事件处理</li><li>如果容器中有一个<code>ApplicationListener Bean</code>，每当<code>ApplicationContex</code>t发布<code>ApplicationEvent</code>时，<code>ApplicationListener Bean</code>将自动被触发。</li><li>容器事件监听器可以监听事件。 <ul><li>除此之外，程序也就二调用<code>ApplicationContex</code>的<code>publishEvent()</code>方法来触发容器事件。</li></ul></li></ul></li><li><p>让Bean获取Spring容器：</p><ul><li><p>接口有一个方法：<code>setBeanFactory(BeanFactory beanFactory)</code></p></li><li><p>spring容器会检测容器中的所有Bean，如果发现某个Bean实现了<code>ApplicationContextAware</code>接口，</p><p>Spring容器会在创建该Bean后，自动调用该方法，调用该方法时，会将容器本身作为参数传给该方法。</p></li><li><p>示例：</p><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token keyword">implements</span> <span class="token class-name">ApplicationContextAware</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">ApplicationContext</span> ctx<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> ctx<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ctx<span class="token operator">=</span>ctx<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_5-spring容器中的bean" tabindex="-1"><a class="header-anchor" href="#_5-spring容器中的bean" aria-hidden="true">#</a> 5.Spring容器中的Bean:</h2></li></ul></li></ul><div class="language-properties line-numbers-mode" data-ext="properties"><pre class="language-properties"><code>		Bean的基本定义和Bean别名：
+<span class="token key attr-name">			&lt;bean</span> <span class="token value attr-value">id=&quot;person&quot; class=&quot;...&quot; name=&quot;#abc,@123,abc*&quot; /&gt;</span>
+<span class="token key attr-name">			&lt;alias</span> <span class="token value attr-value">name=&quot;person&quot; alias=&quot;jack&quot; /&gt;</span>
+<span class="token key attr-name">			&lt;alias</span> <span class="token value attr-value">name=&quot;jack&quot; alias=&quot;jackee&quot; /&gt;</span>
+			
+		容器中Bean的作用域：
+<span class="token key attr-name">			singleton</span> <span class="token value attr-value">单例模式</span>
+<span class="token key attr-name">			prototype</span> <span class="token value attr-value">每调用一次getBean就创建一个新的Bean实例</span>
+<span class="token key attr-name">				&lt;bean</span> <span class="token value attr-value">id=&quot;...&quot; class=&quot;...&quot; scope=&quot;prototype&quot; /&gt;</span>
+			
+		配置依赖：
+			
+		设置普通属性值：
+			value用于指定基本类型及其包装、字符串类型的参数值
+<span class="token key attr-name">				&lt;property</span> <span class="token value attr-value">name=&quot;&quot; value=&quot;&quot;/&gt;</span>
+		
+<span class="token key attr-name">		配置合作者Bean</span><span class="token punctuation">:</span>
+			属性值是另一个Bean的实例
+<span class="token key attr-name">			&lt;property</span> <span class="token value attr-value">name=&quot;&quot; ref=&quot;&quot;/&gt;</span>
+		
+<span class="token key attr-name">		使用自动装配注入合作者Bean</span><span class="token punctuation">:</span>
+			不推荐使用
+		
+<span class="token key attr-name">		注入嵌套Bean</span><span class="token punctuation">:</span>
+<span class="token key attr-name">			&lt;bean</span> <span class="token value attr-value">...&gt;</span>
+<span class="token key attr-name">				&lt;property</span> <span class="token value attr-value">...&gt;</span>
+<span class="token key attr-name">					&lt;bean</span> <span class="token value attr-value">class=&quot;...&quot;/&gt;无需id属性，spring容器不能访问嵌套bean</span>
+				&lt;/property&gt;
+			&lt;/bean&gt;
+		
+		组合属性：
+<span class="token key attr-name">			先getBean()</span> <span class="token value attr-value">然后再setter()</span>
+<span class="token key attr-name">			&lt;bean</span> <span class="token value attr-value">id=&quot;a&quot; class=&quot;...&quot;&gt;</span>
+<span class="token key attr-name">				&lt;property</span> <span class="token value attr-value">name=&quot;foo.bar.x.y&quot; value=&quot;xxx&quot; /&gt;</span>
+			&lt;/bean&gt;
+			相当于：
+				a.getFoo().getBar().getX().setY(&quot;xxx&quot;);
+		
+<span class="token key attr-name">		Spring的Bean</span> <span class="token value attr-value">和JavaBean:</span>
+			javabean通常作为DTO（数据传输对象）,用来封装值对象，再各层之间传递数据。
+<span class="token key attr-name">			 spring的Bean</span> <span class="token value attr-value">无所不包，任何组件都可被称为Bean</span>
+		
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_6-spring提供的java配置管理" tabindex="-1"><a class="header-anchor" href="#_6-spring提供的java配置管理" aria-hidden="true">#</a> 6.Spring提供的Java配置管理：</h2><ul><li>以xml为主，Java类配置为辅</li><li>以Java类配置为主，xml为辅</li></ul><h2 id="_7-创建bean的三种方式" tabindex="-1"><a class="header-anchor" href="#_7-创建bean的三种方式" aria-hidden="true">#</a> 7.创建bean的三种方式：</h2><ul><li><p>调用构造器创建Bean</p></li><li><p>调用静态工厂方法创建Bean</p><div class="language-xml line-numbers-mode" data-ext="xml"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>...<span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>静态工厂类<span class="token punctuation">&quot;</span></span> <span class="token attr-name">factory-method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>工厂方法<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li><li><p>调用实例工厂方法创建Bean</p><ul><li><p>先将工厂实例化为bean</p></li><li><p>然后：</p><div class="language-xml line-numbers-mode" data-ext="xml"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>...<span class="token punctuation">&quot;</span></span> <span class="token attr-name">factory-bean</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>工厂bean的id<span class="token punctuation">&quot;</span></span> <span class="token attr-name">factory-method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>方法<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li></ul></li></ul><h2 id="_8-深入理解容器中的bean" tabindex="-1"><a class="header-anchor" href="#_8-深入理解容器中的bean" aria-hidden="true">#</a> 8.深入理解容器中的Bean:</h2><pre><code>	抽象Bean和子bean:
+			抽象：
+				&lt;bean id=&quot;parentId&quot; class=&quot;...&quot; abstract=&quot;true&quot; /&gt;
+			子：
+				&lt;bean id=&quot;...&quot; class=&quot;...&quot; parent=&quot;parentId&quot; /&gt;
+	Bean继承与Java继承：
+		不同
+	
+	容器中的工厂Bean:
+		FactoryBean
+		获取的是工厂bean的getObject()方法获取的值
+	
+	获得Bean本身的id:
+		实现BeanNameAware接口
+		提供方法：
+			setBeanName(String name)
+	
+	强制初始化Bean:
+		可以在初始化主调Bean之前，强制初始化一个或多个Bean
+			&lt;bean id=&quot;a&quot; class=&quot;...&quot; depends-on=&quot;b&quot; /&gt;
+			&lt;bean id=&quot;b&quot; class=&quot;...&quot; /&gt;
+</code></pre><h2 id="_9-容器中bean的生命周期" tabindex="-1"><a class="header-anchor" href="#_9-容器中bean的生命周期" aria-hidden="true">#</a> 9.容器中Bean的生命周期：</h2><pre><code>	singleton作用域的Bean，Spring 可完全管理
+		prototype作用域的Bean,Spring 只负责创建，然后交给客户端后，容器不在跟踪其生命周期
+	管理Bean的生命周期行为主要有如下两个时机：
+		1.注入依赖关系之后
+		2.即将销毁Bean之前
+	
+	依赖关系注入之后的行为：
+		使用init-method属性 指定某个方法在Bean全部依赖关系设置结束后自动执行。
+		实现InitializingBean接口
+		
+	Bean销毁之前的行为：
+		使用destory-method属性	指定某个方法在Bean销毁之前被自动执行
+		实现DisposableBean接口
+	
+	协调作用域不同步的Bean:
+		方法注入
+		&lt;lookup-method name=&quot;...&quot; bean=&quot;...&quot;/&gt;
+</code></pre><h2 id="_10-高级依赖关系配置" tabindex="-1"><a class="header-anchor" href="#_10-高级依赖关系配置" aria-hidden="true">#</a> 10.高级依赖关系配置：</h2><p>将任意方法的返回值、类或对象的Field值、其他Bean的getter方法返回值，直接定义成容器中的一个Bean</p><h2 id="_11-基于xml-schema的简化配置方式" tabindex="-1"><a class="header-anchor" href="#_11-基于xml-schema的简化配置方式" aria-hidden="true">#</a> 11.基于XML Schema的简化配置方式：</h2><pre><code>	使用p:命名空间简化配置：【简化设值注入】
+		p:命名空间不需要特定的Schema定义，它直接存在于Spring内核中
+		可直接使用属性来配置参数值
+		&lt;beans ...
+				xmlns:p=&quot;http://www.springframework.org/schema/p&quot;&gt;
+			&lt;bean id=&quot;...&quot; class=&quot;...&quot; p:age=&quot;22&quot; p:axe-ref=&quot;Bean的id&quot; /&gt;
+			...
+		&lt;/beans&gt;
+		如果某属性名是以&quot;-ref&quot;结尾，则会引起冲突。
+	
+	使用c:命名空间简化配置：【简化构造注入】
+		&lt;beans ...
+				xmlns:c=&quot;http://www.springframework.org/schema/c&quot;&gt;
+			&lt;bean id=&quot;...&quot; class=&quot;...&quot; c:age=&quot;22&quot; c:axe-ref=&quot;Bean的id&quot; /&gt;
+			...
+		&lt;/beans&gt;
+	
+	使用util:命名空间简化配置:
+		必须导入最新的spring-util.xsd
+		
+		util Schema提供如下几个元素：
+			constant	获取指定类的静态Field的值
+			property-path	获取指定对象的getter方法的返回值
+			list	定义一个List Bean
+			set	定义一个Set Bean	
+			map	定义一个Map Bean
+			properties	加载一份资源文件，并根据加载的资源文件创建一个Properties Bean实例
+			
+			&lt;util:constant id=&quot;chin.age&quot; static-field=&quot;java.sql.Connection.TRANSACTION_SERIALIZABLE&quot; /&gt;
+			
+			&lt;util:properties id=&quot;confTest&quot; location=&quot;classpath:test_zh_CN.properties&quot; /&gt;
+			
+			&lt;util:list id=&quot;chin.schools&quot; list-class=&quot;java.util.LinkedList&quot;&gt;
+				&lt;value&gt;小学&lt;/value&gt;
+				&lt;value&gt;中学&lt;/value&gt;
+				&lt;value&gt;大学&lt;/value&gt;
+			&lt;/util:list&gt;
+			
+			&lt;util:set id=&quot;chin.axes&quot; set-class=&quot;java.util.HashSet&quot;&gt;
+				&lt;value&gt;字符串&lt;/value&gt;
+				&lt;bean class=&quot;...&quot;/&gt;
+				&lt;ref bean=&quot;stoneAxe&quot;/&gt;
+			&lt;/util:set&gt;
+			
+			&lt;util:map id=&quot;chin.scores&quot; map-class=&quot;java.util.TreeMap&quot;&gt;
+				&lt;entry key=&quot;语文&quot; value=&quot;99&quot; /&gt;
+				&lt;entry key=&quot;数学&quot; value=&quot;99&quot; /&gt;
+				&lt;entry key=&quot;英语&quot; value=&quot;99&quot; /&gt;
+			&lt;/util:map&gt;
+</code></pre><h2 id="_12-spring提供的表达式语言-spel" tabindex="-1"><a class="header-anchor" href="#_12-spring提供的表达式语言-spel" aria-hidden="true">#</a> 12.Spring提供的表达式语言(SpEL):</h2><pre><code>	在运行时查询和操作对象图
+	
+	使用Expression接口进行表达式求值：
+		SpEL的三个接口：
+			ExpressionParser:	负责解析一个SpEL表达式，返回一个Expression对象
+			Expression:			该接口的实例代表一个表达式
+			EvaluationContext:	代表计算表达式值得上下文
+		
+		Expression包含的方法：
+			Object getValue():	计算表达式的值
+			&lt;T&gt; T getValue(Class&lt;T&gt; desiredResultType)：	计算表达式的值，并尝试将该值当成desiredResultType类型处理
+			Object getValue(EvaluationContext context):		用指定的EvaluationContext来计算表达式的值
+			&lt;T&gt; T getValue(EvaluationContext context,Class&lt;T&gt; desiredResultType)
+			Object getValue(Object rootObject):		以rootObject作为表达式的root对象来计算表达式的值
+			&lt;T&gt; T getValue(Object rootObject，Class&lt;T&gt; desiredResultType)：
+	
+	Bean定义中的表达式语言支持：
+		在XML配置文件和注解中使用SpEL时，在表达式外面增加#{}包围即可
+	
+	SpEL语法详述：
+		1.直接量表达式：
+			就是在表达式中使用Java语言支持的直接量，包括字符串、日期、数值、boolean值和null。
+			
+		2.在表达式中创建数组：
+			支持使用静态初始化、动态初始化两种语法来创建数组
+			
+		3.在表达式中创建List集合：
+			{ele1,ele2,ele3 ...}
+		
+		4.在表达式中访问List,Map等集合元素：
+			list[index]
+			map[key]
+		
+		5.调用方法：
+			和Java一样
+		
+		6.算术、比较、逻辑、赋值、三目等运算符：
+		
+		7.类型运算符：
+			T()将括号内的字符串当成“类”处理
+		
+		8.调用构造器：
+			直接使用new 来调用构造器
+		
+		9.变量：
+			允许通过EvaluationContext来使用变量，该对象包含了一个setVariable(String name,Object value)方法，该方法用于设置一个变量。
+				在EvaluationContext中设置了变量，就可以在SpEL中通过#name来访问该变量。
+			#name
+			#this	引用SpEL当前正在计算的对象
+			#root	引用SpEL的EvaluationContext的root对象
+		
+		10.自定义函数：
+			为Java方法重新起个名字
+			registerFunction(String name,Method m)	将m方法注册成自定义函数，该函数的名称为name
+		
+		11.Elvis运算符：
+			name != null? name:&quot;newVal&quot;
+			简化为：
+				name?:&quot;newVal&quot;
+		12.安全导航操作：
+			foo?.bar	若foo为空，直接返回null，不会导致NullPointerException
+			
+		13.集合选择：
+			collection.?[condition_expr]
+				&quot;#myList.?[length()&gt;7]&quot;
+		
+		14.集合投影：
+			collection.![condition_expr]
+				把collection集合中的元素依次传入condition_expr中，每个元素得到一个新结果，所有计算出来的结果组成的新结果就是该表达式的返回值
+		
+		15.表达式模板：
+			允许在“直接量表达式”中插入一个或多个#{expr}，#{expr}将会被动态计算出来。
+</code></pre><h1 id="深入使用spring" tabindex="-1"><a class="header-anchor" href="#深入使用spring" aria-hidden="true">#</a> 深入使用Spring:</h1><h2 id="_1-两种后处理器" tabindex="-1"><a class="header-anchor" href="#_1-两种后处理器" aria-hidden="true">#</a> 1.两种后处理器：</h2><pre><code>	开发者可以通过后处理器对IoC容器进行扩展
+	Bean后处理器：对容器中的Bean进行后处理，对Bean进行额外加强
+	容器后处理器：对IoC容器进行后处理，用于增强容器功能
+	
+	Bean后处理器：
+		必须实现BeanPostProcessor接口
+			接口包含两个方法：
+				Object postProcessBeforeInitialization(Object bean,String name) throws BeansException
+				Object postProcessAfterInitialization(Object bean,String name) throws BeansException
+		
+		Spring常用的两个后处理器：
+			BeanNameAutoProxyCreator:		根据Bean实例的name属性，创建Bean实例的代理
+			DefaultAdvisorAutoProxyCreator:	根据提供的Advisor，对容器中的所有Bean实例创建代理
+		
+	容器后处理器：
+		必须实现BeanFactoryPostProcessor接口
+			接口包含一个方法：
+				postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+		
+		PropertyPlaceholderConfigurer:属性占位符配置器
+			&lt;context:property-placeholder location=&quot;classpath:dbconn.properties&quot; /&gt;
+			使用：
+				&quot;$(jdbc.url)&quot;
+			属性文件dbconn.properties:
+				jdbc.driverClassName=com.mysql.cj.jdbc.Driver
+				jdbc.url=
+				jdbc.username=
+				jdbc.password=
+		
+		PropertyOverrideConfigurer:重写占位符配置器 【直接覆盖bean的值】
+			&lt;context:property-override location=&quot;classpath:db.properties&quot; /&gt;
+	
+			db.properties:
+				dataSource.driverClass=
+				dataSource.jdbcUrl=
+				dataSource.user=
+				dataSource.password=
+</code></pre><h2 id="_2-spring的-零配置-支持" tabindex="-1"><a class="header-anchor" href="#_2-spring的-零配置-支持" aria-hidden="true">#</a> 2.Spring的“零配置”支持：</h2><pre><code>	搜索Bean类：
+			注解：
+				@Component	标注一个普通的SpringBean类
+				@Controller	标注一个控制器组件类
+				@Service	标注一个业务逻辑组件类
+				@Respository	标注一个DAO组件类
+				&lt;context:component-scan base-package=&quot;app.service&quot;/&gt;
+	指定Bean的作用域：
+		@Scope(&quot;prototype&quot;)
+	
+	使用@Resource和@Value配置依赖：	
+		@Resource name值，需要被注入的Bean实例的id  相当于&lt;property.../&gt;元素的ref属性
+		@Value 相当于&lt;property.../&gt;元素的value属性
+	
+	使用@PostConstruct和@PreDestory定制生命周期行为：
+		前者用于注解Bean的初始化方法
+		后者用于注解Bean销毁之前的方法			
+	
+	使用@DependsOn和@Lazy改变初始化行为：
+		前者用于强制初始化其他Bean
+		后者用于指定该Bean是否取消预初始化
+		@DependsOn({&quot;steelAxe&quot;,&quot;abc&quot;})
+		@Lazy(true)
+	
+	自动装配和精确装配：
+		@Autowired 标注setter时，默认采用byType自动装配策略
+		@Primary 修饰特定Bean类，当自动装配出现冲突时，选择该注解修饰的Bean
+	
+	使用@Required检查注入：
+		@Required修饰方法，若被修饰的方法没有配置注入，则报出异常，以防止程序运行时引发NPE异常，而找不到出错点。
+</code></pre><h2 id="_3-资源访问" tabindex="-1"><a class="header-anchor" href="#_3-资源访问" aria-hidden="true">#</a> 3.资源访问：</h2><pre><code>	程序访问资源（各种类型的文件，二进制流）
+	
+	URL：
+		java.net.URL 
+	
+	Spring改进Java资源访问的策略，提供Resource接口
+		该接口是所有资源访问类所实现的接口：
+			Resource接口的方法;
+				getInputStream()
+				exists()
+				isOpen()
+				getDescription()
+				getFile()
+				getURL()
+				
+	Spring提供的Resource实现类：
+		UrlResource
+		ClassPathResource	对于web应用，ClassPathResource可以自动搜索位于WEB-INF/classes下的资源文件
+		FileSystemResource
+		ServletContextResource 访问应用的相关资源
+		InputStreamResource
+		ByteArrayResource	访问字节数组
+		针对不同的底层资源，这些实现类提供响应的资源访问逻辑，并提供便捷的包装，以利于客户端程序的资源访问
+		
+		示例：	
+			UrlResource ur=new UrlResource(&quot;file:book.xml&quot;);
+			
+			ClassPathResource：
+				显示创建：ClassPathResource cr=new ClassPathResource(&quot;book.xml&quot;);
+				常用隐式创建：spring识别字符串参数包含classpath:前缀后，系统会自动创建ClassPathResource对象
+			
+			FilePathResource：
+				显示创建：FilePathResource fr=new FilePathResource(&quot;book.xml&quot;);
+				常用隐式创建：spring识别字符串参数包含file:前缀后，系统会自动创建FilePathResource对象
+			
+			ServletContextResource：
+				// 从Web Context下的WEB-INF路径下读取book.xml资源
+				ServletContextResource src = new ServletContextResource(application , &quot;WEB-INF/book.xml&quot;);
+				可以访问WEB-INF中的资源了
+			
+			访问字节数组资源：
+				InputStreamResource效率低，尽量使用ByteArrayResource或FileSystemResource替代它
+				先从InputStream流中读出字节数组，然后以字节数组来创建ByteArrayResource。这样，InputStreamResource被转换为ByteArrayResource，从而方便多次读取。
+	
+	ResourceLoader接口和ResourceLoaderAware接口：
+		ResourceLoader接口：实现类的示例可以获得一个Resource示例
+		ResourceLoaderAware接口：实现类的示例可以获得一个ResourceLoader的引用
+		
+		ResourceLoader接口的方法：
+			Resource getResource(String location) 
+				ApplicationContext的实现类都实现了ResourceLoader接口，因此可直接获取Resource示例
+	
+	使用Resource作为属性：
+		&lt;bean id=&quot;test&quot; class=&quot;org.crazyit.app.service.TestBean&quot;
+			p:res=&quot;classpath:book.xml&quot;/&gt;
+	
+	在ApplicationContext中使用资源：
+		显式声明：
+			ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;beans*.xml&quot;);
+			ApplicationContext ctx = new FileSystemXmlApplicationContext(&quot;beans.xml&quot;);
+</code></pre><h2 id="_4-spring的aop" tabindex="-1"><a class="header-anchor" href="#_4-spring的aop" aria-hidden="true">#</a> 4.Spring的AOP：</h2><p><code>OOP将程序分解成各个层次的对象，从静态角度考虑程序结构</code></p><p><code>AOP将程序运行过程分解成各个切面，从动态角度考虑程序运行过程</code></p><ul><li><p>为什么需要AOP：</p><ul><li>AOP专门用于处理系统中分布于各模块（不同方法）中的交叉关注点的问题。</li><li>在Java EE应用中，常常用AOP来处理一些具有横切性质的系统级服务， <ul><li>如事务管理、安全检查、缓存、对象池管理等。</li></ul></li></ul></li><li><p>使用AspectJ实现AOP：</p><ul><li><p>AspectJ是一个基于Java语言的AOP框架</p></li><li><p>AspectJ主要包括两部分：</p><ul><li>定义如何表达、定义AOP编程中的语法规范</li><li>工具部分，包括编译器、调试工具等</li></ul><div class="language-java line-numbers-mode" data-ext="java"><pre class="language-java"><code>			<span class="token comment">// 指定在执行org.crazyit.app.service包中任意类的、任意方法之前执行下面代码块</span>
+			<span class="token comment">// 第一个星号表示返回值不限；第二个星号表示类名不限；</span>
+			<span class="token comment">// 第三个星号表示方法名不限；圆括号中..代表任意个数、类型不限的形参</span>
+			<span class="token function">before</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">execution</span><span class="token punctuation">(</span><span class="token operator">*</span> org<span class="token punctuation">.</span>crazyit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>service<span class="token punctuation">.</span>*<span class="token punctuation">.</span>*<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;模拟进行权限检查...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			
+			<span class="token comment">// 定义一个PointCut，其名为logPointcut，</span>
+			<span class="token comment">// 该Pointcut代表了后面给出的切入点表达式，这样可复用该切入点表达式</span>
+			pointcut <span class="token function">logPointcut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+				<span class="token operator">:</span><span class="token function">execution</span><span class="token punctuation">(</span><span class="token operator">*</span> org<span class="token punctuation">.</span>crazyit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>service<span class="token punctuation">.</span>*<span class="token punctuation">.</span>*<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">after</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">logPointcut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;模拟记录日志...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+		
+			<span class="token comment">// 指定在执行org.crazyit.app.service包中任意类的、任意方法时执行下面代码块</span>
+			<span class="token class-name">Object</span> <span class="token function">around</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token operator">*</span> org<span class="token punctuation">.</span>crazyit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>service<span class="token punctuation">.</span>*<span class="token punctuation">.</span>*<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;模拟开启事务...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token comment">// 回调原来的目标方法</span>
+				<span class="token class-name">Object</span> rvt <span class="token operator">=</span> <span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;模拟结束事务...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token keyword">return</span> rvt<span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li><p>AOP的基本概念：</p><ul><li>AOP框架能处理程序执行中特定的切入点(Pointcut)，而不与具体类耦合</li><li>AOP框架两个特征： <ul><li>1.各步骤之间的良好隔离性</li><li>2.源代码无关性</li></ul></li><li>关于切面编程的一些术语： <ul><li>切面（Aspect）：切面用于组织多个Advice,Advice放在切面中定义</li><li>连接点（Joinpoint）：程序执行过程中明确的点，如方法的调用，或者异常的抛出。</li><li>增强处理（Advice）：AOP框架在特定的切入点执行的增强处理。处理有“around”，“before”，“after”等类型</li><li>切入点（Pointcut）: 可以增强处理的连接点。连接点被添加增强处理，该连接点就变成了切入点。如何使用表达式来定义切入点是AOP的核心。</li><li>引入：将方法或字段添加到被处理的类中</li><li>目标对象：被AOP框架进行增强处理的对象</li><li>AOP代理：AOP框架创建的对象，代理就是对目标对象的加强。 <ul><li>可以是JDK动态代理，也可以是cglib代理。前者为实现接口的目标对象的代理，后者不实现接口。</li></ul></li><li>织入（Weaving）：将增强处理添加到目标对象中，并创建一个被增强的对象（AOP代理）的过程就是织入。 <ul><li>织入的两种实现方式： <ul><li>1.编译时增强，如AsoectJ</li><li>2.运行时增强，如Sping AOP</li></ul></li></ul></li></ul></li></ul></li><li><p>Spring的AOP支持：</p><ul><li>spring目前仅支持将方法调用作为连接点</li><li>AOP编程三件事： <ul><li>定义普通业务组件</li><li>定义切入点，一个切入点可能横切多个业务组件</li><li>定义增强处理，增强处理就是在AOP框架为普通业务组件织入的处理动作</li><li>AOP代理的方法 = 增强处理 + 目标对象的方法</li></ul></li><li>Spring的两种选择来定义切入点和增强处理： <ul><li>1.基于注解的“零配置”方式：使用@Aspect,@Pointcut等注解标注切入点和增强处理。</li><li>2.基于XML配置文件的管理方式：使用spring配置文件来定义切入点和增强处理</li></ul></li></ul></li><li><p>基于注解的“零配置”方式：</p><ul><li><p><code>&lt;!-- 启动@AspectJ支持 --&gt;</code><br><a href="/blog/old/beframework/spring/aop:aspectj-autoproxy/" class="">aop:aspectj-autoproxy/</a></p></li><li><p>Jar包： aspectjweaver.jar aspectjrt.jar aopalliance.jar</p><pre><code>  	定义切面Bean: @Aspect 切面类
+  	定义Before增强处理：@Before(&quot;切入点表达式&quot;)
+  		示例：	@Before(&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  	定义切面Bean:
+  			@Aspect 切面类
+  	定义Before增强处理：
+  		@Before(&quot;切入点表达式&quot;)
+  		示例：	@Before(&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  		
+  	定义AfterReturning增强处理：
+  		// 匹配org.crazyit.app.service.impl包下所有类的、
+  		// 所有方法的执行作为切入点
+  		@AfterReturning(returning=&quot;rvt&quot;, pointcut=&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  		
+  		@AfterReturning的两个常用属性：
+  			pointcut/value:指定切入点对应的切入表达式
+  			returning：指定一个形参名，该形参可用于访问目标方法的返回值 
+  						如果增强方法的形参类型定义好了，若于目标方法返回值类型不同，
+  														则增强方法不会织入。
+  		
+  	定义AfterThrowing增强处理：
+  		主要用于处理程序中未处理的异常
+  		@AfterThrowing(throwing=&quot;ex&quot;, pointcut=&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  			pointcut/value:指定切入点对应的切入表达式
+  			throwing：指定一个形参名，该形参可用于访问目标方法的返回值 
+  						如果增强方法的形参异常类型定义好了，若于目标方法返回值异常类型不同，
+  														则增强方法不会织入。
+  
+  	After:
+  		不管目标方法成功完成，还是异常结束，该Advice都会织入
+  		这种Advice类似于finally块
+  		通常用来释放资源
+  		@After(&quot;execution(* org.crazyit.app.service.*.*(..))&quot;)
+  		
+  	Around:
+  		这种Advice功能最强大，它既可访问、修改目标方法调用参数，也可访问、修改目标方法的返回值。
+  		它甚至完全组阻止目标方法的执行
+  		
+  		它既可在目标方法之前织入，也可以在目标方法之后织入。
+  		
+  		弱点：它是线程不安全的，能用其他Advice搞定的，就不要把Around Adivce拿出来。
+  		
+  		Around Advice方法必须满足如下三点：
+  			1.必须声明返回值类型
+  			2.必须声明一个类型为ProceedingJoinPoint类型的形参
+  			3.必须调用ProceedingJoinPoint形参的proceed()方法，这就是回调目标方法。如果没有这一行，目标方法不会执行。
+  		
+  		@Around(&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  		
+  		public Object processTx(ProceedingJoinPoint jp) throws java.lang.Throwable{
+  			System.out.println(&quot;执行目标方法之前，模拟开始事务...&quot;);
+  			
+  			// 获取目标方法原始的调用参数
+  			Object[] args = jp.getArgs();
+  			if(args != null &amp;&amp; args.length &gt; 1)
+  			{
+  				// 修改目标方法的第一个参数
+  				args[0] = &quot;【增加的前缀】&quot; + args[0];
+  			}
+  			
+  			// 以改变后的参数去执行目标方法，并保存目标方法执行后的返回值
+  			Object rvt = jp.proceed(args);
+  			
+  			System.out.println(&quot;执行目标方法之后，模拟结束事务...&quot;);
+  			
+  			// 如果rvt的类型是Integer，将rvt改为它的平方
+  			if(rvt != null &amp;&amp; rvt instanceof Integer)
+  				rvt = (Integer)rvt * (Integer)rvt;
+  			return rvt;
+</code></pre><p>​ <br> }</p><pre><code>  	一般来说，需要修改目标方法的调用参数、修改目标方法的返回值，此时只能用Around
+  			组织目标方法执行，用before
+  	
+  	访问目标方法的参数：
+  		JoinPoint类型：
+  			方法：
+  				Object[] getArgs()	返回执行目标方法时的参数
+  				Signature getSignature()	返回被增强的方法的相关信息
+  				Object getTarget()	返回目标对象
+  				Object getThis()	返回代理对象
+  
+  	定义切入点：
+  		切入点定义：
+  			一个切入点表达式
+  			一个包含名字和任意参数的方法签名
+  			@Aspect
+  			public class SystemArchitecture
+  			{
+  				@Pointcut(&quot;execution(* org.crazyit.app.service.impl.*.*(..))&quot;)
+  				public void myPointcut(){}
+  			}
+  			
+  			// 直接使用SystemArchitecture切面类的myPointcut()切入点
+  			@AfterReturning(returning=&quot;rvt&quot;, pointcut=&quot;SystemArchitecture.myPointcut()&quot;)
+  			
+  	切入点指示符，组合符号：
+  		// 下面的args(arg0,arg1)会限制目标方法必须有2个形参
+  		@AfterReturning(returning=&quot;rvt&quot; , pointcut=&quot;execution(* org.crazyit.app.service.impl.*.*(..)) &amp;&amp; args(arg0,arg1)&quot;)
+</code></pre></li></ul></li></ul></li></ul><h2 id="_5-spring的缓存机制" tabindex="-1"><a class="header-anchor" href="#_5-spring的缓存机制" aria-hidden="true">#</a> 5.Spring的缓存机制：</h2><h2 id="_6-spring的事务" tabindex="-1"><a class="header-anchor" href="#_6-spring的事务" aria-hidden="true">#</a> 6.Spring的事务：</h2><pre><code>	@Transactional(propagation=Propagation.REQUIRED ,isolation=Isolation.DEFAULT , timeout=5)
+	
+	&lt;!-- 配置JDBC数据源的局部事务管理器，使用DataSourceTransactionManager 类 --&gt;
+	&lt;!-- 该类实现PlatformTransactionManager接口，是针对采用数据源连接的特定实现--&gt;
+	&lt;!-- 配置DataSourceTransactionManager时需要依注入DataSource的引用 --&gt;
+	&lt;bean id=&quot;transactionManager&quot; 
+		class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;
+		p:dataSource-ref=&quot;dataSource&quot;/&gt;
+	&lt;!-- 根据Annotation来生成事务代理 --&gt;
+	&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+</code></pre></div><!----><footer class="page-meta"><div class="meta-item edit-link"><a href="https://github.com/alooc/edit/main/src/blog/old/beframework/spring/基础总结.md" rel="noopener noreferrer" target="_blank" aria-label="在 GitHub 上编辑此页" class="nav-link label"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon edit-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="edit icon"><path d="M430.818 653.65a60.46 60.46 0 0 1-50.96-93.281l71.69-114.012 7.773-10.365L816.038 80.138A60.46 60.46 0 0 1 859.225 62a60.46 60.46 0 0 1 43.186 18.138l43.186 43.186a60.46 60.46 0 0 1 0 86.373L588.879 565.55l-8.637 8.637-117.466 68.234a60.46 60.46 0 0 1-31.958 11.229z"></path><path d="M728.802 962H252.891A190.883 190.883 0 0 1 62.008 771.98V296.934a190.883 190.883 0 0 1 190.883-192.61h267.754a60.46 60.46 0 0 1 0 120.92H252.891a69.962 69.962 0 0 0-69.098 69.099V771.98a69.962 69.962 0 0 0 69.098 69.098h475.911A69.962 69.962 0 0 0 797.9 771.98V503.363a60.46 60.46 0 1 1 120.922 0V771.98A190.883 190.883 0 0 1 728.802 962z"></path></svg><!--]-->在 GitHub 上编辑此页<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!----></a></div><div class="meta-item git-info"><div class="update-time"><span class="label">上次编辑于: </span><!----></div><div class="contributors"><span class="label">贡献者: </span><!--[--><!--[--><span class="contributor" title="email: dongzhaohe@credamo.com">dongzhaohe</span><!--]--><!--]--></div></div></footer><!----><div id="comment" class="waline-wrapper" darkmode="false" style="display:block;"><div data-waline provider="Waline"><!--v-if--><div class="wl-comment"><!--v-if--><div class="wl-panel"><div class="wl-header item3"><!--[--><div class="wl-header-item"><label for="wl-nick">昵称</label><input id="wl-nick" class="wl-input wl-nick" name="nick" type="text" value></div><div class="wl-header-item"><label for="wl-mail">邮箱</label><input id="wl-mail" class="wl-input wl-mail" name="mail" type="email" value></div><div class="wl-header-item"><label for="wl-link">网址</label><input id="wl-link" class="wl-input wl-link" name="link" type="text" value></div><!--]--></div><textarea id="wl-edit" class="wl-editor" placeholder="请留言。(填写邮箱可在被回复时收到邮件提醒)"></textarea><div class="wl-preview" style="display:none;"><hr><h4>预览:</h4><div class="wl-content"></div></div><div class="wl-footer"><div class="wl-actions"><a href="https://guides.github.com/features/mastering-markdown/" title="Markdown Guide" aria-label="Markdown is supported" class="wl-action" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" ariaHidden="true"><path d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z" fill="currentColor"></path></svg></a><button type="button" class="wl-action" title="表情" style="display:none;"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M563.2 463.3 677 540c1.7 1.2 3.7 1.8 5.8 1.8.7 0 1.4-.1 2-.2 2.7-.5 5.1-2.1 6.6-4.4l25.3-37.8c1.5-2.3 2.1-5.1 1.6-7.8s-2.1-5.1-4.4-6.6l-73.6-49.1 73.6-49.1c2.3-1.5 3.9-3.9 4.4-6.6.5-2.7 0-5.5-1.6-7.8l-25.3-37.8a10.1 10.1 0 0 0-6.6-4.4c-.7-.1-1.3-.2-2-.2-2.1 0-4.1.6-5.8 1.8l-113.8 76.6c-9.2 6.2-14.7 16.4-14.7 27.5.1 11 5.5 21.3 14.7 27.4zM387 348.8h-45.5c-5.7 0-10.4 4.7-10.4 10.4v153.3c0 5.7 4.7 10.4 10.4 10.4H387c5.7 0 10.4-4.7 10.4-10.4V359.2c0-5.7-4.7-10.4-10.4-10.4zm333.8 241.3-41-20a10.3 10.3 0 0 0-8.1-.5c-2.6.9-4.8 2.9-5.9 5.4-30.1 64.9-93.1 109.1-164.4 115.2-5.7.5-9.9 5.5-9.5 11.2l3.9 45.5c.5 5.3 5 9.5 10.3 9.5h.9c94.8-8 178.5-66.5 218.6-152.7 2.4-5 .3-11.2-4.8-13.6zm186-186.1c-11.9-42-30.5-81.4-55.2-117.1-24.1-34.9-53.5-65.6-87.5-91.2-33.9-25.6-71.5-45.5-111.6-59.2-41.2-14-84.1-21.1-127.8-21.1h-1.2c-75.4 0-148.8 21.4-212.5 61.7-63.7 40.3-114.3 97.6-146.5 165.8-32.2 68.1-44.3 143.6-35.1 218.4 9.3 74.8 39.4 145 87.3 203.3.1.2.3.3.4.5l36.2 38.4c1.1 1.2 2.5 2.1 3.9 2.6 73.3 66.7 168.2 103.5 267.5 103.5 73.3 0 145.2-20.3 207.7-58.7 37.3-22.9 70.3-51.5 98.1-85 27.1-32.7 48.7-69.5 64.2-109.1 15.5-39.7 24.4-81.3 26.6-123.8 2.4-43.6-2.5-87-14.5-129zm-60.5 181.1c-8.3 37-22.8 72-43 104-19.7 31.1-44.3 58.6-73.1 81.7-28.8 23.1-61 41-95.7 53.4-35.6 12.7-72.9 19.1-110.9 19.1-82.6 0-161.7-30.6-222.8-86.2l-34.1-35.8c-23.9-29.3-42.4-62.2-55.1-97.7-12.4-34.7-18.8-71-19.2-107.9-.4-36.9 5.4-73.3 17.1-108.2 12-35.8 30-69.2 53.4-99.1 31.7-40.4 71.1-72 117.2-94.1 44.5-21.3 94-32.6 143.4-32.6 49.3 0 97 10.8 141.8 32 34.3 16.3 65.3 38.1 92 64.8 26.1 26 47.5 56 63.6 89.2 16.2 33.2 26.6 68.5 31 105.1 4.6 37.5 2.7 75.3-5.6 112.3z" fill="currentColor"></path></svg></button><button type="button" class="wl-action" title="表情包"><svg width="24" height="24" fill="currentcolor" viewBox="0 0 24 24"><path style="transform: translateY(0.5px)" d="M18.968 10.5H15.968V11.484H17.984V12.984H15.968V15H14.468V9H18.968V10.5V10.5ZM8.984 9C9.26533 9 9.49967 9.09367 9.687 9.281C9.87433 9.46833 9.968 9.70267 9.968 9.984V10.5H6.499V13.5H8.468V12H9.968V14.016C9.968 14.2973 9.87433 14.5317 9.687 14.719C9.49967 14.9063 9.26533 15 8.984 15H5.984C5.70267 15 5.46833 14.9063 5.281 14.719C5.09367 14.5317 5 14.2973 5 14.016V9.985C5 9.70367 5.09367 9.46933 5.281 9.282C5.46833 9.09467 5.70267 9.001 5.984 9.001H8.984V9ZM11.468 9H12.968V15H11.468V9V9Z"></path><path d="M18.5 3H5.75C3.6875 3 2 4.6875 2 6.75V18C2 20.0625 3.6875 21.75 5.75 21.75H18.5C20.5625 21.75 22.25 20.0625 22.25 18V6.75C22.25 4.6875 20.5625 3 18.5 3ZM20.75 18C20.75 19.2375 19.7375 20.25 18.5 20.25H5.75C4.5125 20.25 3.5 19.2375 3.5 18V6.75C3.5 5.5125 4.5125 4.5 5.75 4.5H18.5C19.7375 4.5 20.75 5.5125 20.75 6.75V18Z"></path></svg></button><input id="wl-image-upload" class="upload" type="file" accept=".png,.jpg,.jpeg,.webp,.bmp,.gif"><label for="wl-image-upload" class="wl-action" title="上传图片"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M784 112H240c-88 0-160 72-160 160v480c0 88 72 160 160 160h544c88 0 160-72 160-160V272c0-88-72-160-160-160zm96 640c0 52.8-43.2 96-96 96H240c-52.8 0-96-43.2-96-96V272c0-52.8 43.2-96 96-96h544c52.8 0 96 43.2 96 96v480z" fill="currentColor"></path><path d="M352 480c52.8 0 96-43.2 96-96s-43.2-96-96-96-96 43.2-96 96 43.2 96 96 96zm0-128c17.6 0 32 14.4 32 32s-14.4 32-32 32-32-14.4-32-32 14.4-32 32-32zm462.4 379.2-3.2-3.2-177.6-177.6c-25.6-25.6-65.6-25.6-91.2 0l-80 80-36.8-36.8c-25.6-25.6-65.6-25.6-91.2 0L200 728c-4.8 6.4-8 14.4-8 24 0 17.6 14.4 32 32 32 9.6 0 16-3.2 22.4-9.6L380.8 640l134.4 134.4c6.4 6.4 14.4 9.6 24 9.6 17.6 0 32-14.4 32-32 0-9.6-4.8-17.6-9.6-24l-52.8-52.8 80-80L769.6 776c6.4 4.8 12.8 8 20.8 8 17.6 0 32-14.4 32-32 0-8-3.2-16-8-20.8z" fill="currentColor"></path></svg></label><button type="button" class="wl-action" title="预览"><svg viewBox="0 0 1024 1024" width="24" height="24"><path d="M710.816 654.301c70.323-96.639 61.084-230.578-23.705-314.843-46.098-46.098-107.183-71.109-172.28-71.109-65.008 0-126.092 25.444-172.28 71.109-45.227 46.098-70.756 107.183-70.756 172.106 0 64.923 25.444 126.007 71.194 172.106 46.099 46.098 107.184 71.109 172.28 71.109 51.414 0 100.648-16.212 142.824-47.404l126.53 126.006c7.058 7.06 16.297 10.979 26.406 10.979 10.105 0 19.343-3.919 26.402-10.979 14.467-14.467 14.467-38.172 0-52.723L710.816 654.301zm-315.107-23.265c-65.88-65.88-65.88-172.54 0-238.42 32.069-32.07 74.245-49.149 119.471-49.149 45.227 0 87.407 17.603 119.472 49.149 65.88 65.879 65.88 172.539 0 238.42-63.612 63.178-175.242 63.178-238.943 0zm0 0" fill="currentColor"></path><path d="M703.319 121.603H321.03c-109.8 0-199.469 89.146-199.469 199.38v382.034c0 109.796 89.236 199.38 199.469 199.38h207.397c20.653 0 37.384-16.645 37.384-37.299 0-20.649-16.731-37.296-37.384-37.296H321.03c-68.582 0-124.352-55.77-124.352-124.267V321.421c0-68.496 55.77-124.267 124.352-124.267h382.289c68.582 0 124.352 55.771 124.352 124.267V524.72c0 20.654 16.736 37.299 37.385 37.299 20.654 0 37.384-16.645 37.384-37.299V320.549c-.085-109.8-89.321-198.946-199.121-198.946zm0 0" fill="currentColor"></path></svg></button></div><div class="wl-info"><div class="wl-captcha-container"></div><div class="wl-text-number">0 <!--v-if-->  字</div><button type="button" class="wl-btn">登录</button><button type="submit" class="primary wl-btn" title="Cmd|Ctrl + Enter"><!--[-->提交<!--]--></button></div><div class="wl-gif-popup"><input type="text" placeholder="搜索表情包"><!--v-if--><div class="wl-loading"><svg width="30" height="30" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="currentColor" strokeWidth="4" r="40" stroke-dasharray="85 30"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg></div></div><div class="wl-emoji-popup"><!--[--><!--]--><!--v-if--></div></div></div><!--v-if--></div><div class="wl-meta-head"><div class="wl-count"><!--v-if--> 评论</div><ul class="wl-sort"><!--[--><li class="active">按正序</li><li class="">按倒序</li><li class="">按热度</li><!--]--></ul></div><div class="wl-cards"><!--[--><!--]--></div><!--[--><div class="wl-loading"><svg width="30" height="30" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="currentColor" strokeWidth="4" r="40" stroke-dasharray="85 30"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg></div><!--]--><div class="wl-power"> Powered by <a href="https://github.com/walinejs/waline" target="_blank" rel="noopener noreferrer"> Waline </a> v2.15.5</div></div></div><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><div class="vp-footer">默认页脚</div><div class="vp-copyright">Copyright © 2024 Alooc</div></footer></div><!--]--><!----><!--]--></div>
+    <script type="module" src="/assets/app-310cff28.js" defer></script>
+  </body>
+</html>
