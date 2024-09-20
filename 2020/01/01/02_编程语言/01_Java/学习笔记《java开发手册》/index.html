@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>《Java开发手册》学习笔记 | Alooc</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="《Java开发手册》学习笔记 | Alooc">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左神算法基础提升课学习笔记">
+<meta property="og:url" content="http://example.com/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Alooc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-01T01:02:55.000Z">
+<meta property="article:modified_time" content="2023-07-04T07:29:12.928Z">
+<meta property="article:author" content="Alooc">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Alooc</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/alooc"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(40)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="算法">
+                        
+                        算法
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="数据库">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        数据库
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="数据库<--->Mysql">
+                                        
+                                        Mysql
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="数据库<--->Oracle">
+                                        
+                                        Oracle
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="编程语言">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        编程语言
+                        <small>(15)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->前端">
+                                        
+                                        前端
+                                        
+                                            <small>(6
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->Java">
+                                        
+                                        Java
+                                        
+                                            <small>(8
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="编程语言<--->Python">
+                                        
+                                        Python
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="技巧">
+                        
+                        技巧
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="后端框架">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        后端框架
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->Mybatis">
+                                        
+                                        Mybatis
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->MyBatis-Plus">
+                                        
+                                        MyBatis-Plus
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->Spring">
+                                        
+                                        Spring
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringBoot">
+                                        
+                                        SpringBoot
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringCloud">
+                                        
+                                        SpringCloud
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端框架<--->SpringMVC">
+                                        
+                                        SpringMVC
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="后端技术">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        后端技术
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->activiti">
+                                        
+                                        activiti
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->android">
+                                        
+                                        android
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->Bash">
+                                        
+                                        Bash
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->docker">
+                                        
+                                        docker
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->maven">
+                                        
+                                        maven
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="后端技术<--->yaml">
+                                        
+                                        yaml
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="前端框架">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        前端框架
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="前端框架<--->vue">
+                                        
+                                        vue
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="前端技术">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        前端技术
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="前端技术<--->websocket">
+                                        
+                                        websocket
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="40">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>工作流</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>技巧</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>项目总结</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>activiti</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Bash</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CSS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HTML</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JavaScript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>maven</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyBatis-Plus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Oracle</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringBoot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yaml</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="左神算法基础提升课学习笔记">左神算法基础提升课学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%A6%E7%A5%9E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="左神算法基础课学习笔记">左神算法基础课学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 算法 "
+           href="/2020/01/01/00_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="基础算法总结">基础算法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Oracle "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/02_Oracle/Oracle%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Oracle"
+           data-author="" >
+            <span class="post-title" title="Oracle基础总结">Oracle基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 技巧 "
+           href="/2020/01/01/03_%E6%8A%80%E5%B7%A7/%E6%8A%80%E5%B7%A7/"
+           data-tag="技巧"
+           data-author="" >
+            <span class="post-title" title="常用开发技巧总结Ing">常用开发技巧总结Ing</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Mysql "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/01_Mysql/%E5%9F%BA%E7%A1%80/"
+           data-tag="数据库,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql基础知识">Mysql基础知识</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 Mysql "
+           href="/2020/01/01/01_%E6%95%B0%E6%8D%AE%E5%BA%93/01_Mysql/java%E6%95%B4%E5%90%88mysql/"
+           data-tag="数据库,Mysql"
+           data-author="" >
+            <span class="post-title" title="mysql使用">mysql使用</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Python "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/02_Python/note/"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="Python学习笔记">Python学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/JUC/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="JUC">JUC</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/JSP_Servlet%E7%AC%94%E8%AE%B0/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="JSP/Servlet及相关技术详解">JSP/Servlet及相关技术详解</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8A%E7%96%AF%E7%8B%82Java%E8%AE%B2%E4%B9%89%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《疯狂Java讲义》学习笔记">《疯狂Java讲义》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8Ajava%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《Java开发手册》学习笔记">《Java开发手册》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%9F%BA%E7%A1%80/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="基础">基础</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%8A%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%EF%BC%9AJava%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="《码出高效：Java开发手册》学习笔记">《码出高效：Java开发手册》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E9%9B%86%E5%90%88/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="集合">集合</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/01_Java/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="抽象类和接口">抽象类和接口</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/jquery_ajax%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="jquery-ajax笔记">jquery-ajax笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E3%80%8ACSS%E4%B8%96%E7%95%8C%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="CSS"
+           data-author="" >
+            <span class="post-title" title="《CSS世界》学习笔记">《CSS世界》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/JavaScript%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript笔记">JavaScript笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E7%96%AF%E7%8B%82HTML5+CSS3+JavaScript%E8%AE%B2%E4%B9%89%E7%AC%94%E8%AE%B0/"
+           data-tag="HTML"
+           data-author="" >
+            <span class="post-title" title="疯狂HTML5+CSS3+JavaScript讲义笔记">疯狂HTML5+CSS3+JavaScript讲义笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E7%96%AF%E7%8B%82%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AE%B2%E4%B9%89%E7%AC%94%E8%AE%B0/"
+           data-tag="HTML"
+           data-author="" >
+            <span class="post-title" title="疯狂前端开发讲义笔记">疯狂前端开发讲义笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 编程语言 前端 "
+           href="/2020/01/01/02_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/00_%E5%89%8D%E7%AB%AF/%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="《JavaScript高级程序设计》学习笔记">《JavaScript高级程序设计》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 android "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/02_Android/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/"
+           data-tag="android"
+           data-author="" >
+            <span class="post-title" title="第一行代码笔记">第一行代码笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 maven "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/03_Maven/maven%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven笔记">maven笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 docker "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/06_Docker/%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker常用镜像">docker常用镜像</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 activiti "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/01_Activiti/activiti6%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/"
+           data-tag="activiti,工作流"
+           data-author="" >
+            <span class="post-title" title="activiti6笔记">activiti6笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 Bash "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/05_Bash/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"
+           data-tag="Bash"
+           data-author="" >
+            <span class="post-title" title="Bash常用命令">Bash常用命令</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 docker "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/06_Docker/docker%E5%91%BD%E4%BB%A4/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker基础笔记">docker基础笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 Mybatis "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/01_MyBaits/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="MyBatis基础用法总结">MyBatis基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringBoot "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/05_SpringBoot/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot基础总结">SpringBoot基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 yaml "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/04_Yaml/yaml%E8%AF%AD%E6%B3%95/"
+           data-tag="yaml"
+           data-author="" >
+            <span class="post-title" title="yaml语法">yaml语法</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 Spring "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/03_Spring/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring基础用法总结">Spring基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringMVC "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/04_SpringMVC/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="SpringMVC基础用法总结">SpringMVC基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 MyBatis-Plus "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/02_MyBatis%20Plus/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="MyBatis-Plus"
+           data-author="" >
+            <span class="post-title" title="MyBatis-Plus基础用法总结">MyBatis-Plus基础用法总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringBoot "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/05_SpringBoot/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="SpringBoot源码分析">SpringBoot源码分析</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端技术 websocket "
+           href="/2020/01/01/07_%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/01_WebSocket/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="websocket"
+           data-author="" >
+            <span class="post-title" title="websocket笔记">websocket笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringCloud "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/06_SpringCloud/%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud基础总结">SpringCloud基础总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端框架 vue "
+           href="/2020/01/01/06_%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/01_Vue/%E3%80%8AVue2.5%E5%BC%80%E5%8F%91%E5%8E%BB%E5%93%AA%E5%84%BF%E7%BD%91App%20%E4%BB%8E%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+           data-tag="vue,项目总结"
+           data-author="" >
+            <span class="post-title" title="《Vue2.5开发去哪儿网App 从零基础入门到实战项目》学习笔记">《Vue2.5开发去哪儿网App 从零基础入门到实战项目》学习笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端框架 SpringCloud "
+           href="/2020/01/01/04_%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/06_SpringCloud/springcloud%E9%A1%B9%E7%9B%AE%E3%80%8A%E5%B0%9A%E5%8C%BB%E9%80%9A%E3%80%8B%E6%80%BB%E7%BB%93/"
+           data-tag="SpringCloud,项目总结"
+           data-author="" >
+            <span class="post-title" title="《尚医通》项目总结">《尚医通》项目总结</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端技术 Bash "
+           href="/2020/01/01/05_%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/05_Bash/Bash%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/"
+           data-tag="Bash"
+           data-author="" >
+            <span class="post-title" title="Bash脚本笔记">Bash脚本笔记</span>
+            <span class="post-date" title="2020-01-01 09:02:55">2020/01/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-02_编程语言/01_Java/学习笔记《java开发手册》" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">《Java开发手册》学习笔记</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="编程语言">编程语言</a> > 
+            
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Java</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-04 15:31:27'>2020-01-01 09:02</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80"><span class="toc-text">第一章 计算机基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">第二章 面向对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-text">第三章 代码风格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E8%B5%B0%E8%BF%9BJVM"><span class="toc-text">第四章 走进JVM</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一章-计算机基础"><a href="#第一章-计算机基础" class="headerlink" title="第一章 计算机基础"></a>第一章 计算机基础</h1><p>​    计算机组成原理<br>​    计算机引论<br>​    计算机网络<br>​    信息安全</p>
+<h1 id="第二章-面向对象"><a href="#第二章-面向对象" class="headerlink" title="第二章 面向对象"></a>第二章 面向对象</h1><p>​    抽象、封装、继承、多态</p>
+<pre><code>使用静态内部类的好处：
+     * 1.作用域不会扩散到包外
+     * 2.可以通过“外部类.内部类”的方式直接访问
+     * 3.内部类可以访问外部类中的所有静态属性和方法
+访问控制级别要从严处理
+序列化：
+    1.Java原生 效率低
+    2.Hessian
+    3.json序列化
+    。。。其他序列化工具 
+
+方法：
+    方法体中要对传入的参数保持理性的不信任。
+        方法的第一步骤并不是功能实现，而应该是参数预处理：
+            1.入参保护：判断参数是否超过服务处理能力
+            2.参数校验：视具体情况而定
+POJO（简单的Java对象），通常是只包含getter、setter、toString方法的简单类
+        DO\BO\DTO\VO\AO
+    POJO作为数据载体，通常用于数据传输，不应该包含任何业务逻辑。
+泛型定义时，约定俗成的符号：
+    E 代表 Element，用于集合中的元素
+    T 代表 the Type of object，表示某个类
+    K 代表 Key，V 代表 Value，用于键值对元素。
+9种基本数据类型：
+    boolean byte char short int long float double  
+        表示生活中的真假、字符、整数和小数
+    refvar
+        面向对象世界中的引用变量，也叫引用句柄
+        引用 4B     引用指向的对象 最小12B
+对象的存储空间的分配的单位是8个字节
+
+包装类
+
+String StringBuilder StringBuffer
+</code></pre>
+<h1 id="第三章-代码风格"><a href="#第三章-代码风格" class="headerlink" title="第三章 代码风格"></a>第三章 代码风格</h1><p>​    大驼峰、小驼峰<br>​    望文知义<br>​    *<br>​    代码逻辑要分主次、个性和共性。不要把不同层次的逻辑写在一个大方法体里，<br>​    应该将次要逻辑抽取为独立方法，将共性逻辑抽取成为共性方法（比如参数校<br>​    验、权限判断等），便于复用和维护，使主干代码逻辑更加清晰。<br>​    *<br>​    代码注释</p>
+<h1 id="第四章-走进JVM"><a href="#第四章-走进JVM" class="headerlink" title="第四章 走进JVM"></a>第四章 走进JVM</h1><p>​    字节码    类加载    内存布局    对象创建    垃圾回收<br>​    计算机工程领域的任何问题都可以通过增加一个中间层来解决。<br>​    字节码的主要指令：<br>​        1.加载和存储指令<br>​            在某个帧栈中，通过指令操作数据在虚拟机栈的局部变量表与操作栈之间来回传输。<br>​            常见指令如下：<br>​                （1）将局部变量加载到操作栈中<br>​                （2）从操作栈顶存储到局部变量表<br>​                （3）将常量加载到操作栈顶，这是极为高频使用的指令<br>​        2.运算指令<br>​            对两个操作栈帧上的值进行运算，并把结果写入操作栈顶<br>​        3.类型转换指令<br>​            显式转换两种不同的数值类型<br>​        4.对象创建与访问指令<br>​            根据类进行对象的创建、初始化、方法调用相关指令<br>​            （1）创建对象指令<br>​            （2）访问属性指令<br>​            （3）检查实例类型指令<br>​        5.操作栈管理指令<br>​            JVM提供了直接控制操作栈的指令<br>​            （1）出栈操作<br>​            （2）复制栈顶元素并压入栈<br>​        6.方法调用与返回指令<br>​            （1）INVOKEVIRTUAL指令：调用对象的实例方法<br>​            （2）INVOKESPECIAL指令：调用实例初始化方法、私有方法、父类方法等<br>​            （3）INVOKESTATIC指令：调用类静态方法<br>​            （4）RETURN指令：返回VOID类型<br>​        7.同步指令<br>​    </p>
+<pre><code>解释执行
+JIT编译执行
+
+类加载过程：
+    Java的类加载器是一个运行时核心基础设施模块，
+        主要是在启动之初进行类的Load、Link和Init，
+        即加载、链接、初始化。
+Parents Delegation Model
+魔法值：在代码中直接出现的值
+</code></pre>
+<p>​        </p>
+<p>​    </p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '709b87088cb3e563a2a0',
+            clientSecret: 'b142520468a994df44957d419fbd1ddafd73ed44',
+            repo: 'alooc.github.io',
+            owner: 'alooc',
+            admin: ['alooc'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2023 Alooc
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
