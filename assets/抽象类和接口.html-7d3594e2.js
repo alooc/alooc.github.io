@@ -1,0 +1,5 @@
+import{_ as l}from"./plugin-vue_export-helper-c27b6911.js";import{o,c as p,b as e}from"./app-6337abed.js";const i={},c=e(`<blockquote><blockquote><p>通过抽象类和接口，实现面向对象、多态、代码解耦</p></blockquote></blockquote><ol><li><p>抽象类</p><p>抽象：从具体的事物抽出、概括出他们共同的方面、本质属性与关系等，而将个别的、非本质的方面、属性与关系舍弃，这种思维过程，成为抽象。简单来说，就是取共性化抽象。</p><p>一个类，使用abstract修饰</p><p>特点：</p><pre><code> - 包含抽象方法的类必须被声明为抽象类，抽象类可以不包含抽象方法
+ - 抽象类不能被实例化
+ - 可以包含具体的属性和方法
+ - 继承抽象类或实现接口的类，若未实现所有方法，则须声明为抽象类
+</code></pre></li><li><p>接口</p><p>接口不是类，类描述对象的属性和方法，接口则包含类要实现的方法。</p><p>接口用来指定标准</p><ul><li>在Java中，接口类型可以用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象。</li></ul><p>接口特性：</p><ul><li>方法被隐式指定为<code>public abstract</code></li><li>变量被隐式指定为<code>public static final</code></li><li>接口中的方法不能在接口中实现</li></ul></li><li><p>总结</p><ol><li><p>抽象类是对一组具有相同属性和方法的逻辑上有关系的事物的一种抽象，而接口则是对一组具有相同属性和方法的逻辑上不相关的事物的一种抽象。</p></li><li><p>工厂模式，实现类的创建与使用的分离</p></li><li><p>实例，Datax-web中Json的构建：</p><p>​ 构建Json:<br> ​ 处理读，多数据源<br> ​ 处理写，多数据源<br> ​ 抽象插件类 插件接口，定义插件的标准<br> ​ 读抽象类<br> ​ 写抽象类<br> ​ 工厂类，实例化需要的插件</p></li></ol></li></ol>`,2),t=[c];function r(_,a){return o(),p("div",null,t)}const b=l(i,[["render",r],["__file","抽象类和接口.html.vue"]]);export{b as default};
