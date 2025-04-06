@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SpringMVC基础用法总结 | Alooc</title>
+    <meta name="description" content="Alooc的博客">
+    <meta name="generator" content="VitePress v1.6.3">
+    <link rel="preload stylesheet" href="/assets/style.BEKjzdOg.css" as="style">
+    <link rel="preload stylesheet" href="/vp-icons.css" as="style">
+    
+    <script type="module" src="/assets/app.CJxEIM8C.js"></script>
+    <link rel="preload" href="/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="/assets/chunks/theme.Dli8lqJY.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.DPDPlp3K.js">
+    <link rel="modulepreload" href="/assets/notes_be_frame_spring_springmvc_index.md.DAyJBpEu.lean.js">
+    <link rel="icon" href="/logo.png">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-4e0580c9><!--[--><!--]--><!--[--><span tabindex="-1" data-v-76b2d3b6></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-76b2d3b6>Skip to content</a><!--]--><!----><header class="VPNav" data-v-4e0580c9 data-v-65aa0d71><div class="VPNavBar" data-v-65aa0d71 data-v-a22fa644><div class="wrapper" data-v-a22fa644><div class="container" data-v-a22fa644><div class="title" data-v-a22fa644><div class="VPNavBarTitle has-sidebar" data-v-a22fa644 data-v-023504db><a class="title" href="/" data-v-023504db><!--[--><!--]--><!--[--><img class="VPImage logo" src="/logo.png" alt data-v-410bb4c7><!--]--><span data-v-023504db>Alooc</span><!--[--><!--]--></a></div></div><div class="content" data-v-a22fa644><div class="content-body" data-v-a22fa644><!--[--><!--]--><div class="VPNavBarSearch search" data-v-a22fa644><!--[--><!----><div id="local-search"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-a22fa644 data-v-589d1911><span id="main-nav-aria-label" class="visually-hidden" data-v-589d1911> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/" tabindex="0" data-v-589d1911 data-v-1a93f4bf><!--[--><span data-v-1a93f4bf>首页</span><!--]--></a><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-589d1911 data-v-c9f6b993><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-c9f6b993><span class="text" data-v-c9f6b993><!----><span data-v-c9f6b993>我的笔记</span><span class="vpi-chevron-down text-icon" data-v-c9f6b993></span></span></button><div class="menu" data-v-c9f6b993><div class="VPMenu" data-v-c9f6b993 data-v-b5c661f9><div class="items" data-v-b5c661f9><!--[--><!--[--><div class="VPMenuGroup" data-v-b5c661f9 data-v-36a488f5><p class="title" data-v-36a488f5>基础</p><!--[--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/basics/algo/algo-metrics-and-sorting.html" data-v-49b2c322><!--[--><span data-v-49b2c322>算法</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/basics/database/mysql/" data-v-49b2c322><!--[--><span data-v-49b2c322>数据库</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/basics/lang/java/" data-v-49b2c322><!--[--><span data-v-49b2c322>编程语言</span><!--]--></a></div><!--]--><!--]--></div><!--]--><!--[--><div class="VPMenuGroup" data-v-b5c661f9 data-v-36a488f5><p class="title" data-v-36a488f5>后端</p><!--[--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/be/frame/spring/spring/" data-v-49b2c322><!--[--><span data-v-49b2c322>框架</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/be/middleware/rabbitmq/rabbitmq.html" data-v-49b2c322><!--[--><span data-v-49b2c322>中间件</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-36a488f5 data-v-49b2c322><a class="VPLink link" href="/notes/be/tech-stack/design-pattern.html" data-v-49b2c322><!--[--><span data-v-49b2c322>技术栈</span><!--]--></a></div><!--]--><!--]--></div><!--]--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/notes/fe/data-visualization/instruction.html" data-v-49b2c322><!--[--><span data-v-49b2c322>前端</span><!--]--></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-589d1911 data-v-c9f6b993><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-c9f6b993><span class="text" data-v-c9f6b993><!----><span data-v-c9f6b993>项目实践</span><span class="vpi-chevron-down text-icon" data-v-c9f6b993></span></span></button><div class="menu" data-v-c9f6b993><div class="VPMenu" data-v-c9f6b993 data-v-b5c661f9><div class="items" data-v-b5c661f9><!--[--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/projects/preview/markdown-examples.html" data-v-49b2c322><!--[--><span data-v-49b2c322>在线预览</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/projects/mall/" data-v-49b2c322><!--[--><span data-v-49b2c322>商城系统</span><!--]--></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-589d1911 data-v-c9f6b993><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-c9f6b993><span class="text" data-v-c9f6b993><!----><span data-v-c9f6b993>参考资料</span><span class="vpi-chevron-down text-icon" data-v-c9f6b993></span></span></button><div class="menu" data-v-c9f6b993><div class="VPMenu" data-v-c9f6b993 data-v-b5c661f9><div class="items" data-v-b5c661f9><!--[--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/refs/blogs/" data-v-49b2c322><!--[--><span data-v-49b2c322>博客</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/refs/docs/" data-v-49b2c322><!--[--><span data-v-49b2c322>文档</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-b5c661f9 data-v-49b2c322><a class="VPLink link" href="/refs/tutorials/" data-v-49b2c322><!--[--><span data-v-49b2c322>教程</span><!--]--></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/about/me/" tabindex="0" data-v-589d1911 data-v-1a93f4bf><!--[--><span data-v-1a93f4bf>关于我</span><!--]--></a><!--]--><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-a22fa644 data-v-ae201a57><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-ae201a57 data-v-2d6d62a8 data-v-f3e9724b><span class="check" data-v-f3e9724b><span class="icon" data-v-f3e9724b><!--[--><span class="vpi-sun sun" data-v-2d6d62a8></span><span class="vpi-moon moon" data-v-2d6d62a8></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-a22fa644 data-v-819269e2 data-v-8e2750ee><!--[--><a class="VPSocialLink no-icon" href="https://github.com/alooc" aria-label="github" target="_blank" rel="noopener" data-v-8e2750ee data-v-14a72ee3><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-a22fa644 data-v-13e0a807 data-v-c9f6b993><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-c9f6b993><span class="vpi-more-horizontal icon" data-v-c9f6b993></span></button><div class="menu" data-v-c9f6b993><div class="VPMenu" data-v-c9f6b993 data-v-b5c661f9><!----><!--[--><!--[--><!----><div class="group" data-v-13e0a807><div class="item appearance" data-v-13e0a807><p class="label" data-v-13e0a807>Appearance</p><div class="appearance-action" data-v-13e0a807><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-13e0a807 data-v-2d6d62a8 data-v-f3e9724b><span class="check" data-v-f3e9724b><span class="icon" data-v-f3e9724b><!--[--><span class="vpi-sun sun" data-v-2d6d62a8></span><span class="vpi-moon moon" data-v-2d6d62a8></span><!--]--></span></span></button></div></div></div><div class="group" data-v-13e0a807><div class="item social-links" data-v-13e0a807><div class="VPSocialLinks social-links-list" data-v-13e0a807 data-v-8e2750ee><!--[--><a class="VPSocialLink no-icon" href="https://github.com/alooc" aria-label="github" target="_blank" rel="noopener" data-v-8e2750ee data-v-14a72ee3><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-a22fa644 data-v-2fa31341><span class="container" data-v-2fa31341><span class="top" data-v-2fa31341></span><span class="middle" data-v-2fa31341></span><span class="bottom" data-v-2fa31341></span></span></button></div></div></div></div><div class="divider" data-v-a22fa644><div class="divider-line" data-v-a22fa644></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-4e0580c9 data-v-fc9b0a19><div class="container" data-v-fc9b0a19><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-fc9b0a19><span class="vpi-align-left menu-icon" data-v-fc9b0a19></span><span class="menu-text" data-v-fc9b0a19>Menu</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-fc9b0a19 data-v-66ef8359><button data-v-66ef8359>Return to top</button><!----></div></div></div><aside class="VPSidebar" data-v-4e0580c9 data-v-cc53676b><div class="curtain" data-v-cc53676b></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-cc53676b><span class="visually-hidden" id="sidebar-aria-label" data-v-cc53676b> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="no-transition group" data-v-3f33125d><section class="VPSidebarItem level-0" data-v-3f33125d data-v-178d1c1e><div class="item" role="button" tabindex="0" data-v-178d1c1e><div class="indicator" data-v-178d1c1e></div><h2 class="text" data-v-178d1c1e>框架</h2><!----></div><div class="items" data-v-178d1c1e><!--[--><div class="VPSidebarItem level-1 is-link" data-v-178d1c1e data-v-178d1c1e><div class="item" data-v-178d1c1e><div class="indicator" data-v-178d1c1e></div><a class="VPLink link link" href="/projects/preview/markdown-examples.html" data-v-178d1c1e><!--[--><p class="text" data-v-178d1c1e>测试</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-4e0580c9 data-v-8233baff><div class="VPDoc has-sidebar has-aside" data-v-8233baff data-v-3ddcd6ca><!--[--><!--]--><div class="container" data-v-3ddcd6ca><div class="aside" data-v-3ddcd6ca><div class="aside-curtain" data-v-3ddcd6ca></div><div class="aside-container" data-v-3ddcd6ca><div class="aside-content" data-v-3ddcd6ca><div class="VPDocAside" data-v-3ddcd6ca data-v-dea7a18d><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-dea7a18d data-v-7824067e><div class="content" data-v-7824067e><div class="outline-marker" data-v-7824067e></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-7824067e>On this page</div><ul class="VPDocOutlineItem root" data-v-7824067e data-v-d0385b5f><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-dea7a18d></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-3ddcd6ca><div class="content-container" data-v-3ddcd6ca><!--[--><!--]--><main class="main" data-v-3ddcd6ca><div style="position:relative;" class="vp-doc _notes_be_frame_spring_springmvc_" data-v-3ddcd6ca><div><h1 id="第一章-java-ee应用" tabindex="-1">第一章 Java EE应用 <a class="header-anchor" href="#第一章-java-ee应用" aria-label="Permalink to &quot;第一章 Java EE应用&quot;">​</a></h1><pre><code>## Java EE架构：
+	Domain Object(领域对象层)
+	DAO(Data Access Object 数据访问层)  在其他框架中的别名 EAO(Entity)    		Mapper层
+	Service (业务逻辑层)
+	Controller(控制器层)
+	View(表现层)  组成：jsp页面等
+(上层组件的实现依赖于下层组件的功能，下层组件支持上层组的实现)
+
+servlet 3.x规范：提供功能：异步请求，注解，增强的Servlet API，非阻塞I/O
+
+jsp只负责简单的显示逻辑
+中间层将底层信息封装成JavaBean集，即DTO（数据传输对象），传输DTO给JSP页面
+</code></pre><h1 id="第二章-spring-mvc" tabindex="-1">第二章 Spring MVC <a class="header-anchor" href="#第二章-spring-mvc" aria-label="Permalink to &quot;第二章 Spring MVC&quot;">​</a></h1><pre><code>使用注解开发，简单
+
+Spring MVC应用的开发步骤：
+	1.在web.xml中定义前端控制器DispatcherServlet来拦截请求
+	
+	2.如果 使用POST提交请求，需要定义包含表单数据的JSP页面。GET请求无需这一步骤
+	
+	3.定义处理用户请求的handler类，@Controller
+	
+	4.配置handle。注解开发即可
+	  
+	5.编写视图资源  ModelAndView
+	
+Spring MVC请求&gt;响应的完整工作流程：
+	
+	1.用户发送请求，前端控制器DispatcherServlet截获
+	
+	2.DispatcherServlet对请求URL进行解析，得到URI。根据URI调用HandlerMapping获得该Handler配置的相关对象，包括
+	Handler对象以及Handler对象对应的拦截器，这些对象会被封装在一个HandlerExceptionChain对象中返回。
+	
+	3.DispatcherServlet根据获得的handler，选择一个合适的HandlerAdapter。
+	
+	4.提取请求中的模型数据，开始执行Handler.
+		在填充Handler的入参过程中，根据配置，spring做额外的工作：消息转换，数据转换，数据格式化，数据验证
+		
+	5.Handler执行完成后，向 DispatcherServlet返回一个ModelAndView对象。
+	
+	6.根据返回的ModelAndView对象选择一个合适的ViewResolver(视图解析器)返回给DispatcherServlet
+	
+	7.DispatcherServlet结合Model和View来渲染视图
+	
+	8.将视图渲染结果返回给客户端
+	
+开发者不必关心以上对象是如何共作的，开发者只需要在Controller当中完成对请求的业务处理。
+</code></pre><h1 id="第三章-spring-mvc的常用注解" tabindex="-1">第三章 Spring MVC的常用注解 <a class="header-anchor" href="#第三章-spring-mvc的常用注解" aria-label="Permalink to &quot;第三章 Spring MVC的常用注解&quot;">​</a></h1><pre><code>@Controller
+@RequestMapping
+@GetMapping
+@PostMapping
+@RequestParam
+@PathVariable
+@MatrixVariable
+@CrossOrigin
+@RequestHeader 
+@CookieValue
+@RequestAttribute
+@SessionAttribute
+@SessionAttributes
+@ModelAttribute
+@RequestBody
+@ResponseBody
+@RestController
+@ResponseStatus
+@ExceptionHandler
+@ControllerAdvice
+@RestControllerAdvice
+</code></pre><p>详解：</p><pre><code>@Controller 控制器类
+
+@RequestMapping 处理请求地址映射  注释的方法为请求处理方法 也可以注释类 @RequestMapping(&quot;/login)
+
+@RequestParam 将指定的请求参数赋值给方法中的形参 @RequestParam(&quot;loginname&quot;)
+
+@PathVariable 获得请求URL中的动态参数 @PathVariable(&quot;/pathVariableTest/{userId}&quot;)
+
+@MatrixVariable 允许开发者进行多条件查询 @MatrixVariable(value=&quot;age&quot;,pathVar=&quot;userId&quot;)
+	默认不开启，需在配置文件中设置 &lt;mvc:annotation-driven enable-matrix-variables=&quot;true&quot; /&gt;
+
+@CrossOrigin 处理跨域请求
+
+@RequestHeader 将请求的头信息数据映射到功能处理方法的参数上 @RequestHeader(&quot;User-Agent&quot;) String userAgent
+
+@CookieValue 将请求的Cookie数据映射到功能处理方法的参数上 @CookieValue(value=&quot;JSESSIONID&quot;,defaultValue=&quot;&quot;) String sessionId
+
+@RequestAttribute 将request作用域中的属性转换到目标方法的参数 @RequestAttribute(value=&quot;username&quot;) String username
+
+@SessionAttribute 将session作用域中的属性转换到目标方法的参数 @SessionAttribute(value=&quot;username&quot;) String username
+
+@SessionAttributes 有选择地指定Model中的哪些属性转存到HttpSession对象中
+
+@ModelAttribute 将请求参数绑定到对象 
+
+@RequestBody 将json数据设置到对象中  @RequestBody Book book
+
+@ResponseBody 将其他格式数据（json xml等）转换为body数据
+
+@RestController  该类会被看成一个controller，该类中的所有使用@RequestMapping的方法都默认使用了@ResponseBody
+
+Spring MVC的异常处理：
+	@ExceptionHandler(value=Exception.class)  value=Exception.class表示处理所有的Exception类型异常  
+		为简化开发，写一个父类，在父类中完成异常处理方法
+</code></pre><h1 id="第四章-spring-mvc标签库" tabindex="-1">第四章 Spring MVC标签库 <a class="header-anchor" href="#第四章-spring-mvc标签库" aria-label="Permalink to &quot;第四章 Spring MVC标签库&quot;">​</a></h1><pre><code>spring提供一组功能强大的标签用来在JSP和spring web mvc中处理表单元素。
+标签可以访问控制器处理命令对象和绑定数据。
+
+表单标签库：
+	必须在jsp页面开头处声明taglib指令：
+		&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;
+	
+	form标签：自动绑定，支持其他提交方法
+	
+	input标签：绑定表单数据
+		
+	password标签：绑定表单数据
+	
+	hidden标签：没有可视外观的input
+	
+	textarea标签：
+	
+	checkbox标签：绑定boolean数据，绑定列表数据
+	
+	checkboxes标签
+
+	radiobutton标签
+	
+	radiobuttons标签
+	
+	select标签
+	
+	option标签
+	
+	options标签
+	
+	errors标签
+</code></pre><h1 id="第五章-spring-mvc国际化" tabindex="-1">第五章 Spring MVC国际化 <a class="header-anchor" href="#第五章-spring-mvc国际化" aria-label="Permalink to &quot;第五章 Spring MVC国际化&quot;">​</a></h1><pre><code>//了解
+
+步骤：
+	1.给系统加载国际化资源文件
+	2.输出国际化消息：
+		两种方式：
+			在视图页面输出国际化消息，需要使用spring mvc的标签库
+			在controller的处理方法中输出国际化消息， 需要用到RequestContext的getMessage()方法
+</code></pre><h1 id="第六章-spring-mvc的数据转换、格式化、数据校验" tabindex="-1">第六章 Spring MVC的数据转换、格式化、数据校验 <a class="header-anchor" href="#第六章-spring-mvc的数据转换、格式化、数据校验" aria-label="Permalink to &quot;第六章 Spring MVC的数据转换、格式化、数据校验&quot;">​</a></h1><pre><code>//了解
+</code></pre><h1 id="第七章-spring-mvc的文件上传下载和拦截器机制" tabindex="-1">第七章 Spring MVC的文件上传下载和拦截器机制 <a class="header-anchor" href="#第七章-spring-mvc的文件上传下载和拦截器机制" aria-label="Permalink to &quot;第七章 Spring MVC的文件上传下载和拦截器机制&quot;">​</a></h1><pre><code>文件上传：
+	表单设置：
+		-&gt;	method=&quot;POST&quot; 
+		-&gt;	enctype=&quot;multipart/form-data&quot;	浏览器采用二进制流的方式来处理表单数据
+
+	SpringMVC ：
+			通过即插即用的MultipartResolver实现
+		SpringMVC使用Apache Commons FileUpload技术实现了一个MultipartResolver实现类：CommonsMultipartResolver
+			需要依赖Apache Commons FileUpload的组件：
+												-&gt;commons-fileupload-1.3.3.jar
+												-&gt;commons-io-2.6.jar
+			文件接收（类型都是MultipartFile）：
+				-&gt;File spring将文件传给File,File.transferTo()
+				-&gt;作为对象的属性  将文件传给某个对象的某一属性 
+
+文件下载：
+	使用ResponseEntity对象，可以方便地定义返回的BodyBulider,HttpHeader,HttpStatus
+		BodyBulider对象用来构建返回的Body
+		HttpHeader类型代表Http协议中的头信息
+		HttpStatus类型代表Http协议中的状态
+	
+拦截器：
+	
+	主要作用是拦截用户的请求并进行相应的处理。比如通过拦截器进行用户权限验证，或用来判断用户是否已经登录等。
+
+	通过实现HandlerInterceptor接口来拦截请求
+		三个方法：
+			1.boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+		Object handler)	预处理 在请求之前被调用
+			
+			2.void postHandle(HttpServletRequest request, HttpServletResponse response,
+		Object handler, ModelAndView mv)	在请求处理之后，视图渲染之前被调用
+			
+			3.void afterCompletion(HttpServletRequest request,
+		HttpServletResponse response, Object handler, Exception exception)   资源清理
+	
+	&lt;mvc:interceptors&gt;
+		&lt;mvc:interceptor&gt;
+			&lt;mvc:mapping path=&quot;/*&quot;/&gt;
+			&lt;!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors下面的Interceptor将拦截所有的请求 --&gt;  
+			&lt;bean class=&quot;org.fkit.interceptor.AuthorizationInterceptor&quot;/&gt;
+		&lt;/mvc:interceptor&gt;
+	&lt;/mvc:interceptors&gt;	
+</code></pre><h1 id="第八章-mybatis简介" tabindex="-1">第八章 MyBatis简介 <a class="header-anchor" href="#第八章-mybatis简介" aria-label="Permalink to &quot;第八章 MyBatis简介&quot;">​</a></h1><pre><code>	SQL Mapping 框架
+	
+ORM介绍：
+	ORM框架是面向对象程序设计语言与关系数据库发展不同步的中间解决方案
+
+	ORM工具的唯一作用就是：
+		把对持久化对象的保存、修改、删除等操作，转换为对数据库的操作。
+	
+	ORM框架负责将相关操作转换成对应的SQL操作。
+
+ORM基本映射关系：
+	1.数据表映射类。持久化类被映射到一个数据表。
+	2.数据表的行映射对象（即实例）。
+	3.数据表的列（字段）映射对象的属性。
+
+Mybatis主要思想：将程序中的大量SQL语句剥离出来，配置在配置文件中，以实现SQL的灵活配置。
+
+通用信息为根配置信息，根配置信息需要使用配置文件指定。
+
+&lt;configuration&gt;
+&lt;settings&gt;
+&lt;environments&gt;
+&lt;environment&gt;
+&lt;transactionManager&gt;
+&lt;dataSource&gt;
+&lt;property&gt;
+
+ 数据源是一种用来提高数据库连接性能的常规手段，
+ 数据源会负责维持一个数据库连接池，当程序创建数据源实例时，系统会一次性创建多个数据库连接，并存池。
+ 程序需要使用时，在池中取出一个空闲的数据库连接。
+ 不需要时，将数据库连接归还给连接池即可。
+ 
+配置log4j.properties查看日志
+
+使用mybatis步骤：
+	1.开发持久化类PO和编写持久化操作的Mapper.xml，在其中定义要执行的SQL语句。
+	2.获取SqlSessionFactory
+	3.获取SqlSession
+	4.用面向对象的方式操作数据库
+	5.关闭事务，关闭SqlSession
+
+SqlSessionFactory是整个数据库映射关系编译后的内存镜像，通常一个应用对应一个SqlSessionFactory对象，SqlSessionFactory通过加载mybatis-config.xml配置文件生成。
+SqlSession由SqlSessionFactory工厂产生。
+对PO的操作必须在SqlSession的管理下才能同步到数据库。
+</code></pre><h1 id="第九章-mybatis体系结构" tabindex="-1">第九章 Mybatis体系结构 <a class="header-anchor" href="#第九章-mybatis体系结构" aria-label="Permalink to &quot;第九章 Mybatis体系结构&quot;">​</a></h1><pre><code>SqlSessionFactory：通过SqlSessionFactoryBuilder对象获得
+	SqlSession openSession() 创建SqlSession对象
+
+SqlSession
+
+Mybatis的配置文件：
+	
+	配置文件的结构：
+		顶层的configuration 配置
+		properties 属性
+		settings 设置
+		typeAliases 类型命名
+		typeHandlers 类型处理器
+		objectFactory 对象工厂
+		plugins 插件
+		environments 环境
+		environment 环境变量
+		transactionManager 事务管理器
+		dataSource 数据源
+		databaseIdProvider 数据库厂商标识
+		mapper 映射器
+
+	properties 属性：
+		可外部配置且动态替换
+		既可在典型的Java属性文件中配置，也可通过properties元素的子元素传递
+	settings 设置：
+		调正mybatis运行时的行为
+	typeAliases 类型命名：
+		别名，减少冗余
+	typeHandlers 类型处理器：
+		处理参数和结果集中的数据类型
+	objectFactory 对象工厂：
+		创建结果对象的新实例
+	environments 环境：
+		配置数据源
+	mapper 映射器：
+		告诉mybatis去哪里找映射文件，进而找到这些SQL语句
+</code></pre><p>​ ​ Mapper XML映射文件： ​ 常用的元素： select 映射查询语句 insert 映射插入语句 update 映射更新语句 delete 映射删除语句 sql 可被其他语句引用的可重用语句块 cache 给定命名空间的缓存配置 cache-ref 其他命名空间缓存配置的引用 resultMap 最复杂也是最强大的元素，用来描述如何从数据库结果集中加载对象</p><h1 id="第十章-深入使用mybatis" tabindex="-1">第十章 深入使用MyBatis <a class="header-anchor" href="#第十章-深入使用mybatis" aria-label="Permalink to &quot;第十章 深入使用MyBatis&quot;">​</a></h1><pre><code>关联映射：
+	一对一
+	一对多
+	多对多
+
+通过mapper接口的代理对象访问MyBatis，该对象关联了SqlSession对象，可通过该
+	对象直接调用方法操作数据库。
+	mapper接口对象的类名必须与xml文件中的mapper的namespace一致，
+		方法名和参数必须与xml文件中的&lt;select&gt;元素中的id属性和parameterType属性一致
+
+动态SQL：
+	常用的动态SQL元素：
+		if
+		choose(when,otherwise)
+		where
+		set
+		foreach
+		bind
+
+调用存储过程：
+	
+事务管理：
+	
+	事务的概念：ACID
+	
+	transaction接口
+	
+	对于数据库的事务而言，应该具有以下动作：
+		创建 create
+		提交 commit
+		回滚 rollback
+		关闭 close
+	
+	事务管理分为两种形式：
+		使用JDBC的事务管理机制。即利用java.sql.Connection对象完成对事务的提交、回滚和关闭等操作。
+		使用MABAGED的事务管理机制。对于这种机制，MyBatis自身不会去实现事务管理，而是让容器如WebLogic,JBoss等来实现对事务的管理。
+		
+	事务的配置创建和使用：
+		1.配置：跟配置文件中配置&lt;transactionManager type=&quot;JDBC&quot;&gt;
+		2.创建：JdbcTransactionFactory
+		3.使用：对象实例
+	
+缓存机制：
+	
+	简介：
+		查询缓存分为一级缓存和二级缓存，
+			一级缓存是SqlSession级别的缓存，二级缓存是mapper级别的缓存，二级缓存是多个SqlSession共享的。
+	
+	一级缓存：
+		SqlSession对象中用HashMap存储缓存数据
+		使用：
+			再次查询时会从缓存中获取数据
+			SqlSession执行DML操作（insert,update ,delete），并提交数据库，mybatis会清空sqlsession的一级缓存
+			SqlSession结束后，一级缓存也就不存在了。
+			MyBatis默认开启以及缓存，不需要进行任何配置。
+		mybatis的缓存机制时基于id进行缓存的，也就是说，mybatis使用hashmap缓存数据时，
+			对象的id作为key
+			对象作为value
+	
+	二级缓存：
+		多个SqlSession使用用一个mapper的SQL语句去操作数据库，得到的数据会存在二级缓存区域，使用HashMap存储
+		
+		多个SqlSession共享，作用域是mapper的同一个namespace
+		
+		在setting全局参数中配置开启二级缓存。
+			&lt;settings&gt;
+				&lt;!-- 开启二级缓存 --&gt;
+				&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+			&lt;/settings&gt;
+		mapper.xml中使用二级缓存：
+			&lt;!-- 开启二级缓存 
+				回收策略为先进先出
+				自动刷新时间60s
+				最多缓存512个引用对象
+				只读
+			--&gt;
+			&lt;cache 
+				eviction=&quot;LRU&quot;  
+				flushInterval=&quot;60000&quot; 
+				size=&quot;512&quot; 
+				readOnly=&quot;true&quot;/&gt; 
+</code></pre><h1 id="第十一章-mybatis的注解配置" tabindex="-1">第十一章 MyBatis的注解配置 <a class="header-anchor" href="#第十一章-mybatis的注解配置" aria-label="Permalink to &quot;第十一章 MyBatis的注解配置&quot;">​</a></h1><pre><code>常用注解：
+	@Select				映射查询的SQL语句
+	@SelectProvider		Select语句的动态SQL映射
+	@Insert 			映射插入的SQL语句
+	@InsertProvider		Insert语句的动态SQL映射
+	@Update				映射更新的SQL语句
+	@UpdateProvider		Update语句的动态SQL映射
+	@Delete				映射删除的SQL语句
+	@DeleteProvider		Delete语句的动态SQL映射
+	@Result				在列和属性之间的单独结果映射，id  one  mane
+	@Results			多个结果映射(@Result)列表
+	@Options			提供配置选项的附加值，通常在映射语句上作为附加功能配置出现
+	@One				复杂类型的单独属性值映射。必须指定select属性，表示已映射的SQL语句的完全限定名
+	@Many				复杂类型的集合属性映射。必须指定select属性，表示已映射的SQL语句的完全限定名
+	@Param				当映射器方法需要多个参数时，这个注解可以被应用于映射器方法参数来给每个参数取一个名字。否则会按顺序默认命名。
+
+示例：
+	@Select(&quot;SELECT * FROM TB_USER &quot;)
+	
+	@Select(&quot;SELECT * FROM TB_USER WHERE id = #{id}&quot;)
+	@Results({
+		@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+		@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+		@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+		@Result(column=&quot;age&quot;,property=&quot;age&quot;)
+	})
+	
+	@Insert(&quot;INSERT INTO TB_USER(name,sex,age) VALUES(#{name},#{sex},#{age})&quot;)
+	@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)
+	
+	@Delete(&quot;DELETE FROM TB_USER WHERE id = #{id}&quot;)
+	int removeUser(@Param(&quot;id&quot;) Integer id);
+	
+	@Update(&quot;UPDATE TB_USER SET name = #{name},sex = #{sex},age = #{age} WHERE id = #{id}&quot;)
+</code></pre><p>​ ​ ​ 关联： ​ ========================================================= ​ select属性表示需要关联执行的SQL语句 ​ fetchType表示查询类型是立即加载（EAGER）还是懒加载（LAZY） ​ 【区别：没用时加载，用到时再加载】 ​ ========================================================= ​ 一对一关联： td_person td_card</p><pre><code>		CardMapper
+			@Select(&quot;SELECT * FROM TB_CARD WHERE ID = #{id} &quot;)
+			Card selectCardById(Integer id);
+		PersonMapper
+			@Select(&quot;SELECT * FROM TB_PERSON WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+				@Result(column=&quot;age&quot;,property=&quot;age&quot;),
+				@Result(column=&quot;card_id&quot;,property=&quot;card&quot;,
+				one=@One(
+					select=&quot;org.fkit.mapper.CardMapper.selectCardById&quot;,
+					fetchType=FetchType.EAGER))
+			})
+			Person selectPersonById(Integer id);
+
+	一对多关联：
+		td_clazz td_student
+		
+		StudentMapper
+			// 根据班级id查询班级所有学生
+			@Select(&quot;SELECT * FROM TB_STUDENT WHERE CLAZZ_ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;sex&quot;,property=&quot;sex&quot;),
+				@Result(column=&quot;age&quot;,property=&quot;age&quot;)
+			})
+			List&lt;Student&gt; selectByClazzId(Integer clazz_id);
+			
+		ClazzMapper
+			/ 根据id查询班级信息
+			@Select(&quot;SELECT * FROM TB_CLAZZ  WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;code&quot;,property=&quot;code&quot;),
+				@Result(column=&quot;name&quot;,property=&quot;name&quot;),
+				@Result(column=&quot;id&quot;,property=&quot;students&quot;,
+				many=@Many(
+						select=&quot;org.fkit.mapper.StudentMapper.selectByClazzId&quot;,
+						fetchType=FetchType.LAZY))
+			})
+			Clazz selectById(Integer id);	
+			
+	多对多关联：
+		td_user td_order td_article
+		
+		UserMapper
+			@Select(&quot;SELECT * FROM TB_USER WHERE ID = #{id} &quot;)
+			User selectById(Integer id);
+		ArticleMapper
+			@Select(&quot;SELECT * FROM tb_article WHERE id IN &quot;
+			+&quot;(SELECT article_id FROM tb_item WHERE order_id = #{id} ) &quot;)
+			List&lt;Article&gt; selectByOrderId(Integer order_id);
+		OrderMapper
+			@Select(&quot;SELECT * FROM TB_ORDER WHERE ID = #{id}&quot;)
+			@Results({
+				@Result(id=true,column=&quot;id&quot;,property=&quot;id&quot;),
+				@Result(column=&quot;code&quot;,property=&quot;code&quot;),
+				@Result(column=&quot;total&quot;,property=&quot;total&quot;),
+				@Result(column=&quot;user_id&quot;,property=&quot;user&quot;,
+					one=@One(select=&quot;org.fkit.mapper.UserMapper.selectById&quot;,
+					fetchType=FetchType.EAGER)),
+				@Result(column=&quot;id&quot;,property=&quot;articles&quot;,
+					many=@Many(select=&quot;org.fkit.mapper.ArticleMapper.selectByOrderId&quot;,
+					fetchType=FetchType.LAZY))
+			})
+			Order selectById(Integer id);
+
+	动态SQL：
+		
+		@SelectProvider(type=EmployeeDynaSqlProvider.class,method=&quot;selectWhitParam&quot;)
+		List&lt;Employee&gt; selectWhitParam(Map&lt;String, Object&gt; param);
+		
+		创建一个产生动态SQL的类：
+			EmployeeDynaSqlProvider.java
+				public String selectWhitParam(Map&lt;String, Object&gt; param){
+						return new SQL(){
+							{
+								SELECT(&quot;*&quot;);
+								FROM(&quot;tb_employee&quot;);
+								if(param.get(&quot;id&quot;) != null){
+									WHERE(&quot; id = #{id} &quot;);
+								}
+								if(param.get(&quot;loginname&quot;) != null){
+									WHERE(&quot; loginname = #{loginname} &quot;);
+								}
+								if(param.get(&quot;password&quot;) != null){
+									WHERE(&quot;password = #{password}&quot;);
+								}
+								if(param.get(&quot;name&quot;)!= null){
+									WHERE(&quot;name = #{name}&quot;);
+								}
+								if(param.get(&quot;sex&quot;)!= null){
+									WHERE(&quot;sex = #{sex}&quot;);
+								}
+								if(param.get(&quot;age&quot;)!= null){
+									WHERE(&quot;age = #{age}&quot;);
+								}
+								if(param.get(&quot;phone&quot;)!= null){
+									WHERE(&quot;phone = #{phone}&quot;);
+								}
+								if(param.get(&quot;sal&quot;)!= null){
+									WHERE(&quot;sal = #{sal}&quot;);
+								}
+								if(param.get(&quot;state&quot;)!= null){
+									WHERE(&quot;state = #{state}&quot;);
+								}
+								
+							}
+						}.toString();
+						}	
+
+	调用存储过程：
+		@Select(&quot;{call select_user()}&quot;)
+		@Options(statementType=StatementType.CALLABLE)
+	
+	二级缓存：
+		@CacheNamespace(eviction=LruCache.class,flushInterval=60000,size=512,readWrite=true)
+</code></pre><p>​</p><hr><hr><hr><p>学生 班级 一对一 一对多 多对多</p><p>​ ​ ​</p></div></div></main><footer class="VPDocFooter" data-v-3ddcd6ca data-v-b34a43d1><!--[--><!--]--><!----><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-b34a43d1><span class="visually-hidden" id="doc-footer-aria-label" data-v-b34a43d1>Pager</span><div class="pager" data-v-b34a43d1><!----></div><div class="pager" data-v-b34a43d1><a class="VPLink link pager-link next" href="/projects/preview/markdown-examples.html" data-v-b34a43d1><!--[--><span class="desc" data-v-b34a43d1>Next page</span><span class="title" data-v-b34a43d1>测试</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter has-sidebar" data-v-4e0580c9 data-v-9192b3dc><div class="container" data-v-9192b3dc><p class="message" data-v-9192b3dc>Released under the MIT License.</p><p class="copyright" data-v-9192b3dc>Copyright © 2019-present Alooc</p></div></footer><!--[--><!--]--></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"about_me.md\":\"Bt5abNlO\",\"index.md\":\"DbD9GqRx\",\"notes_basics_algo_algo-metrics-and-sorting.md\":\"DXfnhhMc\",\"notes_basics_algo_basic-algorithms.md\":\"COa44KVb\",\"notes_basics_algo_basic-data-structures.md\":\"BTlcjSSa\",\"notes_basics_algo_index.md\":\"C9qZioem\",\"notes_basics_database_index.md\":\"D3oMsRGt\",\"notes_basics_database_mysql_example.md\":\"D5tcWHfF\",\"notes_basics_database_mysql_index.md\":\"DYz-oj6G\",\"notes_basics_database_nosql_mongodb_mongodb.md\":\"HTBQnDcX\",\"notes_basics_database_oracle_index.md\":\"CV9v1je5\",\"notes_basics_database_redis_index.md\":\"BiJjlPOU\",\"notes_basics_lang_htmlcssjs_css世界学习笔记.md\":\"B15NlFov\",\"notes_basics_lang_htmlcssjs_javascript笔记.md\":\"BAlOENdA\",\"notes_basics_lang_htmlcssjs_javascript高级程序设计学习笔记.md\":\"NGWdkHBG\",\"notes_basics_lang_htmlcssjs_jquery_ajax笔记.md\":\"CxmM5EIW\",\"notes_basics_lang_htmlcssjs_疯狂html5_css3_javascript讲义笔记.md\":\"DmrU1CDy\",\"notes_basics_lang_htmlcssjs_疯狂前端开发讲义笔记.md\":\"CTKwZ7yn\",\"notes_basics_lang_index.md\":\"BAnKyM_h\",\"notes_basics_lang_java_index.md\":\"Cg_Ll8dp\",\"notes_basics_lang_java_jsp_servlet笔记.md\":\"vxIZt5f7\",\"notes_basics_lang_java_juc.md\":\"CRJDwtum\",\"notes_basics_lang_java_学习笔记《java开发手册》.md\":\"DCAW8gvb\",\"notes_basics_lang_java_学习笔记《疯狂java讲义》.md\":\"fcpEhKwa\",\"notes_basics_lang_java_学习笔记《码出高效：java开发手册》.md\":\"DEru9gEe\",\"notes_basics_lang_java_抽象类和接口.md\":\"DrGgar7L\",\"notes_basics_lang_java_集合.md\":\"qEVm0dYV\",\"notes_basics_lang_python_note.md\":\"CrGfvPMo\",\"notes_be_frame_index.md\":\"Gkwa4ToL\",\"notes_be_frame_mybatis_index.md\":\"Dc24dPZN\",\"notes_be_frame_mybatisplus_index.md\":\"Cv4gkZan\",\"notes_be_frame_spring_spring_index.md\":\"Dh3eFJls\",\"notes_be_frame_spring_springboot_index.md\":\"DphekweS\",\"notes_be_frame_spring_springboot_source-analysis.md\":\"CR_aML-V\",\"notes_be_frame_spring_springcloud_index.md\":\"CGsKpwYa\",\"notes_be_frame_spring_springmvc_index.md\":\"DAyJBpEu\",\"notes_be_middleware_elk_elasticsearch.md\":\"D_wVi8oM\",\"notes_be_middleware_index.md\":\"DxYRG15x\",\"notes_be_middleware_rabbitmq_rabbitmq.md\":\"Dxx68ID5\",\"notes_be_tech-stack_activiti_activiti6.md\":\"4j5kN20m\",\"notes_be_tech-stack_android_第一行代码笔记.md\":\"2TiKtwog\",\"notes_be_tech-stack_bash_bash基础笔记.md\":\"Dqb5uNvS\",\"notes_be_tech-stack_bash_常用命令.md\":\"B3x7eLx0\",\"notes_be_tech-stack_design-pattern.md\":\"Ro0IZ1lt\",\"notes_be_tech-stack_docker_docker命令.md\":\"DnQRIMLQ\",\"notes_be_tech-stack_docker_常用镜像命令.md\":\"BAdQoNKD\",\"notes_be_tech-stack_index.md\":\"Bfo6JBoO\",\"notes_be_tech-stack_maven_maven深入学习笔记.md\":\"Bjwsvikh\",\"notes_be_tech-stack_swagger_swagger.md\":\"Bz19yL2w\",\"notes_be_tech-stack_yaml_yaml语法.md\":\"B9M2ZYi_\",\"notes_be_tech-stack_技巧.md\":\"CaMeyKvU\",\"notes_fe_data-visualization_guide_canvas.md\":\"mR9mzqqB\",\"notes_fe_data-visualization_guide_echarts-basic.md\":\"CUcKljj7\",\"notes_fe_data-visualization_guide_echarts.md\":\"YhqaWGPI\",\"notes_fe_data-visualization_guide_scene.md\":\"D6XwnhMR\",\"notes_fe_data-visualization_guide_svg.md\":\"CKone4My\",\"notes_fe_data-visualization_guide_tech.md\":\"B3diwLiE\",\"notes_fe_data-visualization_instruction.md\":\"W7tp4lUK\",\"notes_fe_data-visualization_readme.md\":\"Bw0IeGoH\",\"notes_fe_data-visualization_report_guide.md\":\"BtPZhK3R\",\"notes_fe_data-visualization_report_intro.md\":\"vQRnrh8g\",\"notes_fe_data-visualization_report_qa.md\":\"CjGZSG_J\",\"notes_fe_data-visualization_report_summary.md\":\"CVMkEcd2\",\"notes_fe_index.md\":\"B6HjWv2Y\",\"notes_fe_websocket_基础总结.md\":\"DB4nlgYP\",\"projects_mall_index.md\":\"BaAe1Q9T\",\"projects_preview_api-examples.md\":\"DK13Sa_n\",\"projects_preview_index.md\":\"Dz8tC6Rf\",\"projects_preview_markdown-examples.md\":\"DaWRO3Oq\",\"projects_springcloud项目尚医通总结.md\":\"Du9k6TLQ\",\"refs_blogs_index.md\":\"B9WZ4Rmw\",\"refs_docs_index.md\":\"BraUrT8C\",\"refs_tutorials_index.md\":\"DC92EBbN\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Alooc\",\"description\":\"Alooc的博客\",\"base\":\"/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"logo\":\"/logo.png\",\"nav\":[{\"text\":\"首页\",\"link\":\"/\"},{\"text\":\"我的笔记\",\"items\":[{\"text\":\"基础\",\"items\":[{\"text\":\"算法\",\"link\":\"/notes/basics/algo/algo-metrics-and-sorting\"},{\"text\":\"数据库\",\"link\":\"/notes/basics/database/mysql/\"},{\"text\":\"编程语言\",\"link\":\"/notes/basics/lang/java/\"}]},{\"text\":\"后端\",\"items\":[{\"text\":\"框架\",\"link\":\"/notes/be/frame/spring/spring/\"},{\"text\":\"中间件\",\"link\":\"/notes/be/middleware/rabbitmq/rabbitmq\"},{\"text\":\"技术栈\",\"link\":\"/notes/be/tech-stack/design-pattern\"}]},{\"text\":\"前端\",\"link\":\"/notes/fe/data-visualization/instruction\"}]},{\"text\":\"项目实践\",\"items\":[{\"text\":\"在线预览\",\"link\":\"/projects/preview/markdown-examples\"},{\"text\":\"商城系统\",\"link\":\"/projects/mall/\"}]},{\"text\":\"参考资料\",\"items\":[{\"text\":\"博客\",\"link\":\"/refs/blogs/\"},{\"text\":\"文档\",\"link\":\"/refs/docs/\"},{\"text\":\"教程\",\"link\":\"/refs/tutorials/\"}]},{\"text\":\"关于我\",\"link\":\"/about/me/\"}],\"sidebar\":{\"/notes/basics/algo/\":[{\"text\":\"算法\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/basics/database/\":[{\"text\":\"数据库\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/basics/lang/\":[{\"text\":\"语言\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/be/frame/\":[{\"text\":\"框架\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/be/middleware/\":[{\"text\":\"中间件\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/be/tech-stack/\":[{\"text\":\"技术栈\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/notes/fe/\":[{\"text\":\"前端\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/projects/preview/\":[{\"text\":\"在线预览\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/projects/\":[{\"text\":\"项目\",\"items\":[{\"text\":\"电商项目\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/refs/blogs/\":[{\"text\":\"博客\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/refs/docs/\":[{\"text\":\"文档\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}],\"/refs/tutorials/\":[{\"text\":\"教程\",\"items\":[{\"text\":\"测试\",\"link\":\"/projects/preview/markdown-examples\"}]}]},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/alooc\"}],\"footer\":{\"message\":\"Released under the MIT License.\",\"copyright\":\"Copyright © 2019-present Alooc\"},\"search\":{\"provider\":\"local\"}},\"locales\":{},\"scrollOffset\":134,\"cleanUrls\":false}");</script>
+    
+  </body>
+</html>
